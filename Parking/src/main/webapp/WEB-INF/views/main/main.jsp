@@ -366,9 +366,13 @@
 		<div class="circle-container">
 			<div class="circle"></div>
 		</div>
-		<div>
-			<button class="bubbly-button">로그인</button>
-		</div>
+		<a href="#" class="cta">
+		 <span>로 그 인</span> 
+		 <svg width="13px" height="10px" viewBox="0 0 13 10">
+    <path d="M1,5 L11,5"></path>
+    <polyline points="8 1 12 5 8 9"></polyline>
+  </svg>
+		</a>
 	</div>
 
 	<div id="main_content">
@@ -671,12 +675,6 @@
 								<option value="1" ilotareaname="국내선 제1주차장" ilotarea="1"
 									resveclosminde="0" resveclosmaxde="45" mxmmresveposblde="30">23:50</option>
 
-
-
-
-
-
-
 							</select>
 						</dd>
 					</dl>
@@ -725,6 +723,6 @@
 
 
 	<!-- Scripts -->
-	<script type="text/javascript" src="${path}/resources/js/loginbtn.js"></script>
+	<script></script>
 </body>
 </html>
