@@ -19,6 +19,7 @@
    
      		<!-- 비로그인 상태 : 회원가입,로그인 활성화 -->
 		<c:if test="${empty user}">
+			<a href="${pageContext.request.contextPath}/project/mapTest.do">맵띄우기 연습</a>
 			<a href="${pageContext.request.contextPath}/member/userType.do">회원가입</a>
 			<a href="${pageContext.request.contextPath}/member/login.do">로그인</a>	
 		</c:if>

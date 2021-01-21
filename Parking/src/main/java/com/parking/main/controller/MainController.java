@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class MainController {
@@ -20,4 +21,12 @@ public class MainController {
 		return "main/main";
 	}
 
+	//지도 연습
+	@RequestMapping(value = "/project/mapTest.do")
+	public String mapTest() {
+		//지도 호출
+		return "main/mapTest";
+	}
+	
+	
 }
