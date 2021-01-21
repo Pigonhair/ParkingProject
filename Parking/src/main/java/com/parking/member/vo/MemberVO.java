@@ -21,7 +21,7 @@ import javax.validation.constraints.NotEmpty;
       constraint member_detail_fk foreign key (mem_num) references member (mem_num)
       );*/
       
-public class MainController {
+public class MemberVO {
    //멤버 식별 번호
    private int mem_num;
    //멤버 아이디
