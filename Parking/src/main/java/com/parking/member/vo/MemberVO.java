@@ -1,6 +1,7 @@
 package com.parking.member.vo;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 /*create table member(
         mem_num number not null, -- 멤버 식별 번호
@@ -24,13 +25,21 @@ import javax.validation.constraints.NotEmpty;
 public class MemberVO {
    //멤버 식별 번호
    private int mem_num;
+   
    //멤버 아이디
    @NotEmpty
    private String mem_id;
+   
+	//회원의 비밀번호
+	@Size(min=4,max=15)
+	private String mem_pw;
+   
    //0관리자 1사용자 2사장님
    private int mem_auth;   
+   
    //카카오톡 토큰
    private String mem_token;
+   
    @NotEmpty
    private String name;
    
@@ -94,7 +103,16 @@ public class MemberVO {
       this.dis = dis;
    }
 
-   @Override
+   
+   public String getMem_pw() {
+		return mem_pw;
+   }
+	
+	public void setMem_pw(String mem_pw) {
+		this.mem_pw = mem_pw;
+   }
+
+   @Override	
    public String toString() {
       return "MemberVO [mem_num=" + mem_num + ", mem_id=" + mem_id + ", mem_auth=" + mem_auth + ", mem_token="
             + mem_token + ", name=" + name + ", phone=" + phone + ", dis=" + dis + "]";

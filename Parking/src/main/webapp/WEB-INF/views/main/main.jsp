@@ -366,8 +366,9 @@
 		<div class="circle-container">
 			<div class="circle"></div>
 		</div>
-		<a href="#" class="cta">
-		 <span>로 그 인</span> 
+		<%-- <a href="${pageContext.request.contextPath}/member/userType.do">회원가입</a> --%>
+		<a href="${pageContext.request.contextPath}/member/login.do" class="cta">
+		 <span>로그인</span> 
 		 <svg width="13px" height="10px" viewBox="0 0 13 10">
     <path d="M1,5 L11,5"></path>
     <polyline points="8 1 12 5 8 9"></polyline>
@@ -717,8 +718,6 @@
 	<c:if test="${empty user}">
 		<a href="${pageContext.request.contextPath}/project/mapTest.do">맵띄우기
 			연습</a>
-		<a href="${pageContext.request.contextPath}/member/userType.do">회원가입</a>
-		<a href="${pageContext.request.contextPath}/member/login.do">로그인</a>
 	</c:if>
 
 
