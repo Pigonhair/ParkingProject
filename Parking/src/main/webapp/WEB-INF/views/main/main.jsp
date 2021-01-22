@@ -9,10 +9,48 @@
    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
 <html>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
 <script>
-	
+$(document).ready(function(){ 
+	// 배경 조절 버튼 클릭시 클릭 이벤트
+	$("#myForm").click(function(){ 
+		var width = $(window).width();
+		var height = $(window).height(); 
+		
+		//화면을 가리는 레이어의 사이즈 조정
+		$(".form-container").width(width); 
+		$(".form-container").height(height); 
+		
+		//화면을 가리는 레이어를 보여준다 (0.5초동안 30%의 농도의 투명도) 
+		$(".backLayer").fadeTo(500, 0.3); 
+		//팝업 레이어 보이게 
+		var loadingDivObj = $("#loadingDiv"); 
+		loadingDivObj.css("top", $(document).height()/2-150); 
+		loadingDivObj.css("left",$(document).width()/2-150); 
+		loadingDivObj.fadeIn(500); 
+	}); 
+});
+function openForm() {
+  document.getElementById("myForm").style.display = "block";
+}
+function closeForm() {
+  document.getElementById("myForm").style.display = "none";
+}
+
 </script>
-<style type="text/css">
+<style>
+@media screen and (min-width: 480px) {
+	.form-popup {
+	  display: none;
+	  position: fixed;
+      background-color: skyblue;
+      border: groove black;
+      left: 25%;
+      top: 25%; 
+      width: 50%;
+      height: 50%;
+	}
+}
 @media ( max-width : 1230px) {
 	#main_content .fbox {
 		padding-right: 0;
@@ -366,8 +404,8 @@
 		<div class="circle-container">
 			<div class="circle"></div>
 		</div>
-		<%-- <a href="${pageContext.request.contextPath}/member/userType.do">회원가입</a> --%>
-		<a href="${pageContext.request.contextPath}/member/login.do" class="cta">
+	
+		<a onclick="openForm()" class="cta">
 		 <span>로그인</span> 
 		 <svg width="13px" height="10px" viewBox="0 0 13 10">
     <path d="M1,5 L11,5"></path>
@@ -375,7 +413,8 @@
   </svg>
 		</a>
 	</div>
-
+		
+		
 	<div id="main_content">
 		<form id="resveForm" name="resveForm" class="needs-validation"
 			novalidate="novalidate">
@@ -719,6 +758,20 @@
 		<a href="${pageContext.request.contextPath}/project/mapTest.do">맵띄우기
 			연습</a>
 	</c:if>
+	<div class="form-popup" id="myForm">
+	  <form action="/action_page.php" class="form-container">
+	    <h1>Login</h1>
+	
+	    <label for="email"><b>Email</b></label>
+	    <input type="text" placeholder="Enter Email" name="email" required>
+	
+	    <label for="psw"><b>Password</b></label>
+	    <input type="password" placeholder="Enter Password" name="psw" required>
+	
+	    <button type="submit" class="btn">Login</button>
+	    <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+	  </form>
+	</div>
 
 
 	<!-- Scripts -->
