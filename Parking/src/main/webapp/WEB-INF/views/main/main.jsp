@@ -11,46 +11,47 @@
 <html>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script>
-$(document).ready(function(){ 
-	// 배경 조절 버튼 클릭시 클릭 이벤트
-	$("#myForm").click(function(){ 
-		var width = $(window).width();
-		var height = $(window).height(); 
-		
-		//화면을 가리는 레이어의 사이즈 조정
-		$(".form-container").width(width); 
-		$(".form-container").height(height); 
-		
-		//화면을 가리는 레이어를 보여준다 (0.5초동안 30%의 농도의 투명도) 
-		$(".backLayer").fadeTo(500, 0.3); 
-		//팝업 레이어 보이게 
-		var loadingDivObj = $("#loadingDiv"); 
-		loadingDivObj.css("top", $(document).height()/2-150); 
-		loadingDivObj.css("left",$(document).width()/2-150); 
-		loadingDivObj.fadeIn(500); 
-	}); 
-});
-function openForm() {
-  document.getElementById("myForm").style.display = "block";
+function openForm(){
+	var blur = document.getElementById('blur');
+	blur.classList.toggle('active')
+	var main_content = document.getElementById('main_content');
+	main_content.classList.toggle('main_content')
+	var popup = document.getElementById('popup');
+	popup.classList.toggle('active')
 }
-function closeForm() {
-  document.getElementById("myForm").style.display = "none";
+</script> 
+<style>
+#popup.active{
+      visibility: visible;
+      opacity:1;
+      transition : 0.5s;
 }
 
-</script>
-<style>
-@media screen and (min-width: 480px) {
-	.form-popup {
-	  display: none;
-	  position: fixed;
-      background-color: skyblue;
-      border: groove black;
-      left: 25%;
-      top: 25%; 
-      width: 50%;
-      height: 50%;
-	}
+#popup{
+	 position: fixed;
+     background-color: skyblue;
+     border: groove black;
+     left: 25%;
+     top: 25%; 
+     width: 50%;
+     height: 50%;
+     z-index: 100;
+     visibility: hidden;
+     opacity:0;
+     transition : 0.5s;
 }
+
+.container#blur.active{
+	filter: blur(20px);
+	pointer-events: none;
+	user-select:none;
+}
+.main_content#blur.active{
+	filter: blur(20px);
+	pointer-events: none;
+	user-select:none;
+}
+
 @media ( max-width : 1230px) {
 	#main_content .fbox {
 		padding-right: 0;
@@ -100,7 +101,7 @@ function closeForm() {
 
 </head>
 <body>
-	<div class="container">
+	<div class="container" id="blur">
 		<img class="background"
 			src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/221808/sky.jpg" />
 
@@ -758,7 +759,7 @@ function closeForm() {
 		<a href="${pageContext.request.contextPath}/project/mapTest.do">맵띄우기
 			연습</a>
 	</c:if>
-	<div class="form-popup" id="myForm">
+	<div id="popup">
 	  <form action="/action_page.php" class="form-container">
 	    <h1>Login</h1>
 	
@@ -769,12 +770,8 @@ function closeForm() {
 	    <input type="password" placeholder="Enter Password" name="psw" required>
 	
 	    <button type="submit" class="btn">Login</button>
-	    <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+	    <button type="button" class="btn_cancel" onclick="openForm()">Close</button>
 	  </form>
 	</div>
-
-
-	<!-- Scripts -->
-	<script></script>
 </body>
 </html>
