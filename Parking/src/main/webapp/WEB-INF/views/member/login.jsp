@@ -59,6 +59,7 @@
            	<label for="mem_pw" >Password</label>
            	<form:input type="password" class="input_id_pw" path="mem_pw" id="mem_pw"/>
            	<form:errors path="mem_pw"/><br>
+           	
          	
          	<!-- 일반회원/트레이너 선택란 -->    
          	<img class="texts_img" src="../resources/images/text_Member.png"> 
@@ -79,6 +80,7 @@
            	<button type="button" class="r_f_btn" onclick="location.href='${pageContext.request.contextPath}/member/findIdPw.do'">
            	<img src="../resources/images/Btn_ID_PW.png">
            	</button>
+           	
            	
          </div>
       </form:form>

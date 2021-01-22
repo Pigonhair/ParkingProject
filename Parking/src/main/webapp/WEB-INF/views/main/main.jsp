@@ -752,12 +752,18 @@ function openForm(){
 			<div id="resve_able_info2"
 				style="padding-left: 20px; padding-top: 0px;"></div>
 			<input type="hidden" id="iLotArea" name="iLotArea">
+			<a href="https://kauth.kakao.com/oauth/authorize?client_id=c33ff58fa9f138c4cca66548e9bbb951&redirect_uri=http://localhost:8080/project/kakao/callback&response_type=code"> 
+<img src="/image/kakaologin.png"></a>
 		</form>
 	</div>
 	<!-- 비로그인 상태 : 회원가입,로그인 활성화 -->
 	<c:if test="${empty user}">
 		<a href="${pageContext.request.contextPath}/project/mapTest.do">맵띄우기
 			연습</a>
+	</c:if>
+	<c:if test="${empty user}">
+		<a href="https://kauth.kakao.com/oauth/authorize?client_id=c33ff58fa9f138c4cca66548e9bbb951&redirect_uri=http://localhost:8080/project/kakao/callback&response_type=code"> 
+			개같은 카카오 연습</a>
 	</c:if>
 	<div id="popup">
 	  <form action="/action_page.php" class="form-container">
