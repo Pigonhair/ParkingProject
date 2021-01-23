@@ -105,9 +105,9 @@ select {
 		no-repeat !important;
 }
 
-select, textarea, input[type="text"], input[type="password"], input[type="search"],
-	input[type="number"], input[type="date"], input[type="datetime"], input[type="email"],
-	input[type="tel"], input[type="submit"] {
+select, textarea, input[type="text"],  input[type="search"],
+	input[type="number"], input[type="date"], input[type="datetime"],
+	input[type="tel"] {
 	-webkit-border-radius: 0;
 	border-radius: 0px;
 	-webkit-appearance: none;
@@ -121,7 +121,6 @@ button, select {
 
 button, input, optgroup, select, textarea {
 	color: inherit;
-	font: inherit;
 	margin: 0;
 }
 
@@ -134,7 +133,8 @@ button, input, optgroup, select, textarea {
 	color: #fff;
 	line-height: 64px;
 	text-align: center;
-	background: #a70737;
+/* 	background: #a70737; */
+    background: #ffab9d;
 	
 }
 
@@ -187,8 +187,8 @@ button, html input[type="button"], input[type="reset"], input[type="submit"]
 	cursor: pointer;
 }
 
-input[type="text"], input[type="password"], input[type="search"], input[type="number"],
-	input[type="date"], input[type="datetime"], input[type="email"], input[type="tel"]
+ input[type="search"], input[type="number"],
+	input[type="date"], input[type="datetime"],  input[type="tel"]
 	{
 	height: 40px;
 	margin: 0;
@@ -200,6 +200,7 @@ input[type="text"], input[type="password"], input[type="search"], input[type="nu
 
 input {
 	line-height: normal;
+	background-color: #474A59;
 }
 
 

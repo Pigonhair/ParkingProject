@@ -9,7 +9,7 @@
    Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
 <html>
-<script src="http://code.jquery.com/jquery-latest.js"></script>
+<head>
 <script>
 function openForm(){
 	var blur = document.getElementById('blur');
@@ -19,7 +19,9 @@ function openForm(){
 	var popup = document.getElementById('popup');
 	popup.classList.toggle('active')
 }
-</script> 
+</script>
+
+ 
 <style>
 #popup.active{
       visibility: visible;
@@ -29,8 +31,8 @@ function openForm(){
 
 #popup{
 	 position: fixed;
-     background-color: skyblue;
-     border: groove black;
+     background: #e7e7e7;
+/*      border: groove black; */
      left: 25%;
      top: 25%; 
      width: 50%;
@@ -39,6 +41,8 @@ function openForm(){
      visibility: hidden;
      opacity:0;
      transition : 0.5s;
+     background: url('https://pexels.imgix.net/photos/27718/pexels-photo-27718.jpg?fit=crop&w=1280&h=823') left no-repeat;
+     background-size:cover;
 }
 
 .container#blur.active{
@@ -46,7 +50,7 @@ function openForm(){
 	pointer-events: none;
 	user-select:none;
 }
-.main_content#blur.active{
+.main_content.main_content{
 	filter: blur(20px);
 	pointer-events: none;
 	user-select:none;
@@ -90,7 +94,6 @@ function openForm(){
 	}
 }
 </style>
-<head>
 <title>Parking</title>
 <meta charset="utf-8" />
 <meta name="viewport"
@@ -98,6 +101,14 @@ function openForm(){
 <link rel="stylesheet" href="${path}/resources/css/main.css" />
 <link rel="stylesheet" href="${path}/resources/css/mainbackground.css" />
 <link rel="stylesheet" href="${path}/resources/css/LoginBtn.css" />
+<link rel="stylesheet" href="${path}/resources/css/LoginPopup.css" />
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<%-- <script src="${path}/resources/js/anime.js"></script> --%>
+<script src="${path}/resources/js/anime.min.js"></script>
+<%-- <script src="${path}/resources/js/anime.es.js"></script> --%>
+<script src="//code.jquery.com/jquery-3.4.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.2.0/anime.min.js"></script>
+<script src="${path}/resources/js/LoginPopup.js"></script>
 
 </head>
 <body>
@@ -406,7 +417,7 @@ function openForm(){
 			<div class="circle"></div>
 		</div>
 	
-		<a onclick="openForm()" class="cta">
+		<a href="#" onclick="openForm()" class="cta">
 		 <span>로그인</span> 
 		 <svg width="13px" height="10px" viewBox="0 0 13 10">
     <path d="M1,5 L11,5"></path>
@@ -765,19 +776,30 @@ function openForm(){
 		<a href="https://kauth.kakao.com/oauth/authorize?client_id=c33ff58fa9f138c4cca66548e9bbb951&redirect_uri=http://localhost:8080/project/kakao/callback&response_type=code"> 
 			개같은 카카오 연습</a>
 	</c:if>
+	
+	
+	<!-- 로그인 팝업창 -->
 	<div id="popup">
 	  <form action="/action_page.php" class="form-container">
-	    <h1>Login</h1>
-	
-	    <label for="email"><b>Email</b></label>
-	    <input type="text" placeholder="Enter Email" name="email" required>
-	
-	    <label for="psw"><b>Password</b></label>
-	    <input type="password" placeholder="Enter Password" name="psw" required>
-	
-	    <button type="submit" class="btn">Login</button>
-	    <button type="button" class="btn_cancel" onclick="openForm()">Close</button>
+	    <div class="container2">
+  <div class='window'>
+    <div class='overlay'></div>
+    <div class='content2'>
+      <div class='welcome'>Hello There!</div>
+      <div class='subtitle'>We're almost done. Before using our services you need to create an account.</div>
+      <div class='input-fields'>
+        <input type='text' placeholder='Username' class='input-line full-width'></input>
+        <input type='email' placeholder='Email' class='input-line full-width'></input>
+        <input type='password' placeholder='Password' class='input-line full-width'></input>
+
+      </div>
+      <div class='spacing'>or continue with <span class='highlight'>Facebook</span></div>
+      <div><button class='ghost-round full-width'>Create Account</button></div>
+    </div>
+  </div>
+</div>
 	  </form>
 	</div>
 </body>
+
 </html>
