@@ -4,8 +4,12 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
 <link rel="stylesheet" href="${path}/resources/css/Search.css" />
 <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
 <meta charset="utf-8" />
 <title>Kakao 지도 시작하기</title>
 </head>
@@ -26,7 +30,7 @@
       <form class="form-wrapper">
         <fieldset class="section is-active">
           <h3>Your Details</h3>
-          <input type="text" name="name" id="name" placeholder="Name">
+          <input type="text" name="time" class="timepicker" placeholder="시간을 선택하세요">
           <input type="text" name="email" id="email" placeholder="Email">
           <input type="text" name="" id="email" placeholder="Email">
           <input type="text" name="email" id="email" placeholder="Email">
@@ -215,6 +219,20 @@ for(var [key, value] of positionMap){
 	    } 
 	});
 }
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+<script>
+$('.timepicker').timepicker({
+    timeFormat: 'p h:mm',
+    interval: 10,
+    minTime: '09',
+    maxTime: '8AM',
+    defaultTime: '',
+    startTime: '00:00',
+    dynamic: false,
+    dropdown: true,
+    scrollbar: true
+});
 </script>
 </body>
 </html>
