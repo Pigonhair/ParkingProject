@@ -20,13 +20,5 @@ public class MainController {
 		
 		return "main/main";
 	}
-
-	//지도 연습
-	@RequestMapping(value = "/project/mapTest.do")
-	public String mapTest() {
-		//지도 호출
-		return "main/mapTest";
-	}
-	
 	
 }

@@ -10,10 +10,27 @@
 -->
 <html>
 <head>
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a4fc31dd472c61220b10d05b1cec480c&libraries=services"></script>
+<script src="${path}/resources/js/LoginPopup.js"></script>
 <script>
+
+
+$('.timepicker').timepicker({
+    timeFormat: 'h:mm p',
+    interval: 60,
+    minTime: '0',
+    maxTime: '23',
+    defaultTime: '11',
+    startTime: '10:00',
+    dynamic: false,
+    dropdown: true,
+    scrollbar: true
+});
+
 $(document).ready(function() {
    $(".cta").click(function(){
       var blur = document.getElementById('blur');
@@ -63,6 +80,7 @@ $(document).ready(function() {
    });
 });
 </script>
+
 
 <style>
 #popup.active{
@@ -144,13 +162,6 @@ $(document).ready(function() {
 <link rel="stylesheet" href="${path}/resources/css/mainbackground.css" />
 <link rel="stylesheet" href="${path}/resources/css/LoginBtn.css" />
 <link rel="stylesheet" href="${path}/resources/css/LoginPopup.css" />
-<script src="http://code.jquery.com/jquery-latest.js"></script>
-<%-- <script src="${path}/resources/js/anime.js"></script> --%>
-<script src="${path}/resources/js/anime.min.js"></script>
-<%-- <script src="${path}/resources/js/anime.es.js"></script> --%>
-<script src="//code.jquery.com/jquery-3.4.0.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.2.0/anime.min.js"></script>
-<script src="${path}/resources/js/LoginPopup.js"></script>
 
 </head>
 <body>
@@ -468,10 +479,10 @@ $(document).ready(function() {
       </a>
    </div>
       
-      
+  <form action="${pageContext.request.contextPath}/project/search.do" method=post> 
    <div id="main_content">
-      <form id="resveForm" name="resveForm" class="needs-validation"
-         novalidate="novalidate">
+<!--       <form id="resveForm" name="resveForm" class="needs-validation" -->
+<!--          novalidate="novalidate"> -->
          <fieldset>
             <legend>예약하기 정보 입력폼</legend>
             <div class="fbox">
@@ -487,11 +498,11 @@ $(document).ready(function() {
                <dl>
                   <dt>목적지</dt>
                   <dd class="cal_wrap main">
-                     <input type="text" id="btnAddress">
+                     <input type="text" id="btnAddress" name="btnAddress">
                   </dd>
                </dl>
                <p class="btn_wrap">
-                  <button type="button" id="btnReserve" class="btn_reserv">찾  기</button>
+                  <input type="submit" id="btnReserve" class="btn_reserv" value="찾 기"></input>
                </p>
             </div>
          </fieldset>
@@ -506,7 +517,7 @@ $(document).ready(function() {
    </div>
    <!-- 비로그인 상태 : 회원가입,로그인 활성화 -->
    <c:if test="${empty user}">
-      <a href="${pageContext.request.contextPath}/project/mapTest.do">맵띄우기
+      <a href="${pageContext.request.contextPath}/project/search.do">맵띄우기
          연습</a>
    </c:if>
    <c:if test="${empty user}">
@@ -539,5 +550,4 @@ $(document).ready(function() {
      </form>
    </div>
 </body>
-
 </html>
