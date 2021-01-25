@@ -30,3 +30,24 @@ mem_dis number(1), -- 0일반인 1몸이 불편하신분들(장애인, 임산부
 constraint member_detail_pk primary key (mem_num), 
 constraint member_detail_fk foreign key (mem_num) references member (mem_num)
 );
+
+시퀀스
+
+--☆ 시퀀스 객체 작성
+create sequence 시퀀스객체명
+create sequence mem_num_member nocache nocycle;
+create sequence mem_num_member seq_board nocache nocycle;
+
+--☆ 시퀀스 객체 삭제
+drop   sequence 시퀀스객체명
+drop   sequence seq_board mem_num_member
+
+--☆ 자동으로 1씩 증가하는 값을 얻어오기
+select seq_board.nextval from dual
+
+select * from board;
+
+INSERT INTO boardList(SEQ,ID,TOKEN,NAME,SUBJECT,CONTENT,HIT,REPLY,LOGTIME,PIC)
+VALUES(SEQ_BOARDLIST.NEXTVAL,'pigonhair','kunwoo','거누','제목2','내용2','1','0','2020-12-31','abc.jpg');
+
+

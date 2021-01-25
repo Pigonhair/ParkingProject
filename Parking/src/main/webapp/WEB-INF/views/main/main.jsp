@@ -527,7 +527,9 @@ $(document).ready(function() {
         <input type='password' placeholder='Password' class='input-line full-width'></input>
 
       </div>
-      <div class='spacing'>or continue with <span class='highlight'>Facebook</span></div>
+      <div class='spacing'>
+      <a href="https://kauth.kakao.com/oauth/authorize?client_id=c33ff58fa9f138c4cca66548e9bbb951&redirect_uri=http://localhost:8080/project/kakao/callback&response_type=code">
+      <img src="../resources/images/kakaolog.png"></a>
       <div><button class='ghost-round full-width'>Create Account</button></div>
     </div>
   </div>

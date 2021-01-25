@@ -32,4 +32,12 @@ public interface MemberMapper {
 	@Select("SELECT * FROM member WHERE mem_id=#{mem_id}")
 	public MemberVO login(String mem_id);
 	/****** 로그인 ******/
+	
+	
+	
+
+	//카카오톡에서 받은 email, name, token, 
+		@Insert("INSERT INTO member(mem_num,mem_id,mem_auth,mem_token)"
+				+ "VALUES(mem_num_member.nextval,#{mem_id},#{mem_auth},#{mem_token})")
+		public void insertMember_kakao(MemberVO membervo);
 }

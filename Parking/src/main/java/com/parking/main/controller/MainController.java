@@ -21,4 +21,10 @@ public class MainController {
 		return "main/main";
 	}
 	
+	@RequestMapping(value = "/project/signUp.do")
+	public String signUp() {
+		//회원가입 호출
+		return "member/SignUp";
+	}
+	
 }
