@@ -101,7 +101,21 @@ fieldset{
   margin: 0 auto;
   position: relative;
   height: 500px;
+  overflow:hidden;
 }
+.radius_border{border:1px solid #919191;border-radius:5px;}     
+.custom_typecontrol {position:absolute;top:10px;right:10px;overflow:hidden;width:130px;height:30px;margin:0;padding:0;z-index:1;font-size:12px;font-family:'Malgun Gothic', '맑은 고딕', sans-serif;}
+.custom_typecontrol span {display:block;width:65px;height:30px;float:left;text-align:center;line-height:30px;cursor:pointer;}
+.custom_typecontrol .btn {background:#fff;background:linear-gradient(#fff,  #e6e6e6);}       
+.custom_typecontrol .btn:hover {background:#f5f5f5;background:linear-gradient(#f5f5f5,#e3e3e3);}
+.custom_typecontrol .btn:active {background:#e6e6e6;background:linear-gradient(#e6e6e6, #fff);}    
+.custom_typecontrol .selected_btn {color:#fff;background:#425470;background:linear-gradient(#425470, #5b6d8a);}
+.custom_typecontrol .selected_btn:hover {color:#fff;}   
+.custom_zoomcontrol {position:absolute;top:50px;right:10px;width:36px;height:80px;overflow:hidden;z-index:1;background-color:#f5f5f5;} 
+.custom_zoomcontrol span {display:block;width:36px;height:40px;text-align:center;cursor:pointer;}     
+.custom_zoomcontrol span img {width:15px;height:15px;padding:12px 0;border:none;}             
+.custom_zoomcontrol span:first-child{border-bottom:1px solid #bfbfbf;}
+     
 .information_container{
   width: 100%;
   max-width: 1000px;
@@ -286,14 +300,33 @@ fieldset{
 <header id="header"><h1><span>주차장 예약</span></h1></header>
 <main id="main_container">
 <div id="sub_content">
-<div id="map_content">
-<div id="map" style="width: 1000px; height: 500px;"></div>
-  </div>
+	<div id="map_content">
+		<div id="map" style="width:1000px;height:500px;position:relative;overflow:hidden;"></div>  
+	    <!-- 지도타입 컨트롤 div 입니다 -->
+	    <div class="custom_typecontrol radius_border">
+	        <span id="btnRoadmap" class="selected_btn" onclick="setMapType('roadmap')">지도</span>
+	        <span id="btnSkyview" class="btn" onclick="setMapType('skyview')">스카이뷰</span>
+	    </div>
+	    <!-- 지도 확대, 축소 컨트롤 div 입니다 -->
+	    <div class="custom_zoomcontrol radius_border"> 
+	        <span onclick="zoomIn()"><img src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_plus.png" alt="확대"></span>  
+	        <span onclick="zoomOut()"><img src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_minus.png" alt="축소"></span>
+	    </div>
+	</div>
   <div class="information_container">
     <div class="information_sub_container">
     <div class="wrapper">
       <form class="form-wrapper">
-		
+			<c:forEach var="parking" items="${list}">
+				${parking.park_id}
+				${parking.park_name}
+				${parking.park_capacity}
+				${parking.mem_num}
+				${parking.park_type}
+				${parking.detailAddr}
+				${parking.park_public}
+				<br>
+			</c:forEach>
 		
       </form>
     </div>
@@ -374,21 +407,54 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
     };  
 
 //내 위치,이름 설정
-var myposition_name = '목적지';
-var myposition = '<%=btnAddress%>';
+var dest_name = '목적지';
+var dest_position = '<%=btnAddress%>';
 
-//주차장 이름,위치 설정
-var parkinglot1_name = '주차장1';
-var parkinglot1 = '<%=btnAddress%>';
+//주차장 map만들기
+var parking_position_Map = new Map()
 
-//positionMap만들기 key(이름),value(위치)
-var positionMap = new Map()
-positionMap.set(parkinglot1_name, parkinglot1)
-positionMap.set(myposition_name, myposition)
-console.log(positionMap)
+//DB에서 받아온 주차장 이름 및 위치 넣기
+<c:forEach var="parking" items="${list}">
+var parkinglot_name = '${parking.park_name}';
+var parkinglot_addr = '${parking.detailAddr}';
+//map에 주차장 key,value 넣기
+parking_position_Map.set(parkinglot_name, parkinglot_addr);
+</c:forEach>
+
+var dest_position_Map = new Map()
+//목적지map에 key,value 넣기
+dest_position_Map.set(dest_name, dest_position)
+
+console.log(parking_position_Map)
+console.log(dest_position_Map)
 
 // 지도를 생성합니다    
 var map = new kakao.maps.Map(mapContainer, mapOption); 
+
+//지도타입 컨트롤의 지도 또는 스카이뷰 버튼을 클릭하면 호출되어 지도타입을 바꾸는 함수입니다
+function setMapType(maptype) { 
+    var roadmapControl = document.getElementById('btnRoadmap');
+    var skyviewControl = document.getElementById('btnSkyview'); 
+    if (maptype === 'roadmap') {
+        map.setMapTypeId(kakao.maps.MapTypeId.ROADMAP);    
+        roadmapControl.className = 'selected_btn';
+        skyviewControl.className = 'btn';
+    } else {
+        map.setMapTypeId(kakao.maps.MapTypeId.HYBRID);    
+        skyviewControl.className = 'selected_btn';
+        roadmapControl.className = 'btn';
+    }
+}
+
+// 지도 확대, 축소 컨트롤에서 확대 버튼을 누르면 호출되어 지도를 확대하는 함수입니다
+function zoomIn() {
+    map.setLevel(map.getLevel() - 1);
+}
+
+// 지도 확대, 축소 컨트롤에서 축소 버튼을 누르면 호출되어 지도를 확대하는 함수입니다
+function zoomOut() {
+    map.setLevel(map.getLevel() + 1);
+}
 
 // 주소-좌표 변환 객체를 생성합니다
 var geocoder = new kakao.maps.services.Geocoder();
@@ -405,8 +471,6 @@ var options = { // Drawing Manager를 생성할 때 사용할 옵션입니다
     drawingMode: [
         kakao.maps.Drawing.OverlayType.MARKER
     ]
-
-
 };
 
 // 위에 작성한 옵션으로 Drawing Manager를 생성합니다
@@ -419,12 +483,15 @@ var toolbox = new kakao.maps.Drawing.Toolbox({drawingManager: manager});
 
 // 지도 위에 Toolbox를 표시합니다
 // kakao.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOP은 위 가운데를 의미합니다.
+
 map.addControl(toolbox.getElement(), kakao.maps.ControlPosition.TOP);
 // ****************************지도위에 Toolbar****************************************
 
-for(var [key, value] of positionMap){
+
+//지도위에 parking poisition marker만들기
+for(let item of parking_position_Map){
 	// 주소로 좌표를 검색합니다
-	geocoder.addressSearch(value, function(result, status) {
+	geocoder.addressSearch(item[1], function(result, status) {
 	    // 정상적으로 검색이 완료됐으면 
 	     if (status === kakao.maps.services.Status.OK) {
 
@@ -438,7 +505,32 @@ for(var [key, value] of positionMap){
 
 
 	        var infowindow = new kakao.maps.InfoWindow({
-	            content: '<div style="width:150px;text-align:center;padding:6px 0;">'+key+'</div>'
+	            content: '<div style="width:150px;text-align:center;padding:6px 0;">'+item[0]+'</div>'
+	        });
+	        // 인포윈도우로 장소에 대한 설명을 표시합니다
+	        infowindow.open(map, marker);
+	    } 
+	});
+}
+
+//지도위에 목적지 marker만들고 거기로 이동하기
+for(let item of dest_position_Map){
+	// 주소로 좌표를 검색합니다
+	geocoder.addressSearch(item[1], function(result, status) {
+	    // 정상적으로 검색이 완료됐으면 
+	     if (status === kakao.maps.services.Status.OK) {
+
+	        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+	        // 결과값으로 받은 위치를 마커로 표시합니다
+	        var marker = new kakao.maps.Marker({
+	            map: map,
+	            position: coords
+	        });
+
+
+	        var infowindow = new kakao.maps.InfoWindow({
+	            content: '<div style="width:150px;text-align:center;padding:6px 0;">'+item[0]+'</div>'
 	        });
 
 	        // 인포윈도우로 장소에 대한 설명을 표시합니다

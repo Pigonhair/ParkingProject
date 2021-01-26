@@ -40,8 +40,6 @@ public class SearchController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("/search/search");
 		mav.addObject("list", list);
-		System.out.println(list.get(0).getPark_name());
-		//search.jsp리턴
 		return mav;
 	}
 	
