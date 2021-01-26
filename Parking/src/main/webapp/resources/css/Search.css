@@ -1,7 +1,7 @@
 @charset "UTF-8";
 @font-face {
-	src: url("../font/BMJUA_ttf.ttf");
-	font-family: "jua";
+   src: url("../font/BMJUA_ttf.ttf");
+   font-family: "jua";
 }
 
 
@@ -19,10 +19,6 @@ h1, h2, h3, h4, h5 ,h6{
 
 a{
   text-decoration: none;
-}
-
-p, li, a{
-  font-size: 14px;
 }
 
 fieldset{
@@ -49,9 +45,9 @@ fieldset{
 /* COLUMNS */
 
 .col {
-	display: block;
-	float:left;
-	margin: 0 0 0 1.6%;
+   display: block;
+   float:left;
+   margin: 0 0 0 1.6%;
 }
 
 .col:first-of-type {
@@ -101,18 +97,6 @@ fieldset{
   text-align: center;
 }
 
-
-.steps li{
-  display: inline-block;
-  margin: 20px;
-  color: #ccc;
-  padding-bottom: 5px;
-}
-
-.steps li.is-active{
-  border-bottom: 1px solid #3498db;
-  color: #3498db;
-}
 
 /* FORM */
 
