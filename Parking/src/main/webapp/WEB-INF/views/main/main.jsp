@@ -10,12 +10,11 @@
 -->
 <html>
 <head>
-<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a4fc31dd472c61220b10d05b1cec480c&libraries=services"></script>
 <script src="${path}/resources/js/LoginPopup.js"></script>
 <script>
-
 $(document).ready(function() {
    $(".cta").click(function(){
       var blur = document.getElementById('blur');
@@ -500,11 +499,7 @@ $(document).ready(function() {
 <img src="/image/kakaologin.png"></a>
       </form>
    </div>
-   <!-- 비로그인 상태 : 회원가입,로그인 활성화 -->
-   <c:if test="${empty user}">
-      <a href="${pageContext.request.contextPath}/project/search.do">맵띄우기
-         연습</a>
-   </c:if>
+
    <c:if test="${empty user}">
       <a href="https://kauth.kakao.com/oauth/authorize?client_id=c33ff58fa9f138c4cca66548e9bbb951&redirect_uri=http://localhost:8080/project/kakao/callback&response_type=code"> 
          개같은 카카오 연습</a>
@@ -527,9 +522,7 @@ $(document).ready(function() {
         <input type='password' placeholder='Password' class='input-line full-width'></input>
 
       </div>
-      <div class='spacing'>
-      <a href="https://kauth.kakao.com/oauth/authorize?client_id=c33ff58fa9f138c4cca66548e9bbb951&redirect_uri=http://localhost:8080/project/kakao/callback&response_type=code">
-      <img src="../resources/images/kakaolog.png"></a>
+      <div class='spacing'>or continue with <span class='highlight'>Facebook</span></div>
       <div><button class='ghost-round full-width'>Create Account</button></div>
     </div>
   </div>
@@ -537,4 +530,5 @@ $(document).ready(function() {
      </form>
    </div>
 </body>
+
 </html>

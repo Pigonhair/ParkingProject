@@ -1,53 +1,36 @@
-<cmd에서 오라클 유저(parking) 생성하기>
-sqlplus / nolog -- 계정없이 로그인
-sqlplus / as sysdba --관리가 계정으로 접속
-conn system as sysdba; --password : oracle
-create user parking identified by 1234;
-grant connect, resource to parking; <-- 권한주기(connect, resource은 일반적인 권한 - DDL, DML사용가능)
-grant create view to parking;
-alter user parking account unlock;
-
-
--- parking/1234로 접속해서 테이블만들기
-
-select * from tab;
-
---memeber 테이블 만들기
-create table member(
-  mem_num number not null, -- 멤버 식별 번호
-  mem_id varchar2(20) unique not null, -- 아이디,	*unique : 고유값, 중복허용x
-  mem_auth number(1),  -- 0관리자 1사용자 2사장님
-  mem_token varchar2(300), --카카오톡에서 받아올 토큰
-  constraint member_pk primary key (mem_num) -- mem_num을 참조하여 member_pk라는 프라이머리키를 만듦
+------------------------------parking 테이블------------------
+create table parking(
+  park_id number not null, 						-- 주차장번호
+  park_name varchar2(100), 						-- 주차장 이름
+  park_capacity number, 						-- 총 주차면 수 
+  mem_num number,			   				    -- 소유주 번호(번호로 member에서 아이디찾기)
+  park_type varchar2(20),						-- 주차장 종류 - [노상(공터), 노외(길가), 부설(건물), 기계식]
+  detailAddr varchar2(300),						-- 상세주소	
+  park_public number(1),						-- 공용(0)/사설(1)
+  constraint park_pk primary key (park_id),      -- park_id 참조하여 park_pk 프라이머리키를 만듦
+  constraint owner_fk foreign key (mem_num) references member (mem_num)
 );
 
---member_detail 테이블만들기
-CREATE TABLE member_detail ( --멤버 상세정보
-mem_num number not null, -- member테이블에서 받아옴
-mem_name varchar2(20) not null, -- 이름
-mem_phone varchar2(20) not null, --전화번호
-mem_dis number(1), -- 0일반인 1몸이 불편하신분들(장애인, 임산부, 노약자 등)
-constraint member_detail_pk primary key (mem_num), 
-constraint member_detail_fk foreign key (mem_num) references member (mem_num)
+CREATE SEQUENCE PARKING_ID;
+DROP SEQUENCE PARKING_ID;
+INSERT INTO PARKING VALUES (PARKING_ID.NEXTVAL,'이젠주차장',300,1,'노상','서초동 이젠로 7',1);
+
+SELECT* FROM PARKING;
+DROP TABLE PARKING;
+
+------------------------------parking_detail 테이블------------------
+create table parking_detail(					-- 주차장 상세
+  park_id number not null, 						-- 주차장번호
+  park_status number,						 	-- 주차장사용가능여부	
+  park_avgPoint number,					 		-- 주차장평균평점
+  cur_parking number,			   			    -- 현재 주차중인 차량 수
+  park_rate number,								-- 기본 주차요금
+  park_time_rate number,						-- 기본 주차시간	
+  add_park_rate number,							-- 추가단위 요금
+  day_max_pay number,							-- 하루 최대 요금
+  constraint park_id_fk foreign key (park_id) references parking (park_id)
 );
-
-시퀀스
-
---☆ 시퀀스 객체 작성
-create sequence 시퀀스객체명
-create sequence mem_num_member nocache nocycle;
-create sequence mem_num_member seq_board nocache nocycle;
-
---☆ 시퀀스 객체 삭제
-drop   sequence 시퀀스객체명
-drop   sequence seq_board mem_num_member
-
---☆ 자동으로 1씩 증가하는 값을 얻어오기
-select seq_board.nextval from dual
-
-select * from board;
-
-INSERT INTO boardList(SEQ,ID,TOKEN,NAME,SUBJECT,CONTENT,HIT,REPLY,LOGTIME,PIC)
-VALUES(SEQ_BOARDLIST.NEXTVAL,'pigonhair','kunwoo','거누','제목2','내용2','1','0','2020-12-31','abc.jpg');
+SELECT* FROM PARKING_DETAIL;
+DROP TABLE PARKING_DETAIL;
 
 
