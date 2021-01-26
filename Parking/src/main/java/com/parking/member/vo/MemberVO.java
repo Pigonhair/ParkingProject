@@ -23,100 +23,112 @@ import javax.validation.constraints.Size;
       );*/
       
 public class MemberVO {
-   //멤버 식별 번호
-   private int mem_num;
-   
-   //멤버 아이디
-   @NotEmpty
-   private String mem_id;
-   
-	//회원의 비밀번호
-	@Size(min=4,max=15)
-	private String mem_pw;
-   
-   //0관리자 1사용자 2사장님
-   private int mem_auth;   
-   
-   //카카오톡 토큰
-   private String mem_token;
-   
-   @NotEmpty
-   private String name;
-   
-   private String phone;
-   
-   private int dis;
+	//---------------member-----------------------------
+		// 멤버 식별 번호 (시퀀스 사용)
+		private int mem_num;
+		// 멤버 아이디 (이메일 사용)
+		@NotEmpty
+		private String mem_id;
+		// 관리자 사용자 사장님
+		private String mem_auth;
+		// 카카오톡에서 받아올 토큰
+		private String mem_token;
 
-   public int getMem_num() {
-      return mem_num;
-   }
+		// ----------------member_detail---------------------
+		// 이름 (카카오톡 받아온 이름)
+		@NotEmpty
+		private String name;
+		// 핸드폰 번호
+		private String phone;
+		// 장애여부
+		private String dis;
 
-   public void setMem_num(int mem_num) {
-      this.mem_num = mem_num;
-   }
+		// ---------------member_car-------------------------------
+		// 차량번호
+		private String carid;
+		// 차량모델
+		private String carmodel;
+		// 차량 카테코리(소형,중형,대형)
+		private String category;
 
-   public String getMem_id() {
-      return mem_id;
-   }
+		public int getMem_num() {
+			return mem_num;
+		}
 
-   public void setMem_id(String mem_id) {
-      this.mem_id = mem_id;
-   }
+		public void setMem_num(int mem_num) {
+			this.mem_num = mem_num;
+		}
 
-   public int getMem_auth() {
-      return mem_auth;
-   }
+		public String getMem_id() {
+			return mem_id;
+		}
 
-   public void setMem_auth(int mem_auth) {
-      this.mem_auth = mem_auth;
-   }
+		public void setMem_id(String mem_id) {
+			this.mem_id = mem_id;
+		}
 
-   public String getMem_token() {
-      return mem_token;
-   }
+		public String getMem_auth() {
+			return mem_auth;
+		}
 
-   public void setMem_token(String mem_token) {
-      this.mem_token = mem_token;
-   }
+		public void setMem_auth(String mem_auth) {
+			this.mem_auth = mem_auth;
+		}
 
-   public String getName() {
-      return name;
-   }
+		public String getMem_token() {
+			return mem_token;
+		}
 
-   public void setName(String name) {
-      this.name = name;
-   }
+		public void setMem_token(String mem_token) {
+			this.mem_token = mem_token;
+		}
 
-   public String getPhone() {
-      return phone;
-   }
+		public String getName() {
+			return name;
+		}
 
-   public void setPhone(String phone) {
-      this.phone = phone;
-   }
+		public void setName(String name) {
+			this.name = name;
+		}
 
-   public int getDis() {
-      return dis;
-   }
+		public String getPhone() {
+			return phone;
+		}
 
-   public void setDis(int dis) {
-      this.dis = dis;
-   }
+		public void setPhone(String phone) {
+			this.phone = phone;
+		}
 
-   
-   public String getMem_pw() {
-		return mem_pw;
-   }
-	
-	public void setMem_pw(String mem_pw) {
-		this.mem_pw = mem_pw;
-   }
+		public String getDis() {
+			return dis;
+		}
 
-   @Override	
-   public String toString() {
-      return "MemberVO [mem_num=" + mem_num + ", mem_id=" + mem_id + ", mem_auth=" + mem_auth + ", mem_token="
-            + mem_token + ", name=" + name + ", phone=" + phone + ", dis=" + dis + "]";
-   }
-   
-   
-}
+		public void setDis(String dis) {
+			this.dis = dis;
+		}
+
+		public String getCarid() {
+			return carid;
+		}
+
+		public void setCarid(String carid) {
+			this.carid = carid;
+		}
+
+		public String getCarmodel() {
+			return carmodel;
+		}
+
+		public void setCarmodel(String carmodel) {
+			this.carmodel = carmodel;
+		}
+
+		public String getCategory() {
+			return category;
+		}
+
+		public void setCategory(String category) {
+			this.category = category;
+		}
+
+	}

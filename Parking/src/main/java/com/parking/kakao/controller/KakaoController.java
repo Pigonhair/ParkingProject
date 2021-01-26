@@ -147,6 +147,8 @@ public class KakaoController {
 //	
 		 ModelAndView mav = new ModelAndView();
 		 mav.addObject("id",vo.getMem_id());
+		 mav.addObject("name",vo.getName());
+		 mav.addObject("token",vo.getMem_token());
 //		 mav.setViewName("redirect:/project/signUp.do");
 		 mav.setViewName("/member/SignUp");
 		return mav;

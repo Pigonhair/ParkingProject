@@ -1,6 +1,7 @@
 <%@page import="com.parking.member.vo.MemberVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -152,7 +153,6 @@ html, body {
 /*button*/
 
 
-
 </style>
 </head>
 <body>
@@ -162,27 +162,30 @@ html, body {
   </header>
   <section class="input-content">
     <h2>상세보기<span>*은 필수 입력사항입니다.</span></h2>
+    <form  action="${pageContext.request.contextPath}/project/insert.do" method="post">
     <div class="input-content-wrap">
       <dl class="inputbox">
         <dt class="inputbox-title">ID</dt>
         <dd class="inputbox-content">
-          <input id="input0" type="text" required/>
-          <label for="input0">${id}</label>
+          <input id="input0" type="text" value="${id}" name="id" required/>
+          <input id="input0" type="hidden" value="${token}" name="token" required/>          
+          <%-- <label for="input0">${id}</label> --%>
+          
           <span class="underline"></span>
         </dd>
       </dl>
       <dl class="inputbox">
         <dt class="inputbox-title">NAME</dt>
         <dd class="inputbox-content">
-          <input id="input1" type="password" required/>
-          <label for="input1"></label>
+          <input id="input1" type="text" value="${name}" name="name"required/>
+          <!-- <label for="input1"></label> -->
           <span class="underline"></span>
         </dd>
       </dl>
       <dl class="inputbox">
         <dt class="inputbox-title">*PHONE</dt>
         <dd class="inputbox-content">
-          <input id="input0" type="text" required/>
+          <input id="input0" type="text" name="phone" required/>
           <label for="input0">PHONE</label>
           <span class="underline"></span>
         </dd>
@@ -190,7 +193,7 @@ html, body {
       <dl class="inputbox">
         <dt class="inputbox-title">*CARNUMBER</dt>
         <dd class="inputbox-content">
-          <input id="input0" type="text" required/>
+          <input id="input0" type="text" name="carnumber" required/>
           <label for="input0">CARNUMBER</label>
           <span class="underline"></span>
         </dd>
@@ -198,7 +201,7 @@ html, body {
       <dl class="inputbox">
         <dt class="inputbox-title">*CARMODEL</dt>
         <dd class="inputbox-content">
-          <input id="input0" type="text" required/>
+          <input id="input0" type="text" name="carmodel" required/>
           <label for="input0">CARMODEL</label>
           <span class="underline"></span>
         </dd>
@@ -207,7 +210,7 @@ html, body {
       <dl class="inputbox">
         <dt class="inputbox-title">*Categories</dt>
         <dd class="inputbox-content">
-          <input id="input0" type="text" required/>
+          <input id="input0" type="text" name="categories" required/>
           <label for="input0">Categories</label>
           <span class="underline"></span>
         </dd>
@@ -215,7 +218,7 @@ html, body {
       <dl class="inputbox">
         <dt class="inputbox-title">*dis</dt>
         <dd class="inputbox-content">
-          <input id="input0" type="text" required/>
+          <input id="input0" type="text" name="dis" required/>
           <label for="input0">dis</label>
           <span class="underline"></span>
         </dd>
@@ -223,16 +226,19 @@ html, body {
       <dl class="inputbox">
         <dt class="inputbox-title">*AUTH</dt>
         <dd class="inputbox-content">
-          <input id="input0" type="text" required/>
+          <input id="input0" type="text" name="auth" required/>
           <label for="input0">AUTH</label>
           <span class="underline"></span>
         </dd>
       </dl>
       <div class="btns">
-          <button class="btn btn-confirm">Sign In</button>
+          <input type="submit" class="btn btn-confirm" value="정보수정">
           <button class="btn btn-cancel">Cancel</button>
+          
+           <a href="${pageContext.request.contextPath}/project/insert.do">리뷰페이지Test</a>
       </div>
     </div>
+    </form>
   </section>
 </div>
 </body>

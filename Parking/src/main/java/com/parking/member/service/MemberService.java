@@ -18,5 +18,8 @@ public interface MemberService {
 	//로그인, 아이디 중복체크 시 사용하는 메서드
 	public MemberVO login(String mem_id);
 	
+	// 회원가입 정보 넣기
+	public void insertMember(MemberVO vo);
+	
 
 }
