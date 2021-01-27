@@ -66,13 +66,15 @@
 		<property name="dataSource" ref="dataSource"/>
 		<property name="typeAliasesPackage" value="com.parking.member.vo
 												   com.parking.pay.vo
-												   com.parking.search.vo"/>	
+												   com.parking.search.vo
+												   com.parking.review.vo"/>	
 	</bean>
 	
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="com.parking.member.dao
 											com.parking.pay.dao
-										    com.parking.search.dao"/>	
+										    com.parking.search.dao
+										    com.parking.review.dao"/>	
 	</bean> 
 	
 		

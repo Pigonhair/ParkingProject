@@ -130,6 +130,7 @@ $(document).ready(function() {
 
 </head>
 <body>
+<a href="${pageContext.request.contextPath}/project/review.do">리뷰페이지Test</a>
    <div class="container" id="blur">
       <img class="background"
          src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/221808/sky.jpg" />
