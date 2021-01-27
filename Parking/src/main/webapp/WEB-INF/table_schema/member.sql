@@ -37,7 +37,6 @@ constraint member_detail_pk PRIMARY KEY (mem_name),
 constraint member_detail_fk FOREIGN KEY (mem_num) REFERENCES member (mem_num)
 );
 
-
 SELECT* FROM MEMBER_DETAIL;
 DROP TABLE MEMBER_DETAIL;
 

@@ -434,8 +434,9 @@ $(document).ready(function() {
       <div class="circle-container">
          <div class="circle"></div>
       </div>
-   
-      <a href="#" onclick="openForm()" class="cta">
+      
+<c:if test="${logOK==0}">     
+   <a href="#" class="cta">
        <span>로그인</span> 
        <svg width="13px" height="10px" viewBox="0 0 13 10">
     <path d="M1,5 L11,5"></path>
@@ -443,7 +444,29 @@ $(document).ready(function() {
   </svg>
       </a>
    </div>
+</c:if>
       
+<c:if test="${logOK==1}">
+   <a href="#" class="cta">
+       <span>${mem_name}님</span> 
+       <svg width="13px" height="10px" viewBox="0 0 13 10">
+    <path d="M1,5 L11,5"></path>
+    <polyline points="8 1 12 5 8 9"></polyline>
+  </svg>
+      </a>
+   </div>
+</c:if>
+
+
+<!--    <a href="#" onclick="openForm()" class="cta">
+       <span>로그인</span> 
+       <svg width="13px" height="10px" viewBox="0 0 13 10">
+    <path d="M1,5 L11,5"></path>
+    <polyline points="8 1 12 5 8 9"></polyline>
+  </svg>
+      </a>
+   </div> -->
+ 
   <form action="${pageContext.request.contextPath}/project/search.do" method=post> 
    <div id="main_content">
 <!--       <form id="resveForm" name="resveForm" class="needs-validation" -->

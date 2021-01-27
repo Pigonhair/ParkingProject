@@ -32,7 +32,7 @@ public interface MemberMapper {
 
 	
 	/************************ 회원가입 되어있는지 확인 ************************/
-	@Select("SELECT * FROM MEMBER WHERE MEM_id=#{mem_id}")
+	@Select("SELECT mem_name FROM member_detail WHERE MEM_num=(SELECT mem_num from member WHERE mem_id=#{mem_id})")
 	public MemberVO isMemberID(String mem_id);
 	/************************ 회원가입 되어있는지 확인 ************************/
 	

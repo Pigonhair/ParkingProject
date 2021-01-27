@@ -5,6 +5,7 @@ import java.io.UnsupportedEncodingException;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.parking.member.service.MemberService;
@@ -102,11 +104,12 @@ public class MemberController {
 		vo.setMem_auth(mem_auth);
 		vo.setMem_token(mem_token);
 		
-		memberService.insertMember(vo);
-		
+	 	memberService.insertMember(vo);
+        HttpSession session = request.getSession();
+        session.setAttribute("logOK", "로그인성공");
+        session.setAttribute("mem_name", mem_name);
 		
 		ModelAndView mav = new ModelAndView();
-		
 		return "main/main";
 	}
 	

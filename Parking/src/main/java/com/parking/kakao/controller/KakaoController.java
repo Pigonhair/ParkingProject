@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.Locale;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.tiles.request.Request;
@@ -22,6 +23,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -35,20 +38,20 @@ import com.parking.member.controller.MemberController;
 import com.parking.member.service.MemberService;
 import com.parking.member.vo.MemberVO;
 
-
 @Controller
-public class KakaoController {
+public class KakaoController{
+	
    
 	@Resource
 	private MemberService memberService;
 	
-	private MemberVO memberVO;
-	
-    MemberVO vo = new MemberVO();
+	private MemberVO vo = new MemberVO();
 	
    @GetMapping("/kakao/callback")
    public ModelAndView kakaoCallback(String code) {
 
+       ModelAndView mav = new ModelAndView();
+       
 //       http요청을 편하게 할수 있는 RestTemplate
 //       Post 방식으로 key=value 테이터를 요청 (카카오쪽으로) 밑에 rt 라이브러리
       RestTemplate rt = new RestTemplate();
@@ -121,12 +124,14 @@ public class KakaoController {
          e.printStackTrace();
       }
       
-      MemberVO memberChk = memberService.isMemberID(Integer.toString(kakaoProflie.getId()));
-      if(memberChk != null) {
+      
+      vo = memberService.isMemberID(Integer.toString(kakaoProflie.getId()));
+      if(vo != null) {
           //*************************************회원가입 되어있는경우**********************************
     	  System.out.println("이미 회원가입 되어있는 아이디입니다.");
-          ModelAndView mav = new ModelAndView();
-          mav.setViewName("redirect:/project/main.do");
+    	  System.out.println("회원이름 :" + vo.getMem_name());
+    	  
+          mav.setViewName("redirect:/member/logOK.do");
          return mav;  
       } else {
           //*************************************회원가입 안되있는경우**********************************
@@ -138,18 +143,20 @@ public class KakaoController {
           vo.setName(kakaoProflie.getProperties().getNickname());
           System.out.println("kakao Nickname : " + kakaoProflie.getProperties().getNickname());
           
-//          HttpSession session=.getSession();
-//          session.setAttribute("logOK", entity);
-//          session.setAttribute("sessionID", id);ㅇ
-//          return "login/loginOK.jsp"; 
-          
-           ModelAndView mav = new ModelAndView();
            mav.addObject("mem_id",vo.getMem_id());
            mav.addObject("mem_name",vo.getMem_name());
            mav.addObject("mem_token",vo.getMem_token());
            mav.setViewName("/member/signUp");
           return mav;  
       }
+   }
+   
+
+   @RequestMapping("/member/logOK.do")
+   public String logOK(HttpServletRequest request, Model model) {
+	   model.addAttribute("logOK",1); //로그인 완료되었을 때
+	   model.addAttribute("mem_name",vo.getMem_name());
+	   return "main/main";
    }
 
 }
