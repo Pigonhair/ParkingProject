@@ -13,13 +13,12 @@ public interface MemberService {
 	 * insertMember(MemberVO membervo); -> 멤버테이블에 넣기
 	 * insertMember_detail(MemberVO membervo); -> 회원 상세정보 넣기
 	 */
-	public void insertMember_detail(MemberVO membervo);
-	
-	//로그인, 아이디 중복체크 시 사용하는 메서드
-	public MemberVO login(String mem_id);
-	
+		
 	// 회원가입 정보 넣기
 	public void insertMember(MemberVO vo);
+
+	// 가입되어있는 아이디인지 확인하기
+	public MemberVO isMemberID(String mem_id);
 	
 
 }

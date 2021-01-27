@@ -6,6 +6,7 @@ package com.parking.kakao.controller;
 import java.io.IOException;
 import java.util.Locale;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import org.apache.tiles.request.Request;
@@ -31,19 +32,20 @@ import com.parking.kakao.model.KakaoProfile;
 import com.parking.kakao.model.OAuthToken;
 import com.parking.main.controller.MainController;
 import com.parking.member.controller.MemberController;
+import com.parking.member.service.MemberService;
 import com.parking.member.vo.MemberVO;
 
 
 @Controller
 public class KakaoController {
    
-   
-//   @RequestMapping("/project/signUp.do")
-//   public String getMain(Locale locale, Model model) {
-//      
-//      return "main/main";
-//   }
-//   @RequestMapping("/kakao/callback")
+	@Resource
+	private MemberService memberService;
+	
+	private MemberVO memberVO;
+	
+    MemberVO vo = new MemberVO();
+	
    @GetMapping("/kakao/callback")
    public ModelAndView kakaoCallback(String code) {
 
@@ -118,42 +120,36 @@ public class KakaoController {
       } catch (IOException e) {
          e.printStackTrace();
       }
-      // User 오브젝트 : 
-      System.out.println("카카오 아이디(번호) : " + kakaoProflie.getId()); // member id
-//      System.out.println("카카오 이메일 : " + kakaoProflie.getKakao_account().getEmail());
-//      System.out.println("카카오 닉네임(name) : " + kakaoProflie.getProperties().getNickname());
-//      // 토큰값 
-      MemberVO vo = new MemberVO();
-//      vo.setMem_id(kakaoProflie.getKakao_account().getEmail());
-//      System.out.println("카카오 vo 값 전달(Id) : " + vo.getMem_id());
-      vo.setMem_token(oauthToken.getAccess_token());
-      System.out.println("카카오 vo 값 전달(Token) : " + oauthToken.getAccess_token());
-      vo.setName(kakaoProflie.getProperties().getNickname());
-      System.out.println("카카오 vo 값 전달(name) : " + kakaoProflie.getProperties().getNickname());
       
-//      MemberController mc = new MemberController();
-//      
-//      ModelAndView mv = new ModelAndView();
-//      mv.setViewName("member/signUp.do");
-      
-      /* return "member/SignUp.jsp"; */
-      
-      /* response.sendRedirect(request.getContextPath()+"/project/main.do"); */
-      
-//      HttpSession session=.getSession();
-//      session.setAttribute("logOK", entity);
-//      session.setAttribute("sessionID", id);ㅇ
-//      return "login/loginOK.jsp"; 
-//   
-       ModelAndView mav = new ModelAndView();
-//       mav.addObject("id",vo.getMem_id());
-       mav.addObject("name",vo.getName());
-       mav.addObject("token",vo.getMem_token());
-//       mav.setViewName("redirect:/project/signUp.do");
-       mav.setViewName("/member/SignUp");
-      return mav;
-      // MemberController.java -> signUp.do를 호출 해서 리턴
-      
+      MemberVO memberChk = memberService.isMemberID(Integer.toString(kakaoProflie.getId()));
+      if(memberChk != null) {
+          //*************************************회원가입 되어있는경우**********************************
+    	  System.out.println("이미 회원가입 되어있는 아이디입니다.");
+          ModelAndView mav = new ModelAndView();
+          mav.setViewName("redirect:/project/main.do");
+         return mav;  
+      } else {
+          //*************************************회원가입 안되있는경우**********************************
+    	  System.out.println("회원가입 안되어있는 아이디입니다.");
+          System.out.println("kakao ID : " + kakaoProflie.getId()); // member id
+          vo.setMem_id(Integer.toString(kakaoProflie.getId()));
+          vo.setMem_token(oauthToken.getAccess_token());
+          System.out.println("kakao Token : " + oauthToken.getAccess_token());
+          vo.setName(kakaoProflie.getProperties().getNickname());
+          System.out.println("kakao Nickname : " + kakaoProflie.getProperties().getNickname());
+          
+//          HttpSession session=.getSession();
+//          session.setAttribute("logOK", entity);
+//          session.setAttribute("sessionID", id);ㅇ
+//          return "login/loginOK.jsp"; 
+          
+           ModelAndView mav = new ModelAndView();
+           mav.addObject("mem_id",vo.getMem_id());
+           mav.addObject("mem_name",vo.getMem_name());
+           mav.addObject("mem_token",vo.getMem_token());
+           mav.setViewName("/member/signUp");
+          return mav;  
+      }
    }
 
 }

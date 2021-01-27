@@ -1,12 +1,12 @@
-<%@page import="com.parking.member.vo.MemberVO"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <style>
 html, body {
   height: 100%;
@@ -84,7 +84,7 @@ html, body {
   width: 100%;
 }
 .input-content .inputbox-content input {
-  width: 100%;
+  width: 500px;
   height: 30px;
   box-sizing: border-box;
   line-height: 30px;
@@ -103,7 +103,7 @@ html, body {
   cursor: default;
 }
 .input-content .inputbox-content input:focus ~ .underline {
-  width: 100%;
+  width: 500px;
 }
 .input-content .inputbox-content label {
   position: absolute;
@@ -150,96 +150,109 @@ html, body {
   background: #2962ff;
   color: #fff;
 }
-/*button*/
-
-
 </style>
 </head>
 <body>
 <div id="wrap" class="input">
   <header class="input-header">
-    <h1>회원가입 상세보기</h1>
+    <h1>회원가입</h1>
   </header>
+  
   <section class="input-content">
-    <h2>상세보기<span>*은 필수 입력사항입니다.</span></h2>
+    <h2>회원가입<span>*은 필수 입력사항입니다.</span></h2>
     <form  action="${pageContext.request.contextPath}/project/insert.do" method="post">
     <div class="input-content-wrap">
       <dl class="inputbox">
-        <dt class="inputbox-title">ID</dt>
+        <dt class="inputbox-title">* 아이디</dt>
         <dd class="inputbox-content">
-          <input id="input0" type="text" value="${id}" name="id" required/>
-          <input id="input0" type="hidden" value="${token}" name="token" required/>          
-          <%-- <label for="input0">${id}</label> --%>
+          <input id="mem_id" type="text" value="${mem_id}" name="mem_id" required/>
+          <input id="mem_token" type="hidden" value="${mem_token}" name="mem_token" required readonly/>          
+          <label for="input0">${id}</label>
           
           <span class="underline"></span>
         </dd>
       </dl>
       <dl class="inputbox">
-        <dt class="inputbox-title">NAME</dt>
+        <dt class="inputbox-title">* 이름</dt>
         <dd class="inputbox-content">
-          <input id="input1" type="text" value="${name}" name="name"required/>
+          <input id="mem_name" type="text" value="${mem_name}" name="mem_name"required readonly/>
           <!-- <label for="input1"></label> -->
           <span class="underline"></span>
         </dd>
       </dl>
       <dl class="inputbox">
-        <dt class="inputbox-title">*PHONE</dt>
+        <dt class="inputbox-title">* 전화번호</dt>
         <dd class="inputbox-content">
-          <input id="input0" type="text" name="phone" required/>
-          <label for="input0">PHONE</label>
+          <input id="mem_phone" type="text" name="mem_phone" required/>
+          <label for="input0">전화번호</label>
           <span class="underline"></span>
         </dd>
       </dl>
       <dl class="inputbox">
-        <dt class="inputbox-title">*CARNUMBER</dt>
+        <dt class="inputbox-title">* 차량번호</dt>
         <dd class="inputbox-content">
-          <input id="input0" type="text" name="carnumber" required/>
-          <label for="input0">CARNUMBER</label>
+          <input id="carid" type="text" name="carid" required/>
+          <label for="input0">차량번호</label>
           <span class="underline"></span>
         </dd>
       </dl>
       <dl class="inputbox">
-        <dt class="inputbox-title">*CARMODEL</dt>
+        <dt class="inputbox-title">* 차량모델</dt>
         <dd class="inputbox-content">
-          <input id="input0" type="text" name="carmodel" required/>
-          <label for="input0">CARMODEL</label>
+          <input id="carmodel" type="text" name="carmodel" required/>
+          <label for="input0">차량모델</label>
           <span class="underline"></span>
         </dd>
       </dl>
       
       <dl class="inputbox">
-        <dt class="inputbox-title">*Categories</dt>
+        <dt class="inputbox-title">* 소형,중형,대형</dt>
         <dd class="inputbox-content">
-          <input id="input0" type="text" name="categories" required/>
-          <label for="input0">Categories</label>
-          <span class="underline"></span>
+          <select title="category" id="category" name="category">
+             <option value="big-sized" selected="selected">대형</option>
+             <option value="medium-sized">중형</option>
+             <option value="small-sized">소형</option>
+          </select>     
         </dd>
       </dl>
       <dl class="inputbox">
-        <dt class="inputbox-title">*dis</dt>
+        <dt class="inputbox-title">* 장애여부 </dt>
         <dd class="inputbox-content">
-          <input id="input0" type="text" name="dis" required/>
-          <label for="input0">dis</label>
-          <span class="underline"></span>
+          <select title="mem_dis" id="mem_dis" name="mem_dis">
+             <option value="ordi" selected="selected">일반</option>
+             <option value="dis">장애인</option>
+          </select>
         </dd>
       </dl>
       <dl class="inputbox">
-        <dt class="inputbox-title">*AUTH</dt>
+        <dt class="inputbox-title">* 사용자구분</dt>
         <dd class="inputbox-content">
-          <input id="input0" type="text" name="auth" required/>
-          <label for="input0">AUTH</label>
-          <span class="underline"></span>
+          <select title="mem_auth" id="mem_auth" name="mem_auth">
+             <option value="user" selected="selected">일반사용자</option>
+             <option value="owner">주차장 소유자</option>
+          </select>        
         </dd>
       </dl>
       <div class="btns">
-          <input type="submit" class="btn btn-confirm" value="정보수정">
-          <button class="btn btn-cancel">Cancel</button>
+          <input type="submit" class="btn btn-confirm" value="회원가입">
+          <input type="button" id="btn_home" class="btn btn-confirm" value="취소">
           
-           <a href="${pageContext.request.contextPath}/project/insert.do">리뷰페이지Test</a>
       </div>
     </div>
     </form>
   </section>
 </div>
+<script>
+
+$(document).ready(function() {
+	//context path가져오기
+	var ctx = '<%=request.getContextPath()%>';
+	//홈으로 돌아가기 버튼
+   $("#btn_home").click(function(){
+	   location.href=ctx+"/project/main.do";
+   });
+
+});
+</script>
 </body>
 </html>

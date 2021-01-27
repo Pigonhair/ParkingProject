@@ -30,18 +30,19 @@ public class MemberVO {
 		@NotEmpty
 		private String mem_id;
 		// 관리자 사용자 사장님
-		private String mem_auth;
+		private int mem_auth;
 		// 카카오톡에서 받아올 토큰
+		@NotEmpty
 		private String mem_token;
 
 		// ----------------member_detail---------------------
 		// 이름 (카카오톡 받아온 이름)
 		@NotEmpty
-		private String name;
+		private String mem_name;
 		// 핸드폰 번호
-		private String phone;
+		private String mem_phone;
 		// 장애여부
-		private String dis;
+		private int mem_dis;
 
 		// ---------------member_car-------------------------------
 		// 차량번호
@@ -67,11 +68,11 @@ public class MemberVO {
 			this.mem_id = mem_id;
 		}
 
-		public String getMem_auth() {
+		public int getMem_auth() {
 			return mem_auth;
 		}
 
-		public void setMem_auth(String mem_auth) {
+		public void setMem_auth(int mem_auth) {
 			this.mem_auth = mem_auth;
 		}
 
@@ -83,28 +84,28 @@ public class MemberVO {
 			this.mem_token = mem_token;
 		}
 
-		public String getName() {
-			return name;
+		public String getMem_name() {
+			return mem_name;
 		}
 
-		public void setName(String name) {
-			this.name = name;
+		public void setName(String mem_name) {
+			this.mem_name = mem_name;
 		}
 
-		public String getPhone() {
-			return phone;
+		public String getMem_phone() {
+			return mem_phone;
 		}
 
-		public void setPhone(String phone) {
-			this.phone = phone;
+		public void setPhone(String mem_phone) {
+			this.mem_phone = mem_phone;
 		}
 
-		public String getDis() {
-			return dis;
+		public int getMem_Dis() {
+			return mem_dis;
 		}
 
-		public void setDis(String dis) {
-			this.dis = dis;
+		public void setDis(int mem_dis) {
+			this.mem_dis = mem_dis;
 		}
 
 		public String getCarid() {
@@ -131,4 +132,12 @@ public class MemberVO {
 			this.category = category;
 		}
 
+		@Override
+		public String toString() {
+			return "MemberVO [mem_num=" + mem_num + ", mem_id=" + mem_id + ", mem_auth=" + mem_auth + ", mem_token="
+					+ mem_token + ", mem_name=" + mem_name + ", mem_phone=" + mem_phone + ", mem_dis=" + mem_dis
+					+ ", carid=" + carid + ", carmodel=" + carmodel + ", category=" + category + "]";
+		}
+		
+		
 	}
