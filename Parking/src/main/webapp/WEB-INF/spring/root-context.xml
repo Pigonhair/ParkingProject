@@ -67,14 +67,16 @@
 		<property name="typeAliasesPackage" value="com.parking.member.vo
 												   com.parking.pay.vo
 												   com.parking.search.vo
-												   com.parking.review.vo"/>	
+												   com.parking.review.vo	
+												   com.parking.reservation.vo"/>
 	</bean>
 	
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="com.parking.member.dao
 											com.parking.pay.dao
 										    com.parking.search.dao
-										    com.parking.review.dao"/>	
+										    com.parking.review.dao
+										    com.parking.reservation.dao"/>	
 	</bean> 
 	
 		

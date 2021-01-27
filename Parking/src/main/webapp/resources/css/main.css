@@ -1,3 +1,8 @@
+@font-face {
+   src: url("../font/BMJUA_ttf.ttf");
+   font-family: "jua";
+}
+
 article, aside, details, figcaption, figure, footer, header, hgroup,
 	main, menu, nav, section, summary, form, fieldset {
 	display: block;
@@ -133,9 +138,22 @@ button, input, optgroup, select, textarea {
 	color: #fff;
 	line-height: 64px;
 	text-align: center;
-/* 	background: #a70737; */
-    background: #ffab9d;
-	
+    background: #000000;
+	font-family: "jua";
+}
+
+#main_content .btn_review {
+    position: relative;
+    width: 210px;
+    height: 64px;
+    border-radius: 5px;
+    font-size: 25px;
+    color: #fff;
+    line-height: 64px;
+    text-align: center;
+    background: #000000;
+    font-family: "jua";
+    margin-left: 20px;
 }
 
 button, html input[type="button"], input[type="reset"], input[type="submit"]

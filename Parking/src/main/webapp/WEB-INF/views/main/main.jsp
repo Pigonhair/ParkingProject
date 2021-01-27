@@ -473,7 +473,7 @@ $(document).ready(function() {
 <!--       <form id="resveForm" name="resveForm" class="needs-validation" -->
 <!--          novalidate="novalidate"> -->
          <fieldset>
-            <legend>예약하기 정보 입력폼</legend>
+            <legend>.</legend>
             <div class="fbox">
                <dl>
                   <dt>차량 선택</dt>
@@ -491,7 +491,7 @@ $(document).ready(function() {
                   </dd>
                </dl>
                <p class="btn_wrap">
-                  <input type="submit" id="btnReserve" class="btn_reserv" value="찾 기"></input>
+                  <input type="submit" id="btnReserve" class="btn_reserv" value="찾 기"></input><input type="submit" id="btnReview" class="btn_review" value="리뷰검색"></input>
                </p>
             </div>
          </fieldset>
