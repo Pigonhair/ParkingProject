@@ -162,7 +162,8 @@ String btnAddress = request.getParameter("btnAddress");
                   <label for="agree2">개인정보처리방침 모든 내용을 읽고 동의합니다.</label>
                  
                <div class="btn_area">
-                  <button id="btnNext" class="btn wine" onclick="#">예약하기</button>
+                  <button id="btnNext" class="btn wine" onclick="location.href='${pageContext.request.contextPath}/pay/pay.do'">결제하기</button>
+                  
                </div>
       </div>
   </div>

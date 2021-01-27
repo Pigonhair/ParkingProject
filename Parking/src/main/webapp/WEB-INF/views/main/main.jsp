@@ -1,13 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <!DOCTYPE HTML>
-<!--
-   Dopetrope by HTML5 UP
-   html5up.net | @ajlkn
-   Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
 <html>
 <head>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -16,6 +10,8 @@
 <script src="${path}/resources/js/LoginPopup.js"></script>
 <script>
 $(document).ready(function() {
+	
+	//로그인 popup창 열기
    $(".cta").click(function(){
       var blur = document.getElementById('blur');
       blur.classList.toggle('active')
@@ -25,6 +21,7 @@ $(document).ready(function() {
       popup.classList.toggle('active')
    });
    
+   //로그인 popup창 닫기
    $(".btn_exit").click(function(){
       var blur = document.getElementById('blur');
       blur.classList.toggle('active')
@@ -34,6 +31,7 @@ $(document).ready(function() {
       popup.classList.toggle('active')
    });
    
+   //주소찾기 daum api
    $("#btnAddress").click(function(){
       new daum.Postcode({
           oncomplete: function(data) {
@@ -41,24 +39,7 @@ $(document).ready(function() {
 
               // 주소 정보를 해당 필드에 넣는다.
               document.getElementById("btnAddress").value = addr;
-              // 주소로 상세 정보를 검색
-              geocoder.addressSearch(data.address, function(results, status) {
-                  // 정상적으로 검색이 완료됐으면
-                  if (status === daum.maps.services.Status.OK) {
 
-                      var result = results[0]; //첫번째 결과의 값을 활용
-
-                      // 해당 주소에 대한 좌표를 받아서
-                      var coords = new daum.maps.LatLng(result.y, result.x);
-                      // 지도를 보여준다.
-                      mapContainer.style.display = "block";
-                      map.relayout();
-                      // 지도 중심을 변경한다.
-                      map.setCenter(coords);
-                      // 마커를 결과값으로 받은 위치로 옮긴다.
-                      marker.setPosition(coords)
-                  }
-              });
           }
       }).open();
    });
@@ -520,15 +501,17 @@ $(document).ready(function() {
         <input type='text' placeholder='Username' class='input-line full-width'></input>
         <input type='email' placeholder='Email' class='input-line full-width'></input>
         <input type='password' placeholder='Password' class='input-line full-width'></input>
-
       </div>
+      
       <div class='spacing'><div class='spacing'>
       <a href="https://kauth.kakao.com/oauth/authorize?client_id=c33ff58fa9f138c4cca66548e9bbb951&redirect_uri=http://localhost:8080/project/kakao/callback&response_type=code">
       <img src="../resources/images/kakaolog.png"></a></div>
       <div><button class='ghost-round full-width'>Create Account</button></div>
+      </div>
+    
     </div>
   </div>
-</div>
+  
      </form>
    </div>
 </body>
