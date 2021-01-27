@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page import="java.io.PrintWriter"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <!DOCTYPE HTML>
 <html>
@@ -131,310 +132,22 @@ $(document).ready(function() {
 </head>
 <body>
 <a href="${pageContext.request.contextPath}/project/review.do">리뷰페이지Test</a>
-   <div class="container" id="blur">
-      <img class="background"
-         src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/221808/sky.jpg" />
+   <!-- <div class="container" id="blur">
+      <img class="background" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/221808/sky.jpg" /> -->
 
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
-      <div class="circle-container">
-         <div class="circle"></div>
-      </div>
+<%
+	PrintWriter script = response.getWriter();
+	script.println("<div class=\"container\" id=\"blur\">");
+	script.println("<img class=\"background\" src=\"https://s3-us-west-2.amazonaws.com/s.cdpn.io/221808/sky.jpg\" />");
+	
+	int x = 0;
+	for(x=0; x<=200 ; x++){
+		
+		script.println("<div class=\"circle-container\">");
+		script.println("<div class=\"circle\"></div>");
+		script.println("</div>");
+	
+}%>
       
 <c:if test="${logOK==0}">     
    <a href="#" class="cta">
@@ -491,7 +204,8 @@ $(document).ready(function() {
                   </dd>
                </dl>
                <p class="btn_wrap">
-                  <input type="submit" id="btnReserve" class="btn_reserv" value="찾 기"></input><input type="submit" id="btnReview" class="btn_review" value="리뷰검색"></input>
+                  <input type="submit" id="btnReserve" class="btn_reserv" value="찾 기"></input>
+                  <input type="button" id="btnReview" class="btn_review" value="리뷰검색" onClick="location.href='${pageContext.request.contextPath}/review.do'"></input>
                </p>
             </div>
          </fieldset>

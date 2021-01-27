@@ -7,6 +7,7 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script type="text/javaScript" src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script>
 
 
 <!-- <link href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css'>
@@ -34,8 +35,8 @@ $(document).ready(function(){
 		$('#loading').show();
 		
 		$.ajax({
-			type: 'post',
-			data:{pageNum:pageNum},
+			type:'post',
+			data:{pageNum:currentPage},
 			url:'reviewListAjax.do',
 			dataType:'json',
 			cache:false,
@@ -52,7 +53,6 @@ $(document).ready(function(){
 					alert('목록 호출 오류 발생!');
 				}else{
 					$(list).each(function(index,item){
-						alert('일단 되나?');
 						var output='<div class="container">';
 						output = '<h1 class="my-4"></h1>';
 						output += '<div class="row">';
@@ -62,11 +62,11 @@ $(document).ready(function(){
 						output += '</a>';
 						output += '</div>';
 						output += '<div class="col-md-5">';
-						/* output += '<h3>'+item.view_title+'</h3>'; */
-						output += '<h3>일단되나봅시다</h3>'
+						output += '<h3>'+item.review_title+'</h3>'; 
 						
-						/* output += '<p>'+item.view_content+'</p>'; */
-						output += '<p>일단 되나 보자고</p>';
+						
+						output += '<p>'+item.review_content+'</p>'; 
+						
 						output += '<a class="btn btn-primary" href="#">상세보기</a>';
 						output += '</div>';
 						output += '</div>';
@@ -125,7 +125,7 @@ $(document).ready(function(){
 
 
 
- <div class="container">
+ <%-- <div class="container">
 
       <!-- Page Heading -->
       <h1 class="my-4">주차장 사용 어땠는지 평가
@@ -164,4 +164,4 @@ $(document).ready(function(){
       <!-- /.row -->
 
      
-    </div> 
+    </div>  --%>

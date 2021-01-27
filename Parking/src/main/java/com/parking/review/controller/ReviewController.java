@@ -46,15 +46,15 @@ public class ReviewController {
 	}
 	
 	//그룹 목록 불러오기
-		@RequestMapping("/review/reviewListAjax.do")
+		@RequestMapping("/reviewListAjax.do" )
 		@ResponseBody
 		public Map<String,Object> getReviewList(@RequestParam(value="pageNum",defaultValue="1") int currentPage, HttpSession session, Model model){
 			System.out.println("목록불러오기 ajax 진입");
 			List<ReviewVO> list = null;
 			
-			ReviewVO review = (ReviewVO)session.getAttribute("user");
-			int sessionMem_num = review.getMem_num();
-			
+			//ReviewVO review = (ReviewVO)session.getAttribute("user");
+			//int sessionMem_num = review.getMem_num();
+			int sessionMem_num = 1;
 			int count = 0;
 			
 			Map<String,Object> map = new HashMap<String,Object>();
@@ -86,7 +86,7 @@ public class ReviewController {
 	
 
 	//리뷰 리스트 페이지 호출
-	@RequestMapping("/project/review.do")
+	@RequestMapping("/review.do")
 	public String review() {
 		//리뷰페이지 호출
 		return "review/review";
