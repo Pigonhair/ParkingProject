@@ -242,7 +242,7 @@ $(document).ready(function() {
       <a href="https://kauth.kakao.com/oauth/authorize?client_id=c33ff58fa9f138c4cca66548e9bbb951&redirect_uri=http://localhost:8080/project/kakao/callback&response_type=code"> 
          개같은 카카오 연습</a>
    </c:if>
-   
+      <a href="${pageContext.request.contextPath}/pay/pay.do">결제 페이지Test</a>
    
    <!-- 로그인 팝업창 -->
    <div id="popup">
