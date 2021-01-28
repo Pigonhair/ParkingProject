@@ -1,3 +1,4 @@
+
 package com.parking.reservation.dao;
 
 import java.util.List;
@@ -18,8 +19,8 @@ public interface ReservationMapper {
    public int selectReser();
    
    // reservation 테이블에 정보 입력
-   @Insert("INSERT INTO RESERVATION (reser_id,park_id,mem_num,start_time,end_time)"
-         + " values(#{reser_id},#{park_id},#{mem_num},#{start_time},#{end_time})")
+   @Insert("INSERT INTO RESERVATION (reser_id,park_id,mem_num,start_time,end_time,totalPrice)"
+         + " values(#{reser_id},#{park_id},#{mem_num},#{start_time},#{end_time},#{totalPrice})")
    public void inserReser(ReservationVO vo);
 
    

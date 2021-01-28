@@ -64,7 +64,7 @@
                            <select name="select-profession" id="select-profession">
                            <option value="">주차장선택</option>
                         <c:forEach var="parking" items="${list}">               
-                           <option value="${parking.park_id},${parking.mem_num}">${parking.park_id}
+                           <option value="${parking.park_id}">${parking.park_id}
                               ${parking.park_name} ${parking.park_capacity}
                               ${parking.mem_num} ${parking.park_type} ${parking.detailAddr}
                               ${parking.park_public}</option>                 
@@ -141,7 +141,7 @@
    
    <script>
 $('.timepicker').timepicker({
-    timeFormat: 'p h:mm ',
+    timeFormat: 'HH:mm ',
     interval: 10,
     minTime: '0',
     maxTime: '11:50pm',
