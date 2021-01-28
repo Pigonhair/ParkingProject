@@ -159,7 +159,7 @@ html, body {
   </header>
   
   <section class="input-content">
-    <h2>내정보<span>*만 수정가능한 사항입니다.</span></h2>
+    <h2>내정보<span>*표시한 항목만 수정가능한 사항입니다.</span></h2>
     <form  action="${pageContext.request.contextPath}/member/update.do" method="post">
     <div class="input-content-wrap">
       <dl class="inputbox">
@@ -199,7 +199,7 @@ html, body {
       <dl class="inputbox">
         <dt class="inputbox-title">*차량모델</dt>
         <dd class="inputbox-content">
-          <input id="carmodel" type="text" value="${memberVO.car_model}, ${memberVO.mem_auth}" name="carmodel" required/>
+          <input id="carmodel" type="text" value="${memberVO.car_model}" name="carmodel" required/>
           <label for="input0">차량모델</label>
           <span class="underline"></span>
         </dd>
@@ -238,10 +238,19 @@ html, body {
         <dt class="inputbox-title">*장애여부 </dt>
         <dd class="inputbox-content">
 
+        <c:if test="${memberVO.mem_dis == 0}">
           <select title="mem_dis" id="mem_dis" name="mem_dis">
              <option value="ordi" selected="selected">일반</option>
              <option value="dis">장애인</option>
           </select>
+        </c:if>
+        
+        <c:if test="${memberVO.mem_dis == 1}">
+          <select title="mem_dis" id="mem_dis" name="mem_dis">
+             <option value="ordi">일반</option>
+             <option value="dis" selected="selected">장애인</option>
+          </select>
+        </c:if>        
         
         </dd>
       </dl>
@@ -249,11 +258,20 @@ html, body {
         <dt class="inputbox-title">*사용자구분</dt>
         <dd class="inputbox-content">
         
+        <c:if test="${memberVO.mem_auth == 1}">
           <select title="mem_auth" id="mem_auth" name="mem_auth">
              <option value="user" selected="selected">일반사용자</option>
              <option value="owner">주차장 소유자</option>
-          </select>
-
+        </select>
+        </c:if>
+          
+        <c:if test="${memberVO.mem_auth == 2}">
+          <select title="mem_auth" id="mem_auth" name="mem_auth">
+             <option value="user">일반사용자</option>
+             <option value="owner" selected="selected">주차장 소유자</option>
+        </select>   
+ 		</c:if>
+ 		
         </dd>
       </dl>
       <div class="btns">
