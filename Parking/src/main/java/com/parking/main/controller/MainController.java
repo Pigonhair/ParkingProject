@@ -30,11 +30,12 @@ public class MainController {
 	public String getMain(HttpServletRequest request,Locale locale, Model model,HttpSession session) {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		 String mem_token = (String)session.getAttribute("mem_token");
-		 
+		 System.out.println("Maincontroller.session.mem_token  " + mem_token);
 
 		 if(mem_token != null) {
 			 //session에 토큰이 있을경우
 			 MemberVO memberVO = memberService.getMemberbytoken(mem_token);
+			 System.out.println("로그인하는 사용자 :" + memberVO.getMem_name());
 			 model.addAttribute("logOK",1); //로그인 완료되었을 때
 			 model.addAttribute("mem_name",memberVO.getMem_name());
 		 } else {

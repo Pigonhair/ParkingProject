@@ -10,12 +10,19 @@
 <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a4fc31dd472c61220b10d05b1cec480c&libraries=services"></script>
 <script src="${path}/resources/js/LoginPopup.js"></script>
 <script>
-$(document).ready(function() {
+$(document).ready(function() {	
 	
+	var ctx = '<%=request.getContextPath()%>';
+	
+	//로그아웃
+   $("#logout").click(function(){
+	   	//세션 삭제하기
+	    <% session.invalidate(); %>
+		location.href=ctx+"/project/main.do";
+   });	
 	
 	//내정보 보기
    $("#myinfo").click(function(){
-		var ctx = '<%=request.getContextPath()%>';
 		location.href=ctx+"/member/memberdetail.do";
    });
 	
@@ -173,16 +180,22 @@ $(document).ready(function() {
     <polyline points="8 1 12 5 8 9"></polyline>
   </svg>
       </a>
-   </div>
+      </div>
 </c:if>
       
 <c:if test="${logOK==1}">
-   <a href="#" class="cta" id="myinfo">
+   <a href="#" class="cta" id="logout">
+       <span>로그아웃</span> 
+    <path d="M1,5 L11,5"></path>
+    <polyline points="8 1 12 5 8 9"></polyline>
+  </svg>
+   </a>
+  <a href="#" class="cta" id="myinfo">
        <span>${mem_name}님</span> 
     <path d="M1,5 L11,5"></path>
     <polyline points="8 1 12 5 8 9"></polyline>
   </svg>
-      </a>
+   </a>
    </div>
 </c:if>
 
@@ -223,7 +236,7 @@ $(document).ready(function() {
          <a href="https://kauth.kakao.com/oauth/authorize?client_id=c33ff58fa9f138c4cca66548e9bbb951&redirect_uri=http://localhost:8080/project/kakao/callback&response_type=code"> 
 <img src="/image/kakaologin.png"></a>
       </form>
-   </div>
+         </div>
 
    <c:if test="${empty user}">
       <a href="https://kauth.kakao.com/oauth/authorize?client_id=c33ff58fa9f138c4cca66548e9bbb951&redirect_uri=http://localhost:8080/project/kakao/callback&response_type=code"> 
