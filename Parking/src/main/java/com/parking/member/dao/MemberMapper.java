@@ -2,6 +2,7 @@ package com.parking.member.dao;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.parking.member.vo.MemberVO;
 
@@ -55,5 +56,16 @@ public interface MemberMapper {
 			"	where mem_token=#{mem_token}")
 	public MemberVO getMemberbytoken(String mem_token);
 	
+	/************************ member정보 업데이트하기 ************************/
+	@Update("update member set mem_auth =#{mem_auth} where mem_num=#{mem_num}")
+	public void updateMember(MemberVO vo);
+	
+	@Update("update member_detail set mem_phone=#{mem_phone}, mem_dis=#{mem_dis} where mem_num=#{mem_num}")
+	public void updateMember_detail(MemberVO vo);
+	
+	@Update("update member_car set car_id=#{car_id},car_model=#{car_model},category=#{category} where mem_num=#{mem_num}")
+	public void updateMember_car(MemberVO vo);
+	/************************ member정보 업데이트하기 ************************/
+
 
 }

@@ -53,3 +53,19 @@ PRIMARY KEY (car_id)
 
 SELECT* FROM MEMBER_CAR;
 DROP TABLE MEMBER_CAR;
+
+ 
+
+	 	
+update member set mem_auth = 2 where mem_num=	
+update member_detail set mem_phone = 2, mem_dis where mem_num=
+update member_car set car_id = 2, car_model,category where mem_num=
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 

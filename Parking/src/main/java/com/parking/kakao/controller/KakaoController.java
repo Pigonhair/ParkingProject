@@ -64,7 +64,7 @@ public class KakaoController{
       // HttpBody 오브젝트 생성
       MultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
       params.add("grant_type", "authorization_code");
-      params.add("client_id", "c33ff58fa9f138c4cca66548e9bbb951");
+      params.add("client_id", "c33ff58fa9f138c4cca66548e9bbb951"); 	
       params.add("redirect_uri", "http://localhost:8080/project/kakao/callback");
       params.add("code", code);
       
@@ -141,6 +141,8 @@ public class KakaoController{
          return mav;  
       } else {
           //*************************************회원가입 안되있는경우**********************************
+    	  membervo = new MemberVO();
+    	  
     	  System.out.println("회원가입 안되어있는 아이디입니다.");
           System.out.println("kakao ID : " + kakaoProflie.getId()); // member id
           membervo.setMem_id(Integer.toString(kakaoProflie.getId()));

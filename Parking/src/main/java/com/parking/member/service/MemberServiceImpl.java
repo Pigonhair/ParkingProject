@@ -42,4 +42,15 @@ public class MemberServiceImpl implements MemberService{
 		return memberMapper.getMemberbytoken(mem_token);
 	}
 	
+	//멤버 정보 업데이트하기
+	@Override
+	public void updateMember(MemberVO vo) {
+		memberMapper.updateMember(vo);
+		System.out.println("회원정보 업데이트 완료");
+		memberMapper.updateMember_detail(vo);
+		System.out.println("member_detail 업데이트 완료");
+		memberMapper.updateMember_car(vo);
+		System.out.println("member_car 업데이트 완료");
+	}
+	
 }

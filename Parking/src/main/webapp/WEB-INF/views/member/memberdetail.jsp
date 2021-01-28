@@ -160,7 +160,7 @@ html, body {
   
   <section class="input-content">
     <h2>내정보<span>*표시한 항목만 수정가능한 사항입니다.</span></h2>
-    <form  action="${pageContext.request.contextPath}/member/update.do" method="post">
+    <form  id="member_modify-form"  action="${pageContext.request.contextPath}/member/update.do" method="post">
     <div class="input-content-wrap">
       <dl class="inputbox">
         <dt class="inputbox-title">아이디</dt>
@@ -276,7 +276,7 @@ html, body {
       </dl>
       <div class="btns">
           <input type="submit" class="btn btn-confirm" value="수정하기">
-          <input type="button" id="btn_home" class="btn btn-confirm" value="취소">
+          <input type="button" id="btn_home" class="btn btn-confirm" value="HOME">
           
       </div>
     </div>
@@ -293,6 +293,14 @@ $(document).ready(function() {
 	   location.href=ctx+"/project/main.do";
    });
 
+	$('#member_modify-form').submit(function(){
+		var choice = window.confirm('수정하시겠습니까?');
+		if(choice){
+			alert('수정완료!');
+		}else{
+			return false;
+		}
+	});
 });
 </script>
 </body>
