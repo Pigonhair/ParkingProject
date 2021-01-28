@@ -19,6 +19,9 @@ public interface MemberService {
 
 	// 가입되어있는 아이디인지 확인하기
 	public MemberVO isMemberID(String mem_id);
+
+	public MemberVO getMemberbytoken(String mem_token);
+
 	
 
 }

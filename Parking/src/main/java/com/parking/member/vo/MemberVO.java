@@ -46,98 +46,78 @@ public class MemberVO {
 
 		// ---------------member_car-------------------------------
 		// 차량번호
-		private String carid;
+		private String car_id;
 		// 차량모델
-		private String carmodel;
+		private String car_model;
 		// 차량 카테코리(소형,중형,대형)
 		private String category;
-
 		public int getMem_num() {
 			return mem_num;
 		}
-
 		public void setMem_num(int mem_num) {
 			this.mem_num = mem_num;
 		}
-
 		public String getMem_id() {
 			return mem_id;
 		}
-
 		public void setMem_id(String mem_id) {
 			this.mem_id = mem_id;
 		}
-
 		public int getMem_auth() {
 			return mem_auth;
 		}
-
 		public void setMem_auth(int mem_auth) {
 			this.mem_auth = mem_auth;
 		}
-
 		public String getMem_token() {
 			return mem_token;
 		}
-
 		public void setMem_token(String mem_token) {
 			this.mem_token = mem_token;
 		}
-
 		public String getMem_name() {
 			return mem_name;
 		}
-
-		public void setName(String mem_name) {
+		public void setMem_name(String mem_name) {
 			this.mem_name = mem_name;
 		}
-
 		public String getMem_phone() {
 			return mem_phone;
 		}
-
-		public void setPhone(String mem_phone) {
+		public void setMem_phone(String mem_phone) {
 			this.mem_phone = mem_phone;
 		}
-
-		public int getMem_Dis() {
+		public int getMem_dis() {
 			return mem_dis;
 		}
-
-		public void setDis(int mem_dis) {
+		public void setMem_dis(int mem_dis) {
 			this.mem_dis = mem_dis;
 		}
-
-		public String getCarid() {
-			return carid;
+		public String getCar_id() {
+			return car_id;
 		}
-
-		public void setCarid(String carid) {
-			this.carid = carid;
+		public void setCar_id(String car_id) {
+			this.car_id = car_id;
 		}
-
-		public String getCarmodel() {
-			return carmodel;
+		public String getCar_model() {
+			return car_model;
 		}
-
-		public void setCarmodel(String carmodel) {
-			this.carmodel = carmodel;
+		public void setCar_model(String car_model) {
+			this.car_model = car_model;
 		}
-
 		public String getCategory() {
 			return category;
 		}
-
 		public void setCategory(String category) {
 			this.category = category;
 		}
-
+		
 		@Override
 		public String toString() {
 			return "MemberVO [mem_num=" + mem_num + ", mem_id=" + mem_id + ", mem_auth=" + mem_auth + ", mem_token="
 					+ mem_token + ", mem_name=" + mem_name + ", mem_phone=" + mem_phone + ", mem_dis=" + mem_dis
-					+ ", carid=" + carid + ", carmodel=" + carmodel + ", category=" + category + "]";
+					+ ", car_id=" + car_id + ", car_model=" + car_model + ", category=" + category + "]";
 		}
-		
+
 		
 	}

@@ -38,6 +38,7 @@ import com.parking.member.controller.MemberController;
 import com.parking.member.service.MemberService;
 import com.parking.member.vo.MemberVO;
 
+
 @Controller
 public class KakaoController{
 	
@@ -45,10 +46,10 @@ public class KakaoController{
 	@Resource
 	private MemberService memberService;
 	
-	private MemberVO vo = new MemberVO();
+	private MemberVO membervo = new MemberVO();
 	
    @GetMapping("/kakao/callback")
-   public ModelAndView kakaoCallback(String code) {
+   public ModelAndView kakaoCallback(String code, HttpServletRequest request, Model model, HttpSession session) {
 
        ModelAndView mav = new ModelAndView();
        
@@ -125,11 +126,16 @@ public class KakaoController{
       }
       
       
-      vo = memberService.isMemberID(Integer.toString(kakaoProflie.getId()));
-      if(vo != null) {
+      membervo = memberService.isMemberID(Integer.toString(kakaoProflie.getId()));
+      if(membervo != null) {
           //*************************************회원가입 되어있는경우**********************************
     	  System.out.println("이미 회원가입 되어있는 아이디입니다.");
-    	  System.out.println("회원이름 :" + vo.getMem_name());
+    	  System.out.println("회원이름 :" + membervo.getMem_name());
+    	  
+    	  //session에 토큰넣어놓기
+          session = request.getSession();
+          session.setAttribute("mem_token", membervo.getMem_token());
+    	  System.out.println("세션에 넣은 토큰값 : " + membervo.getMem_token());
     	  
           mav.setViewName("redirect:/member/logOK.do");
          return mav;  
@@ -137,15 +143,15 @@ public class KakaoController{
           //*************************************회원가입 안되있는경우**********************************
     	  System.out.println("회원가입 안되어있는 아이디입니다.");
           System.out.println("kakao ID : " + kakaoProflie.getId()); // member id
-          vo.setMem_id(Integer.toString(kakaoProflie.getId()));
-          vo.setMem_token(oauthToken.getAccess_token());
+          membervo.setMem_id(Integer.toString(kakaoProflie.getId()));
+          membervo.setMem_token(oauthToken.getAccess_token());
           System.out.println("kakao Token : " + oauthToken.getAccess_token());
-          vo.setName(kakaoProflie.getProperties().getNickname());
+          membervo.setMem_name(kakaoProflie.getProperties().getNickname());
           System.out.println("kakao Nickname : " + kakaoProflie.getProperties().getNickname());
           
-           mav.addObject("mem_id",vo.getMem_id());
-           mav.addObject("mem_name",vo.getMem_name());
-           mav.addObject("mem_token",vo.getMem_token());
+           mav.addObject("mem_id",membervo.getMem_id());
+           mav.addObject("mem_name",membervo.getMem_name());
+           mav.addObject("mem_token",membervo.getMem_token());
            mav.setViewName("/member/signUp");
           return mav;  
       }
@@ -153,9 +159,10 @@ public class KakaoController{
    
 
    @RequestMapping("/member/logOK.do")
-   public String logOK(HttpServletRequest request, Model model) {
+   public String logOK(HttpServletRequest request, Model model, HttpSession session) {
+	   
 	   model.addAttribute("logOK",1); //로그인 완료되었을 때
-	   model.addAttribute("mem_name",vo.getMem_name());
+	   model.addAttribute("mem_name",membervo.getMem_name());
 	   return "main/main";
    }
 

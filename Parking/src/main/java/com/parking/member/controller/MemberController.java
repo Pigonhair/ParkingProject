@@ -95,22 +95,49 @@ public class MemberController {
 		} 
 		
 		vo.setMem_id(mem_id);
-		vo.setName(mem_name);
-		vo.setPhone(mem_phone);
-		vo.setCarid(carid);
-		vo.setCarmodel(carmodel);
+		vo.setMem_name(mem_name);
+		vo.setMem_phone(mem_phone);
+		vo.setCar_id(carid);
+		vo.setCar_model(carmodel);
 		vo.setCategory(category);
-		vo.setDis(mem_dis);
+		vo.setMem_dis(mem_dis);
 		vo.setMem_auth(mem_auth);
 		vo.setMem_token(mem_token);
 		
 	 	memberService.insertMember(vo);
-        HttpSession session = request.getSession();
-        session.setAttribute("logOK", "로그인성공");
-        session.setAttribute("mem_name", mem_name);
+      
+ 	    model.addAttribute("logOK",1); //로그인 완료되었을 때
+ 	    model.addAttribute("mem_name",mem_name);
 		
 		ModelAndView mav = new ModelAndView();
 		return "main/main";
+	}
+	
+	//내정보 보기
+	@RequestMapping(value = "/member/memberdetail.do")
+	public ModelAndView memberDetail(HttpServletRequest request, Model model, HttpSession session) {
+		session = request.getSession();
+		String mem_token = (String)session.getAttribute("mem_token");
+		System.out.println("mem_token :" + mem_token);
+		
+		//토큰으로 memberVO가져오기
+		MemberVO memberVO = memberService.getMemberbytoken(mem_token);
+		System.out.println(memberVO.getCategory());
+		System.out.println(memberVO.getMem_dis());
+		System.out.println(memberVO.getMem_auth());
+		
+        ModelAndView mav = new ModelAndView();
+        mav.addObject(memberVO);
+        mav.setViewName("/member/memberdetail");
+        
+		return mav;
+	}
+	
+	//내정보 수정하기
+	@RequestMapping(value = "/member/update.do")
+	public String memberUpdate(HttpServletRequest request, Model model) {
+
+		return "member/memberdetail";
 	}
 	
 }

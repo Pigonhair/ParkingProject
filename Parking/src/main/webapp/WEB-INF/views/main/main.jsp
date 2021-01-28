@@ -12,8 +12,15 @@
 <script>
 $(document).ready(function() {
 	
+	
+	//내정보 보기
+   $("#myinfo").click(function(){
+		var ctx = '<%=request.getContextPath()%>';
+		location.href=ctx+"/member/memberdetail.do";
+   });
+	
 	//로그인 popup창 열기
-   $(".cta").click(function(){
+   $("#loginpopup").click(function(){
       var blur = document.getElementById('blur');
       blur.classList.toggle('active')
       var main_content = document.getElementById('main_content');
@@ -43,6 +50,15 @@ $(document).ready(function() {
 
           }
       }).open();
+   });
+   
+	//내정보
+   $(".myinfo").click(function(){
+		var ctx = '<%=request.getContextPath()%>';
+		//홈으로 돌아가기 버튼
+	   $("#btn_home").click(function(){
+		   location.href=ctx+"/member/memberdetail.do";
+	   });
    });
 });
 </script>
@@ -150,7 +166,7 @@ $(document).ready(function() {
 }%>
       
 <c:if test="${logOK==0}">     
-   <a href="#" class="cta">
+   <a href="#" class="cta" id="loginpopup">
        <span>로그인</span> 
        <svg width="13px" height="10px" viewBox="0 0 13 10">
     <path d="M1,5 L11,5"></path>
@@ -161,9 +177,8 @@ $(document).ready(function() {
 </c:if>
       
 <c:if test="${logOK==1}">
-   <a href="#" class="cta">
+   <a href="#" class="cta" id="myinfo">
        <span>${mem_name}님</span> 
-       <svg width="13px" height="10px" viewBox="0 0 13 10">
     <path d="M1,5 L11,5"></path>
     <polyline points="8 1 12 5 8 9"></polyline>
   </svg>
@@ -171,15 +186,6 @@ $(document).ready(function() {
    </div>
 </c:if>
 
-
-<!--    <a href="#" onclick="openForm()" class="cta">
-       <span>로그인</span> 
-       <svg width="13px" height="10px" viewBox="0 0 13 10">
-    <path d="M1,5 L11,5"></path>
-    <polyline points="8 1 12 5 8 9"></polyline>
-  </svg>
-      </a>
-   </div> -->
  
   <form action="${pageContext.request.contextPath}/project/search.do" method=post> 
    <div id="main_content">

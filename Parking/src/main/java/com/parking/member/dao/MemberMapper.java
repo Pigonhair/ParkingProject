@@ -26,15 +26,34 @@ public interface MemberMapper {
 	public void insertMember_detail(MemberVO vo);
 	
 	@Insert("INSERT INTO member_car(mem_num,car_id,car_model,category)"
-			+ "VALUES(#{mem_num},#{carid},#{carmodel},#{category})")
+			+ "VALUES(#{mem_num},#{car_id},#{car_model},#{category})")
 	public void insertMember_car(MemberVO vo);
 	/************************ Member Register ************************/
 
 	
-	/************************ 회원가입 되어있는지 확인 ************************/
-	@Select("SELECT mem_name FROM member_detail WHERE MEM_num=(SELECT mem_num from member WHERE mem_id=#{mem_id})")
+	/************************ mem_id로 member, member_detail가져오기 ************************/
+	@Select("select mem_num,mem_id,mem_auth,mem_token,mem_name,mem_phone,mem_dis from member\r\n" + 
+			"left join member_detail using(mem_num) where mem_id=#{mem_id}")
 	public MemberVO isMemberID(String mem_id);
-	/************************ 회원가입 되어있는지 확인 ************************/
+	
+	/************************ mem_token로 member, member_detail, member_car가져오기 ************************/
+	@Select("select a.mem_num\r\n" + 
+			"	,a.mem_id\r\n" + 
+			"	,a.mem_auth\r\n" + 
+			"	,a.mem_token\r\n" + 
+			"	,b.mem_name\r\n" + 
+			"	,b.mem_phone\r\n" + 
+			"	,b.mem_dis\r\n" + 
+			"	,c.car_id\r\n" + 
+			"	,c.car_model\r\n" + 
+			"	,c.category\r\n" + 
+			"	from member a\r\n" + 
+			"	inner join member_detail b\r\n" + 
+			"		on a.mem_num = b.mem_num\r\n" + 
+			"	inner join member_car c\r\n" + 
+			"		on b.mem_num = c.mem_num\r\n" + 
+			"	where mem_token=#{mem_token}")
+	public MemberVO getMemberbytoken(String mem_token);
 	
 
 }

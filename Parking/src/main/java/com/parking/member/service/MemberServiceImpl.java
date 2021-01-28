@@ -30,19 +30,16 @@ public class MemberServiceImpl implements MemberService{
 		
 	}
 	
+	//mem_id로 memverVo가져오기
 	@Override
 	public MemberVO isMemberID(String mem_id) {
-		System.out.println(" 회원가입 체크하는 아이디" + mem_id);
-		return memberMapper.isMemberID(mem_id);//
+		return memberMapper.isMemberID(mem_id);
 	}
 
-
-
-
+	//mem_token로 memverVo가져오기
+	@Override
+	public MemberVO getMemberbytoken(String mem_token) {
+		return memberMapper.getMemberbytoken(mem_token);
+	}
 	
-
-
-	
-	
-		
 }
