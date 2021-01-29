@@ -14,8 +14,8 @@ select * from tab;
 ----------------------------------memeber 테이블 만들기------------------------------------------------
 create table member(
   mem_num number not null, -- 멤버 식별 번호
-  mem_id varchar2(20) unique not null, -- 아이디,	*unique : 고유값, 중복허용x
-  mem_pwd varchar2(15) not null, -- 비밀번호
+  mem_id varchar2(100) unique not null, -- 아이디,	*unique : 고유값, 중복허용x
+  mem_pwd varchar2(100) not null, -- 비밀번호
   mem_auth number(1),  -- 0관리자 1사용자 2사장님
   mem_token varchar2(300) --카카오톡에서 받아올 토큰
 --  constraint mem_pk primary key (mem_num) -- mem_num을 참조하여 member_pk라는 프라이머리키를 만듦   
