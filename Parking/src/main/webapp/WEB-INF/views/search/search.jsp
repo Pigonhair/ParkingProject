@@ -75,7 +75,7 @@
                            <input type="hidden" name="parkReserve" id="parkReserve" value="">
                            <input type="text" name="start_time" class="timepicker" placeholder="입차시간을 선택하세요">
                            <input type="text" name="end_time" class="timepicker" placeholder="출차시간을 선택하세요">
-<!--                            <input type="text" name="price" id="price" placeholder="30분당 금액"> -->
+                           <input type="text" name="car_number" placeholder="차번호를 입력하세요">
                            <input type="text" name="reserve" id="reserve" placeholder="예약 가능여부">
                         </fieldset>
                      

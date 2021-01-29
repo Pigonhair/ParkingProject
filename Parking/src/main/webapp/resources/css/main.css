@@ -205,6 +205,11 @@ button, html input[type="button"], input[type="reset"], input[type="submit"]
 	cursor: pointer;
 }
 
+#btnAddress::-webkit-input-placeholder { 
+	color: #888888;
+	font-size: 16px; 
+	}
+
  input[type="search"], input[type="number"],
 	input[type="date"], input[type="datetime"],  input[type="tel"]
 	{

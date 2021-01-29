@@ -219,7 +219,7 @@ $(document).ready(function() {
                <dl>
                   <dt>목적지</dt>
                   <dd class="cal_wrap main">
-                     <input type="text" id="btnAddress" name="btnAddress">
+                     <input type="text" id="btnAddress" name="btnAddress" placeholder="목적지를 선택하세요">
                   </dd>
                </dl>
                <p class="btn_wrap">

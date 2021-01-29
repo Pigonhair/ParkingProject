@@ -7,8 +7,9 @@ create table reservation(			-- 예약정보
   mem_num number,  					-- 사용자번호
   start_time VARCHAR2(100),			 		-- 예약시작시간
   end_time VARCHAR2(100),					-- 예약종료시간	
+  car_num VARCHAR2(100),                --차번호
 --  rdate	DATE,						-- 예약날짜
-  totalPrice number,
+  totalPrice number,                    -- 총 금액
   constraint reser_id_pk primary key (reser_id), 
   constraint reser_mem_num foreign key (mem_num) references member (mem_num)
 );
