@@ -161,7 +161,8 @@ $(document).ready(function() {
 <%
 	PrintWriter script = response.getWriter();
 	script.println("<div class=\"container\" id=\"blur\">");
-	script.println("<img class=\"background\" src=\"https://s3-us-west-2.amazonaws.com/s.cdpn.io/221808/sky.jpg\" />");
+// 	script.println("<img class=\"background\" src=\"https://s3-us-west-2.amazonaws.com/s.cdpn.io/221808/sky.jpg\" />");
+    script.println("<img class=\"background\" src=\"../resources/images/back.jpg\" />");
 	
 	int x = 0;
 	for(x=0; x<=200 ; x++){
@@ -247,26 +248,27 @@ $(document).ready(function() {
 >>>>>>> branch 'master' of https://github.com/Pigonhair/ParkingProject.git
    
    <!-- 로그인 팝업창 -->
-   <div id="popup">
-     <form action="${pageContext.request.contextPath}/project/login.do" method="post" class="form-container">
+    <div id="popup">
+     <form action="/action_page.php" class="form-container">
        <div class="container2">
   <div class='window'>
     <div class='overlay'></div>
     <div class='content2'>
     <div><button type="button" class='btn_exit'>x</button></div>
-      <div class='welcome'>Hello There!</div>
-      <div class='subtitle'>We're almost done. Before using our services you need to create an account.</div>
+      <div class='welcome'>예약이</div>
+      <div class='welcome2'>필요한 순간, <span style="color:#ffd400">피몽</span></div>
+      <div class='subtitle'>현재 1,352,786명의 회원이 피몽에서 활동하고 있습니다.
+<span style="color:#ffd400">1,352,787</span>번째 피몽회원이 되어보세요 :)</div>
       <div class='input-fields'>
-        <input type='text' placeholder='ID' class='input-line full-width' id="mem_id" name = "mem_id"></input>
-        <input type='password' placeholder='PASSWORD' class='input-line full-width' id = "mem_pwd" name = "mem_pwd"></input>
+        
+        <input type='email' placeholder='이메일' class='input-line full-width'></input>
+        <input type='password' placeholder='패스워드' class='input-line full-width'></input>
       </div>
       
       <div class='spacing'><div class='spacing'>
       <a href="https://kauth.kakao.com/oauth/authorize?client_id=c33ff58fa9f138c4cca66548e9bbb951&redirect_uri=http://localhost:8080/project/kakao/callback&response_type=code">
-      <img src="../resources/images/kakaolog.png"></a></div>
-      <div><a href="${pageContext.request.contextPath}/project/signUp.do">회원 가입</a></div>
-      <div><input type = "submit" class = "login_button" value="로그인"></div>
-      <div><button class='ghost-round full-width'>Create Account</button></div>
+      <img src="../resources/images/kakaolog.png" style="height:50px; width:300px"></a></div>
+      <div><button class='ghost-round full-width'>피몽 회원가입 하기</button></div>
       </div>
     </div>
     </div>

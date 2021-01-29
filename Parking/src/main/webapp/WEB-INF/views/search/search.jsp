@@ -59,7 +59,8 @@
 <!--                      <form class="form-wrapper"> -->
 
                         <fieldset class="section is-active">
-                           <h3 style="color:#000000; font-family:'jua'; font-size: 30px; margin-bottom: 50px">예약정보입력</h3>
+                          <h3 style="color:#000000; font-family:'jua'; font-size: 30px; margin-bottom: 50px">예약정보입력<p>(주차요금은 <span style="
+color:#a70737;">10분</span>당 <span style="color:#a70737;">1000원</span>입니다)</p></h3>
                            <div class="sel sel--black-panther">
                            <select name="select-profession" id="select-profession">
                            <option value="">주차장선택</option>
