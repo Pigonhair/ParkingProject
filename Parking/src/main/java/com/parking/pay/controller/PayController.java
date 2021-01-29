@@ -24,7 +24,7 @@ public class PayController {
 	 */
 
 	//search화면
-	@RequestMapping(value = "/proejct/pay.do")
+	@RequestMapping(value = "/pay/pay.do")
 	public String payReservation(HttpServletRequest request,Locale locale, Model model,HttpSession session) {
 
 		return "pay/pay";

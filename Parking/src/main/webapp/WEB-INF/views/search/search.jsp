@@ -128,7 +128,7 @@ color:#a70737;">10분</span>당 <span style="color:#a70737;">1000원</span>입�
                      aria-required="true"> <label for="agree2">개인정보처리방침
                      모든 내용을 읽고 동의합니다.</label>
                   <div class="btn_area">
-                   <button id="btnNext" class="btn wine">결제하기</button> 
+                   <button id="btnNext" class="btn wine"><a href="${pageContext.request.contextPath}/pay/pay.do">결제하기</a></button> 
                </div>
             </div>
            </form>
@@ -140,14 +140,6 @@ color:#a70737;">10분</span>당 <span style="color:#a70737;">1000원</span>입�
 <script>
    
 $(document).ready(function() {	
-	
-	var ctx = '<%=request.getContextPath()%>';
-	
-	//pay로이동
-   $("#btnNext").click(function(){
-	   	//세션 삭제하기
-		location.href=ctx+"/project/pay.do";
-   });	
 	
 
 	$('.timepicker').timepicker({

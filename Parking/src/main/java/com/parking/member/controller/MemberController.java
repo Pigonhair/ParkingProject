@@ -185,9 +185,10 @@ public class MemberController {
 	// 내정보 보기
 	@RequestMapping(value = "/member/memberdetail.do")
 	public ModelAndView memberDetail(HttpServletRequest request, Model model, HttpSession session) {
-		String mem_token = (String) session.getAttribute("mem_token");
-		System.out.println("mem_token :" + mem_token);
 
+		String mem_token = request.getParameter("mem_token");
+		System.out.println("mem_token : " + mem_token);
+		
 		// 토큰으로 memberVO가져오기
 		MemberVO memberVO = memberService.getMemberbytoken(mem_token);
 
@@ -268,11 +269,17 @@ public class MemberController {
 		return "redirect:/member/memberdetail.do";
 	}
 	
-	@RequestMapping(value = "member/delete.do")
+	@RequestMapping(value = "/member/delete.do")
 	
 	public String memberDelete(HttpServletRequest request, Model model, HttpSession session) {
 		return null;
 		
+	}
+	
+	@RequestMapping(value = "/member/signUp.do")
+	public String signUp() {
+		//회원가입 호출
+		return "member/signUp";
 	}
 	
 

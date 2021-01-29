@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page import="java.io.PrintWriter"%>
+<%
+	String mem_token = (String) session.getAttribute("mem_token");
+%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <!DOCTYPE HTML>
 <html>
@@ -13,7 +16,7 @@
 $(document).ready(function() {	
 	
 	var ctx = '<%=request.getContextPath()%>';
-	
+	var mem_token = '<%=(String) session.getAttribute("mem_token")%>';
 	//로그아웃
    $("#logout").click(function(){
 	   	//세션 삭제하기
@@ -23,7 +26,7 @@ $(document).ready(function() {
 	
 	//내정보 보기
    $("#myinfo").click(function(){
-		location.href=ctx+"/member/memberdetail.do";
+		location.href=ctx+"/member/memberdetail.do?mem_token="+mem_token;
    });
 	
 	//로그인 popup창 열기
@@ -248,7 +251,7 @@ $(document).ready(function() {
    
    <!-- 로그인 팝업창 -->
     <div id="popup">
-     <form action="/action_page.php" class="form-container">
+     <form action="${pageContext.request.contextPath}/project/login.do" class="form-container">
        <div class="container2">
   <div class='window'>
     <div class='overlay'></div>
@@ -260,15 +263,17 @@ $(document).ready(function() {
 <span style="color:#ffd400">1,352,787</span>번째 피몽회원이 되어보세요 :)</div>
       <div class='input-fields'>
         
-        <input type='email' placeholder='이메일' class='input-line full-width'></input>
-        <input type='password' placeholder='패스워드' class='input-line full-width'></input>
+        <input type='text' placeholder='아이디' name="mem_id" class='input-line full-width'></input>
+        <input type='password' placeholder='패스워드' name="mem_pwd" class='input-line full-width'></input>
       </div>
       
 	  <div class='spacing'><div class='spacing'>
       <input type="submit" class='ghost-round full-width' value="로그인하기" onclick=""></div>
       <a href="https://kauth.kakao.com/oauth/authorize?client_id=c33ff58fa9f138c4cca66548e9bbb951&redirect_uri=http://localhost:8080/project/kakao/callback&response_type=code">
       <img src="../resources/images/kakaolog.png" style="height:50px; width:300px"></a>
-      <div><button class='ghost-round full-width'>피몽 회원가입 하기</button></div>
+      <div><button class='ghost-round full-width'>
+   <a href="${pageContext.request.contextPath}/member/signUp.do">피몽 회원가입 하기</a>   
+      </button></div>
     </div>
     </div>
   </div>
