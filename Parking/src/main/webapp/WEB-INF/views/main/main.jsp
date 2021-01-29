@@ -219,7 +219,7 @@ $(document).ready(function() {
                <dl>
                   <dt>목적지</dt>
                   <dd class="cal_wrap main">
-                     <input type="text" id="btnAddress" name="btnAddress">
+                     <input type="text" id="btnAddress" name="btnAddress" placeholder="목적지를 선택하세요">
                   </dd>
                </dl>
                <p class="btn_wrap">
@@ -235,7 +235,16 @@ $(document).ready(function() {
          <input type="hidden" id="iLotArea" name="iLotArea">
       </form>
          </div>
+<<<<<<< HEAD
    
+=======
+
+   <c:if test="${empty user}">
+      <a href="https://kauth.kakao.com/oauth/authorize?client_id=c33ff58fa9f138c4cca66548e9bbb951&redirect_uri=http://localhost:8080/project/kakao/callback&response_type=code"> 
+         개같은 카카오 연습</a>
+   </c:if>
+      <a href="${pageContext.request.contextPath}/pay/pay.do">결제 페이지Test</a>
+>>>>>>> branch 'master' of https://github.com/Pigonhair/ParkingProject.git
    
    <!-- 로그인 팝업창 -->
    <div id="popup">

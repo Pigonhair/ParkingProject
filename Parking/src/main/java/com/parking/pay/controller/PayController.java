@@ -17,14 +17,13 @@ public class PayController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(PayController.class);
 	
-	@Resource
-	PayService payService;
-
-	//자바빈(VO) 초기화
-	@ModelAttribute
-	public PayVO initCommand() {
-		return new PayVO();
-	}
+	/*
+	 * @Resource PayService payService;
+	 * 
+	 * //자바빈(VO) 초기화
+	 * 
+	 * @ModelAttribute public PayVO initCommand() { return new PayVO(); }
+	 */
 
 	//search화면
 	@RequestMapping(value = "/pay/pay.do")
@@ -33,6 +32,13 @@ public class PayController {
 		return "pay/pay";
 	}
 	
+	
+	//결제 완료
+	@RequestMapping(value = "/pay/payok.do")
+	public String payok() {
+
+		return "pay/payok";
+	}
 	
 	
 }
