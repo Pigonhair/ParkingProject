@@ -234,9 +234,9 @@ $(document).ready(function() {
          <div id="resve_able_info2"
             style="padding-left: 20px; padding-top: 0px;"></div>
          <input type="hidden" id="iLotArea" name="iLotArea">
-      </form>
          </div>
-<<<<<<< HEAD
+      </form>
+      
    
 =======
 
@@ -245,7 +245,6 @@ $(document).ready(function() {
          개같은 카카오 연습</a>
    </c:if>
       <a href="${pageContext.request.contextPath}/pay/pay.do">결제 페이지Test</a>
->>>>>>> branch 'master' of https://github.com/Pigonhair/ParkingProject.git
    
    <!-- 로그인 팝업창 -->
     <div id="popup">
@@ -266,10 +265,10 @@ $(document).ready(function() {
       </div>
       
 	  <div class='spacing'><div class='spacing'>
+      <input type="submit" class='ghost-round full-width' value="로그인하기" onclick=""></div>
       <a href="https://kauth.kakao.com/oauth/authorize?client_id=c33ff58fa9f138c4cca66548e9bbb951&redirect_uri=http://localhost:8080/project/kakao/callback&response_type=code">
-      <img src="../resources/images/kakaolog.png"></a></div>
+      <img src="../resources/images/kakaolog.png" style="height:50px; width:300px"></a>
       <div><button class='ghost-round full-width'>피몽 회원가입 하기</button></div>
-      </div>
     </div>
     </div>
   </div>

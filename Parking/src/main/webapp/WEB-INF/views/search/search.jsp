@@ -127,30 +127,41 @@ color:#a70737;">10분</span>당 <span style="color:#a70737;">1000원</span>입�
                   <input type="checkbox" id="agree2" name="agree2" value="Y"
                      aria-required="true"> <label for="agree2">개인정보처리방침
                      모든 내용을 읽고 동의합니다.</label>
-
                   <div class="btn_area">
-                    <input type="submit" id="btnNext" class="btn wine" value="예약하기">
-<%--                   <button id="btnNext" class="btn wine" onclick="location.href='${pageContext.request.contextPath}/pay/pay.do'">결제하기</button> --%>
+                   <button id="btnNext" class="btn wine">결제하기</button> 
                </div>
             </div>
            </form>
          </div>
       </div>
 
-      <script
-         src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
    
-   <script>
-$('.timepicker').timepicker({
-    timeFormat: 'HH:mm ',
-    interval: 10,
-    minTime: '0',
-    maxTime: '11:50pm',
-    defaultTime: '',
-    startTime: '00:00',
-    dynamic: false,
-    dropdown: true,
-    scrollbar: true
+<script>
+   
+$(document).ready(function() {	
+	
+	var ctx = '<%=request.getContextPath()%>';
+	
+	//pay로이동
+   $("#btnNext").click(function(){
+	   	//세션 삭제하기
+		location.href=ctx+"/project/pay.do";
+   });	
+	
+
+	$('.timepicker').timepicker({
+	    timeFormat: 'HH:mm ',
+	    interval: 10,
+	    minTime: '0',
+	    maxTime: '11:50pm',
+	    defaultTime: '',
+	    startTime: '00:00',
+	    dynamic: false,
+	    dropdown: true,
+	    scrollbar: true
+	});
+
 });
 </script>
 

@@ -1,21 +1,19 @@
 package com.parking.pay.controller;
 
-import javax.annotation.Resource;
+import java.util.Locale;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.parking.pay.service.PayService;
-import com.parking.pay.vo.PayVO;
 
 
 @Controller
 public class PayController {
-	
-	private static final Logger logger = LoggerFactory.getLogger(PayController.class);
+
 	
 	/*
 	 * @Resource PayService payService;
@@ -26,8 +24,8 @@ public class PayController {
 	 */
 
 	//search화면
-	@RequestMapping(value = "/pay/pay.do")
-	public String payReservation() {
+	@RequestMapping(value = "/proejct/pay.do")
+	public String payReservation(HttpServletRequest request,Locale locale, Model model,HttpSession session) {
 
 		return "pay/pay";
 	}
@@ -35,7 +33,7 @@ public class PayController {
 	
 	//결제 완료
 	@RequestMapping(value = "/pay/payok.do")
-	public String payok() {
+	public String payok(HttpServletRequest request,Locale locale, Model model,HttpSession session) {
 
 		return "pay/payok";
 	}
