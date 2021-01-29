@@ -1,8 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%-- <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page import="java.io.PrintWriter"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
 <head>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -45,32 +45,8 @@ $(document).ready(function() {
       var popup = document.getElementById('popup');
       popup.classList.toggle('active')
    });
-   
-   //주소찾기 daum api
-   $("#btnAddress").click(function(){
-      new daum.Postcode({
-          oncomplete: function(data) {
-              var addr = data.address; // 최종 주소 변수
-
-              // 주소 정보를 해당 필드에 넣는다.
-              document.getElementById("btnAddress").value = addr;
-
-          }
-      }).open();
-   });
-   
-	//내정보
-   $(".myinfo").click(function(){
-		var ctx = '<%=request.getContextPath()%>';
-		//홈으로 돌아가기 버튼
-	   $("#btn_home").click(function(){
-		   location.href=ctx+"/member/memberdetail.do";
-	   });
-   });
 });
 </script>
-
-
 <style>
 #popup.active{
       visibility: visible;
@@ -143,35 +119,20 @@ $(document).ready(function() {
    }
 }
 </style>
-<title>Parking</title>
-<meta charset="utf-8" />
+<meta charset="UTF-8">
 <meta name="viewport"
    content="width=device-width, initial-scale=1, user-scalable=no" />
 <link rel="stylesheet" href="${path}/resources/css/main.css" />
 <link rel="stylesheet" href="${path}/resources/css/mainbackground.css" />
 <link rel="stylesheet" href="${path}/resources/css/LoginBtn.css" />
 <link rel="stylesheet" href="${path}/resources/css/LoginPopup.css" />
-
+<title>메인 헤더</title>
 </head>
 <body>
-<a href="${pageContext.request.contextPath}/project/review.do">리뷰페이지Test</a>
-   <!-- <div class="container" id="blur">
-      <img class="background" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/221808/sky.jpg" /> -->
+<a class="logo" href="${pageContext.request.contextPath}/project/main.do">홈홈홈</a>
 
-<%
-	PrintWriter script = response.getWriter();
-	script.println("<div class=\"container\" id=\"blur\">");
-	script.println("<img class=\"background\" src=\"https://s3-us-west-2.amazonaws.com/s.cdpn.io/221808/sky.jpg\" />");
-	
-	int x = 0;
-	for(x=0; x<=200 ; x++){
-		
-		script.println("<div class=\"circle-container\">");
-		script.println("<div class=\"circle\"></div>");
-		script.println("</div>");
-	
-}%>
-      
+<img alt="logo" src="" onclick="${pageContext.request.contextPath}/project/main.do">
+
 <c:if test="${logOK==0}">     
    <a href="#" class="cta" id="loginpopup">
        <span>로그인</span> 
@@ -181,6 +142,7 @@ $(document).ready(function() {
   </svg>
       </a>
       </div>
+      
 </c:if>
       
 <c:if test="${logOK==1}">
@@ -199,45 +161,7 @@ $(document).ready(function() {
    </div>
 </c:if>
 
- 
-  <form action="${pageContext.request.contextPath}/project/search.do" method=post> 
-   <div id="main_content">
-<!--       <form id="resveForm" name="resveForm" class="needs-validation" -->
-<!--          novalidate="novalidate"> -->
-         <fieldset>
-            <legend>.</legend>
-            <div class="fbox">
-               <dl>
-                  <dt>차량 선택</dt>
-                  <dd class="select_wrap">
-                     <select title="Division" id="parkngAr" name="parkngAr">
-                        <option value="GNRL" selected="selected">일반</option>
-                        <option value="DSPSN">장애인</option>
-                     </select>
-                  </dd>
-               </dl>
-               <dl>
-                  <dt>목적지</dt>
-                  <dd class="cal_wrap main">
-                     <input type="text" id="btnAddress" name="btnAddress">
-                  </dd>
-               </dl>
-               <p class="btn_wrap">
-                  <input type="submit" id="btnReserve" class="btn_reserv" value="찾 기"></input>
-                  <input type="button" id="btnReview" class="btn_review" value="리뷰검색" onClick="location.href='${pageContext.request.contextPath}/review.do'"></input>
-               </p>
-            </div>
-         </fieldset>
-         <div id="resve_able_info" class="fc_wine"
-            style="padding-left: 20px; padding-top: 10px;"></div>
-         <div id="resve_able_info2"
-            style="padding-left: 20px; padding-top: 0px;"></div>
-         <input type="hidden" id="iLotArea" name="iLotArea">
-      </form>
-         </div>
-   
-   
-   <!-- 로그인 팝업창 -->
+<!-- 로그인 팝업창 -->
    <div id="popup">
      <form action="${pageContext.request.contextPath}/project/login.do" method="post" class="form-container">
        <div class="container2">
@@ -265,6 +189,6 @@ $(document).ready(function() {
   
      </form>
    </div>
-</body>
 
-</html>
+</body>
+</html> --%>

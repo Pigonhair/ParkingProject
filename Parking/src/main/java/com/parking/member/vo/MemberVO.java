@@ -34,6 +34,9 @@ public class MemberVO {
 		// 카카오톡에서 받아올 토큰
 		@NotEmpty
 		private String mem_token;
+		//비밀번호
+		@NotEmpty
+		private String mem_pwd;
 
 		// ----------------member_detail---------------------
 		// 이름 (카카오톡 받아온 이름)
@@ -51,6 +54,13 @@ public class MemberVO {
 		private String car_model;
 		// 차량 카테코리(소형,중형,대형)
 		private String category;
+
+		public String getMem_pwd() {
+			return mem_pwd;
+		}
+		public void setMem_pwd(String mem_pwd) {
+			this.mem_pwd = mem_pwd;
+		}
 		public int getMem_num() {
 			return mem_num;
 		}
@@ -115,9 +125,12 @@ public class MemberVO {
 		@Override
 		public String toString() {
 			return "MemberVO [mem_num=" + mem_num + ", mem_id=" + mem_id + ", mem_auth=" + mem_auth + ", mem_token="
-					+ mem_token + ", mem_name=" + mem_name + ", mem_phone=" + mem_phone + ", mem_dis=" + mem_dis
-					+ ", car_id=" + car_id + ", car_model=" + car_model + ", category=" + category + "]";
+					+ mem_token + ", mem_pwd=" + mem_pwd + ", mem_name=" + mem_name + ", mem_phone=" + mem_phone
+					+ ", mem_dis=" + mem_dis + ", car_id=" + car_id + ", car_model=" + car_model + ", category="
+					+ category + "]";
 		}
+		
+	
 
 		
 	}

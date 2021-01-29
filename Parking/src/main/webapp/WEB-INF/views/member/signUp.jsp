@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<c:set var="path" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -165,7 +166,7 @@ html, body {
       <dl class="inputbox">
         <dt class="inputbox-title">* 아이디</dt>
         <dd class="inputbox-content">
-          <input id="mem_id" type="text" value="${mem_id}" name="mem_id" required/>
+          <input id="mem_id" type="text" value="${mem_id}" placeholder="아이디" name="mem_id" required />
           <input id="mem_token" type="hidden" value="${mem_token}" name="mem_token" required readonly/>          
           <label for="input0">${id}</label>
           
@@ -173,10 +174,18 @@ html, body {
         </dd>
       </dl>
       <dl class="inputbox">
+        <dt class="inputbox-title">* 비밀번호</dt>
+        <dd class="inputbox-content">
+          <input id="mem_pwd" type="password" name="mem_pwd" required/>
+          <label for="input0">비밀번호</label>
+          <span class="underline"></span>
+        </dd>
+      </dl>
+      <dl class="inputbox">
         <dt class="inputbox-title">* 이름</dt>
         <dd class="inputbox-content">
-          <input id="mem_name" type="text" value="${mem_name}" name="mem_name"required readonly/>
-          <!-- <label for="input1"></label> -->
+          <input id="mem_name" type="text" placeholder="이름" value="${mem_name}" name="mem_name" required/>
+          <label for="input0"></label>
           <span class="underline"></span>
         </dd>
       </dl>

@@ -17,8 +17,8 @@ public interface MemberMapper {
 	public int selectMem_num();
 	
 	//member테이블에 member 정보 입력
-	@Insert("INSERT INTO MEMBER (mem_num,mem_id, mem_auth, mem_token)"
-			+ "VALUES (#{mem_num},#{mem_id},#{mem_auth},#{mem_token})")
+	@Insert("INSERT INTO MEMBER (mem_num, mem_id, mem_auth, mem_token, mem_pwd)"
+			+ "VALUES (#{mem_num},#{mem_id},#{mem_auth},#{mem_token}, #{mem_pwd})")
 	public void insertMember(MemberVO vo);	
 	
 	//member_detail 테이블에 추가 입력
@@ -33,7 +33,7 @@ public interface MemberMapper {
 
 	
 	/************************ mem_id로 member, member_detail가져오기 ************************/
-	@Select("select mem_num,mem_id,mem_auth,mem_token,mem_name,mem_phone,mem_dis from member\r\n" + 
+	@Select("select mem_num,mem_id,mem_auth,mem_token, mem_pwd, mem_name,mem_phone,mem_dis from member\r\n" + 
 			"left join member_detail using(mem_num) where mem_id=#{mem_id}")
 	public MemberVO isMemberID(String mem_id);
 	
@@ -67,5 +67,21 @@ public interface MemberMapper {
 	public void updateMember_car(MemberVO vo);
 	/************************ member정보 업데이트하기 ************************/
 
+
+
+
+	/********************************* 로그인 *********************************/
+//	@Select("SELECT * FROM MEMBER WHERE MEM_ID = #{mem_id} AND MEM_PWD = #{mem_pwd}")
+//	public MemberVO login(String mem_id, String mem_pwd);
+//	
+//	@Select("SELECT MEM_PHONE FROM MEMBER_DETAIL WHERE MEM_NUM = #{mem_num}")
+//	public MemberVO check(String mem_phone);
+	
+//	@Select("SELECT * FROM MEMBER WHERE MEM_ID = #{mem_id} AND MEM_PWD = #{mem_pwd}")
+//	public void login(MemberVO vo);
+	
+	@Select("SELECT * FROM MEMBER WHERE MEM_ID = #{mem_id} AND MEM_PWD = #{mem_pwd}")
+	public MemberVO login(MemberVO vo);
+	/********************************* 로그인 *********************************/
 
 }
