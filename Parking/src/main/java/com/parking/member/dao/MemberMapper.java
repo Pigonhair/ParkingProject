@@ -83,5 +83,8 @@ public interface MemberMapper {
 	@Select("SELECT * FROM MEMBER WHERE MEM_ID = #{mem_id} AND MEM_PWD = #{mem_pwd}")
 	public MemberVO login(MemberVO vo);
 	/********************************* 로그인 *********************************/
+	@Select("SELECT mem_num,mem_id,mem_pwd,mem_auth,mem_token,mem_name,mem_phone,mem_dis FROM MEMBER\n" + 
+			"left join member_detail using (mem_num) WHERE MEM_ID = #{mem_id}")
+	public MemberVO getMemberByID(String mem_id);
 
 }

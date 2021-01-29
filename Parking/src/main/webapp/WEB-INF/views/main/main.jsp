@@ -265,10 +265,9 @@ $(document).ready(function() {
         <input type='password' placeholder='패스워드' class='input-line full-width'></input>
       </div>
       
-      <div class='spacing'><div class='spacing'>
-      <input type="submit" class='ghost-round full-width' value="로그인하기">
+	  <div class='spacing'><div class='spacing'>
       <a href="https://kauth.kakao.com/oauth/authorize?client_id=c33ff58fa9f138c4cca66548e9bbb951&redirect_uri=http://localhost:8080/project/kakao/callback&response_type=code">
-      <img src="../resources/images/kakaolog.png" style="height:50px; width:300px"></a></div>
+      <img src="../resources/images/kakaolog.png"></a></div>
       <div><button class='ghost-round full-width'>피몽 회원가입 하기</button></div>
       </div>
     </div>

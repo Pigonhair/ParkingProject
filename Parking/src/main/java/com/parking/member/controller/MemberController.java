@@ -185,7 +185,6 @@ public class MemberController {
 	// 내정보 보기
 	@RequestMapping(value = "/member/memberdetail.do")
 	public ModelAndView memberDetail(HttpServletRequest request, Model model, HttpSession session) {
-		session = request.getSession();
 		String mem_token = (String) session.getAttribute("mem_token");
 		System.out.println("mem_token :" + mem_token);
 

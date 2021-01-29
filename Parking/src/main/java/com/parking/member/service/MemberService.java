@@ -26,4 +26,6 @@ public interface MemberService {
 	// 멤버 정보 업데이트하기
 	public void updateMember(MemberVO vo);
 
+	public MemberVO getMemberByID(String mem_id);
+
 }

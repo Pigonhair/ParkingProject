@@ -130,6 +130,8 @@ public class KakaoController{
       if(membervo != null) {
           //*************************************회원가입 되어있는경우**********************************
     	  System.out.println("이미 회원가입 되어있는 아이디입니다.");
+    	  membervo = memberService.getMemberByID(Integer.toString(kakaoProflie.getId()));
+    	  
     	  System.out.println("회원이름 :" + membervo.getMem_name());
     	  
     	  //session에 토큰넣어놓기

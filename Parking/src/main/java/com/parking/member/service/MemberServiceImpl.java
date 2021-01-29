@@ -32,6 +32,12 @@ public class MemberServiceImpl implements MemberService{
 		
 	}
 	
+	@Override
+	public MemberVO getMemberByID(String mem_id) {
+		MemberVO v =memberMapper.getMemberByID(mem_id);
+		return v;
+	}
+	
 	//mem_id로 memverVo가져오기
 	@Override
 	public MemberVO isMemberID(String mem_id) {
