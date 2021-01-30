@@ -35,7 +35,7 @@
          </form>
       </div>
       <div id="main_container">
-      <form class="form-wrapper" action="${pageContext.request.contextPath}/project/reserveInsert.do" method="post">
+       <form class="form-wrapper" id="form_id" name="form_id" action="${pageContext.request.contextPath}/project/reserveInsert.do" method="post">
          <div id="sub_content">
             <div id="map_content">
                <div id="map" style="width: 1000px; height: 500px; position: relative; overflow: hidden;"></div>
@@ -129,6 +129,7 @@ color:#a70737;">10분</span>당 <span style="color:#a70737;">1000원</span>입�
                      모든 내용을 읽고 동의합니다.</label>
                   <div class="btn_area">
                    <button id="btnNext" class="btn wine"><a href="${pageContext.request.contextPath}/pay/pay.do">결제하기</a></button> 
+                   <input type="submit" id="btnNext2" value="결제하기"/>
                </div>
             </div>
            </form>
@@ -153,6 +154,18 @@ $(document).ready(function() {
 	    dropdown: true,
 	    scrollbar: true
 	});
+	
+	$('#form_id').submit(function(){
+	      alert("버튼 눌림")
+	        if($(agree1).is(":checked")==false){
+	           alert("이용 약관 이용에 대한 안내 동의해주세요 ") 
+	           return false;
+	        }   
+	        if($(agree2).is(":checked")==false){
+	           alert("개인정보처리방침 이용에 대한 안내 동의해주세요")
+	           return false;
+	        } 
+	   });
 
 });
 </script>

@@ -16,17 +16,45 @@
 $(document).ready(function() {	
 	
 	var ctx = '<%=request.getContextPath()%>';
-	var mem_token = '<%=(String) session.getAttribute("mem_token")%>';
+	
+/* 	 function signUp(){
+		 
+		 var mem_id = $('input[name='+mem_id+']').val();
+		 var meme_pwd = $('input[name='+meme_pwd+']').val();
+		 
+		if($('#mem_id').val()==''){
+            $('#mem_id').attr('placeholder','아이디를 입력하세요');
+            $('#mem_id').focus();
+            return false;
+		}
+		if($('#mem_pwd').val()==''){
+            $('#mem_pwd').attr('placeholder','비밀번호를 입력하세요');
+            $('#mem_pwd').focus();
+            return false;
+		}
+			
+	        $.ajax({
+	           type:'POST',
+	           url:'./PlusHeartServlet',
+	           data: {mem_id : mem_id, meme_pwd : meme_pwd},
+	           async: false,
+	           success:function (jsonObj) {
+
+	           },
+	           error : function(data,textStatus) {
+	               console.log('error!!')
+	        }
+	     })
+    } */
+	
 	//로그아웃
    $("#logout").click(function(){
-	   	//세션 삭제하기
-	    <% session.invalidate(); %>
-		location.href=ctx+"/project/main.do";
+		location.href=ctx+"/member/logOut.do";
    });	
 	
 	//내정보 보기
    $("#myinfo").click(function(){
-		location.href=ctx+"/member/memberdetail.do?mem_token="+mem_token;
+		location.href=ctx+"/member/memberdetail.do";
    });
 	
 	//로그인 popup창 열기
@@ -263,16 +291,15 @@ $(document).ready(function() {
 <span style="color:#ffd400">1,352,787</span>번째 피몽회원이 되어보세요 :)</div>
       <div class='input-fields'>
         
-        <input type='text' placeholder='아이디' name="mem_id" class='input-line full-width'></input>
-        <input type='password' placeholder='패스워드' name="mem_pwd" class='input-line full-width'></input>
+        <input type='text' id="mem_id" placeholder='아이디' name="mem_id" class='input-line full-width'></input>
+        <input type='password' id="mem_pwd" placeholder='패스워드' name="mem_pwd" class='input-line full-width'></input>
       </div>
       
 	  <div class='spacing'><div class='spacing'>
       <input type="submit" class='ghost-round full-width' value="로그인하기" onclick=""></div>
       <a href="https://kauth.kakao.com/oauth/authorize?client_id=c33ff58fa9f138c4cca66548e9bbb951&redirect_uri=http://localhost:8080/project/kakao/callback&response_type=code">
       <img src="../resources/images/kakaolog.png" style="height:50px; width:300px"></a>
-      <div><button class='ghost-round full-width'>
-   <a href="${pageContext.request.contextPath}/member/signUp.do">피몽 회원가입 하기</a>   
+      <div><button type="button" class='ghost-round full-width' onclick="signUp()">피몽 회원가입 하기   
       </button></div>
     </div>
     </div>
