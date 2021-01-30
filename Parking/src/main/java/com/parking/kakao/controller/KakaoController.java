@@ -135,7 +135,6 @@ public class KakaoController{
     	  System.out.println("회원이름 :" + membervo.getMem_name());
     	  
     	  //session에 토큰넣어놓기
-          session = request.getSession();
           session.setAttribute("mem_token", membervo.getMem_token());
     	  System.out.println("세션에 넣은 토큰값 : " + membervo.getMem_token());
     	  

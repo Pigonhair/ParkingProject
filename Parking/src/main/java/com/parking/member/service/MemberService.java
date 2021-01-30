@@ -18,14 +18,12 @@ public interface MemberService {
 
 	// ************************ mem_token로 member, member_detail, member_car가져오기************************//
 	public MemberVO getMemberbytoken(String mem_phone);
-
-	// 로그인
-//	public void loginid(MemberVO vo);
-	public MemberVO login(MemberVO vo);
 	
 	// 멤버 정보 업데이트하기
 	public void updateMember(MemberVO vo);
-
+	
 	public MemberVO getMemberByID(String mem_id);
+
+	public MemberVO CheckMemberIdPwd(MemberVO vo);
 
 }

@@ -13,40 +13,61 @@
 <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a4fc31dd472c61220b10d05b1cec480c&libraries=services"></script>
 <script src="${path}/resources/js/LoginPopup.js"></script>
 <script>
+function gohome(){
+	location.href=ctx+"/proejct/main.do";
+}
+
 $(document).ready(function() {	
 	
 	var ctx = '<%=request.getContextPath()%>';
 	
-/* 	 function signUp(){
-		 
-		 var mem_id = $('input[name='+mem_id+']').val();
+	//로그인버튼
+    $("#loginBtn").click(function(){
+   	 	 var mem_id = $('input[name='+mem_id+']').val();
 		 var meme_pwd = $('input[name='+meme_pwd+']').val();
 		 
 		if($('#mem_id').val()==''){
-            $('#mem_id').attr('placeholder','아이디를 입력하세요');
-            $('#mem_id').focus();
-            return false;
+           alert('아이디를 입력해주세요');
+           $('#mem_id').focus();
+		} else{
+			if($('#mem_pwd').val()==''){
+				alert('비밀번호를 입력해주세요');
+	           $('#mem_pwd').focus();
+			} else{
+				$.ajax({
+		            url:'../confirmMemberId.do',
+		            type:'post',
+		            data:{mem_id:$('#mem_id').val(),mem_pwd:$('#mem_pwd').val() },
+		            dataType:'json',
+		            cache:false,
+		            timeout:30000,
+		            success:function(data){
+		               if(data.result == 'ok'){
+		                  //로그인성공
+		            	   gohome();
+		               }else if(data.result == 'fail'){
+		                  //로그인실패
+		                  alert("아이디 또는 비밀번호가 틀렸습니다.");
+		                  $('#mem_id').val('').focus();
+		                  $('#mem_pwd').val('');
+		               }
+		            },
+		            error:function(){
+		               alert('네트워크 오류 발생');
+		            }
+		         });				
+			}
 		}
-		if($('#mem_pwd').val()==''){
-            $('#mem_pwd').attr('placeholder','비밀번호를 입력하세요');
-            $('#mem_pwd').focus();
-            return false;
-		}
-			
-	        $.ajax({
-	           type:'POST',
-	           url:'./PlusHeartServlet',
-	           data: {mem_id : mem_id, meme_pwd : meme_pwd},
-	           async: false,
-	           success:function (jsonObj) {
-
-	           },
-	           error : function(data,textStatus) {
-	               console.log('error!!')
-	        }
-	     })
-    } */
+		
+   });
 	
+	
+	
+	//회원가입
+    $("#signUpBtn").click(function(){
+ 		location.href=ctx+"/member/signUp.do";
+    });	
+    
 	//로그아웃
    $("#logout").click(function(){
 		location.href=ctx+"/member/logOut.do";
@@ -267,9 +288,7 @@ $(document).ready(function() {
          <input type="hidden" id="iLotArea" name="iLotArea">
          </div>
       </form>
-      
-   
-=======
+
 
    <c:if test="${empty user}">
       <a href="https://kauth.kakao.com/oauth/authorize?client_id=c33ff58fa9f138c4cca66548e9bbb951&redirect_uri=http://localhost:8080/project/kakao/callback&response_type=code"> 
@@ -279,7 +298,7 @@ $(document).ready(function() {
    
    <!-- 로그인 팝업창 -->
     <div id="popup">
-     <form action="${pageContext.request.contextPath}/project/login.do" class="form-container">
+     <form class="form-container">
        <div class="container2">
   <div class='window'>
     <div class='overlay'></div>
@@ -296,10 +315,10 @@ $(document).ready(function() {
       </div>
       
 	  <div class='spacing'><div class='spacing'>
-      <input type="submit" class='ghost-round full-width' value="로그인하기" onclick=""></div>
+      <input type="submit" id="loginBtn" class='ghost-round full-width' value="로그인하기" ></div>
       <a href="https://kauth.kakao.com/oauth/authorize?client_id=c33ff58fa9f138c4cca66548e9bbb951&redirect_uri=http://localhost:8080/project/kakao/callback&response_type=code">
       <img src="../resources/images/kakaolog.png" style="height:50px; width:300px"></a>
-      <div><button type="button" class='ghost-round full-width' onclick="signUp()">피몽 회원가입 하기   
+      <div><button type="button" id="signUpBtn" class='ghost-round full-width'>피몽 회원가입 하기   
       </button></div>
     </div>
     </div>

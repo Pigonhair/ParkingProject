@@ -63,43 +63,11 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 
-
 	//로그인
 	@Override
-	public MemberVO login(MemberVO vo) {
-		System.out.println(vo.getMem_id() + " ///////" + vo.getMem_pwd());
-/*		MemberVO v =memberMapper.login(mem_id,mem_pwd);*/
-		/*System.out.println("로그이이이이이인 : " + v);*/
-		MemberVO memberVO =memberMapper.login(vo);
+	public MemberVO CheckMemberIdPwd(MemberVO vo) {
+		MemberVO memberVO = memberMapper.CheckMemberIdPwd(vo);
 		return memberVO;
 	}
-	//토큰 생성
-	public String testSHA256(String pwd) {
-		try{
-
-			MessageDigest digest = MessageDigest.getInstance("SHA-256");
-			byte[] hash = digest.digest(pwd.getBytes("UTF-8"));
-			StringBuffer hexString = new StringBuffer();
-
-			for (int i = 0; i < hash.length; i++) {
-				String hex = Integer.toHexString(0xff & hash[i]);
-				if(hex.length() == 1) hexString.append('0');
-				hexString.append(hex);
-			}
-			//출력
-			return hexString.toString();
-			
-		} catch(Exception ex){
-			throw new RuntimeException(ex);
-		}
-	}
-	
-//	@Override
-//	public void loginid(MemberVO vo) {
-//		String mem_phone = vo.getMem_phone();
-//		vo=memberMapper.isMemberID(vo.getMem_id());
-//		String db_mem_phone = memberMapper.check(mem_phone).getMem_phone();
-//		System.out.println("impl 아이디 : " + vo.getMem_id());
-//	}
 	
 }

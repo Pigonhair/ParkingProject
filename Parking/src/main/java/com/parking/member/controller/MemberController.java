@@ -194,47 +194,7 @@ public class MemberController {
 		return "main/main";
 	}
 
-	// 로그인
-	@RequestMapping(value = "/project/login.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public String login(HttpServletRequest request, Model model, HttpSession session) {
-		System.out.println("로그인 실행");
 
-		try {
-			request.setCharacterEncoding("UTF-8");
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
-
-		String mem_id = request.getParameter("mem_id");
-		System.out.println("아이디 : " + mem_id);
-		String mem_pwd = request.getParameter("mem_pwd");
-		System.out.println("비밀번호 : " + mem_pwd);
-		MemberVO vo = new MemberVO();
-		vo.setMem_id(mem_id);
-		vo.setMem_pwd(mem_pwd);
-		
-		vo = memberService.login(vo);
-		if (vo != null) {
-			session.setAttribute("mem_token", vo.getMem_token());
-			model.addAttribute("logOK", 1); //로그인 완료시
-			model.addAttribute("mem_name", vo.getMem_name());
-			System.out.println("로그인 성공");
-		}else {
-			session.setAttribute("mem_id", null);
-			session.setAttribute("mem_pwd", null);
-			model.addAttribute("logOK", 0); //로그인 실패시
-			System.out.println("로그인 실패");
-			return "redirect:/";
-		}
-//		ModelAndView mav = new ModelAndView();
-//		mav.addObject("id",vo.getMem_id());
-//		mav.addObject("pwd", vo.getMem_pwd());
-		
-		System.out.println("로그인 완료");
-		
-		return "main/main";
-
-	}
 
 	// 내정보 보기
 	@RequestMapping(value = "/member/memberdetail.do")
