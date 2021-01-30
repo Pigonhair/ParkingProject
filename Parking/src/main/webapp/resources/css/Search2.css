@@ -394,7 +394,9 @@ fieldset {
    margin-left: 400px;
 }
 
+
 #btnNext {
+   cursor: pointer;
    margin-left: 450px;
    margin-top: 50px;
    font-family: 'jua';
@@ -406,11 +408,14 @@ fieldset {
    border: 2px solid #424242 !important
 }
 
+
 #btnPrivacy {
+   cursor: pointer;
    height: 35px;
    margin: 2px;
    line-height: 29px;
    font-size: 16px;
    color: #ffffff;
    background: #424242;
+   font-family: "jua";
 }

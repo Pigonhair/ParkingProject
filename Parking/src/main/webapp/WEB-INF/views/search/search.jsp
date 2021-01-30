@@ -83,7 +83,7 @@ color:#a70737;">10분</span>당 <span style="color:#a70737;">1000원</span>입�
 <!--                      </form> -->
                   </div>
                </div>
-               <h3 class="stitle01" style="margin-left: 100px">주차예약 이용안내</h3>
+               <h3 class="stitle01" style="margin-left: 100px; font-family:'jua'; font-size:25px;">주차예약 이용안내</h3>
                <div class="scroll_box" style="margin-left: 100px">
                   [예약 기본정보]<br> (예약 기간) 최소 2시간부터 최장 1개월까지 예약이 가능합니다.<br>
                   (예약 대기) 예약신청 일자 중 예약이 불가한 일정이 있을 경우 예약대기가 가능하며, 예약 가능 시 자동 예약 후
@@ -113,23 +113,22 @@ color:#a70737;">10분</span>당 <span style="color:#a70737;">1000원</span>입�
                <div class="agree_chk"
                   style="margin-left: 100px; margin-top: 15px;">
                   <input type="checkbox" id="agree1" name="agree1" value="Y"
-                     aria-required="true"> <label for="agree1">주차예약
+                     aria-required="true"> <label for="agree1" style="font-family:'jua'; font-size:18px;">주차예약
                      이용안내 모든 내용을 읽고 동의합니다.</label>
                </div>
                <div style="margin-bottom: 10px">
                   <br>
                </div>
-               <h3 class="stitle01" style="margin-left: 100px">
+               <h3 class="stitle01" style="margin-left: 100px; font-family:'jua';" >
                   개인정보처리방침
                   <button id="btnPrivacy" class="btn" onclick="#">개인정보처리방침</button>
                </h3>
                <div class="agree_chk" style="margin-left: 100px">
                   <input type="checkbox" id="agree2" name="agree2" value="Y"
-                     aria-required="true"> <label for="agree2">개인정보처리방침
+                     aria-required="true"> <label for="agree2" style="font-family:'jua'; font-size:18px;">개인정보처리방침
                      모든 내용을 읽고 동의합니다.</label>
                   <div class="btn_area">
-                   <button id="btnNext" class="btn wine"><a href="${pageContext.request.contextPath}/pay/pay.do">결제하기</a></button> 
-                   <input type="submit" id="btnNext2" value="결제하기"/>
+                   <input type="submit" id="btnNext" class="btn wine" value="예약하기"/>
                </div>
             </div>
            </form>
