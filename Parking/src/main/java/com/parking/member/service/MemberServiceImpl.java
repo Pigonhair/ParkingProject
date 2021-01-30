@@ -70,8 +70,13 @@ public class MemberServiceImpl implements MemberService{
 		System.out.println(vo.getMem_id() + " ///////" + vo.getMem_pwd());
 /*		MemberVO v =memberMapper.login(mem_id,mem_pwd);*/
 		/*System.out.println("로그이이이이이인 : " + v);*/
-		MemberVO memberVO =memberMapper.login(vo);
-		return memberVO;
+		MemberVO v =memberMapper.login(vo);
+		if (v != null) {
+			String token = vo.getMem_id()+System.currentTimeMillis()+new Random().nextInt(100); 
+			token = testSHA256(token);
+			System.out.println("또끈 생쉉 : " + token);
+		}
+		return v;
 	}
 	//토큰 생성
 	public String testSHA256(String pwd) {

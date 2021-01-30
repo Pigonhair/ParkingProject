@@ -16,15 +16,17 @@
 $(document).ready(function() {	
 	
 	var ctx = '<%=request.getContextPath()%>';
-	
+	var mem_token = '<%=(String) session.getAttribute("mem_token")%>';
 	//로그아웃
    $("#logout").click(function(){
-		location.href=ctx+"/member/logOut.do";
+	   	//세션 삭제하기
+	    <% session.invalidate(); %>
+		location.href=ctx+"/project/main.do";
    });	
 	
 	//내정보 보기
    $("#myinfo").click(function(){
-		location.href=ctx+"/member/memberdetail.do";
+		location.href=ctx+"/member/memberdetail.do?mem_token="+mem_token;
    });
 	
 	//로그인 popup창 열기

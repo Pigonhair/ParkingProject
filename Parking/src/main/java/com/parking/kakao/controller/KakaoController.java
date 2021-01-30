@@ -156,7 +156,7 @@ public class KakaoController{
            mav.addObject("mem_id",membervo.getMem_id());
            mav.addObject("mem_name",membervo.getMem_name());
            mav.addObject("mem_token",membervo.getMem_token());
-           mav.setViewName("/member/signUpKakao");
+           mav.setViewName("/member/signUp");
           return mav;  
       }
    }

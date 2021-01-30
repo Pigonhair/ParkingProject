@@ -19,7 +19,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.parking.member.service.MemberService;
 import com.parking.member.vo.MemberVO;
-import com.parking.util.sha256;
 
 @Controller
 public class MemberController {
@@ -40,8 +39,8 @@ public class MemberController {
 	}
 
 	// 회원가입 컨트롤러
-	@RequestMapping(value = "/member/signUpkakao.do", method = RequestMethod.POST)
-	public String signUpkakao(HttpServletRequest request, Model model, HttpSession session) {
+	@RequestMapping(value = "/project/insert.do", method = RequestMethod.POST)
+	public String kakaoInsert(HttpServletRequest request, Model model) {
 		try {
 			request.setCharacterEncoding("UTF-8");
 		} catch (UnsupportedEncodingException e) {
@@ -68,6 +67,7 @@ public class MemberController {
 		System.out.println("controller : category : " + category);
 		String mem_dis_str = request.getParameter("mem_dis");
 		System.out.println("controller : mem_dis_str : " + mem_dis_str);
+
 		String mem_auth_str = request.getParameter("mem_auth");
 		System.out.println("controller : mem_auth_str : " + mem_auth_str);
 		String mem_token = request.getParameter("mem_token");
@@ -92,7 +92,7 @@ public class MemberController {
 		} else if (mem_auth_str.equals("owner")) {
 			mem_auth = 2;
 		}
-		
+
 		vo.setMem_id(mem_id);
 		vo.setMem_pwd(mem_pwd);
 		vo.setMem_name(mem_name);
@@ -105,103 +105,19 @@ public class MemberController {
 		vo.setMem_token(mem_token);
 
 		memberService.insertMember(vo);
-		//세션에 토큰넣기
-		session.setAttribute("mem_token", mem_token);
-  	  	System.out.println("세션에 넣은 토큰값 : " + mem_token);
-  	  	
+
 		model.addAttribute("logOK", 1); // 로그인 완료되었을 때
 		model.addAttribute("mem_name", mem_name);
 
-		return "main/main";
-	}	
-	
-	
-	// 회원가입 컨트롤러
-	@RequestMapping(value = "/member/insert.do", method = RequestMethod.POST)
-	public String signUp(HttpServletRequest request, Model model, HttpSession session) {
-		try {
-			request.setCharacterEncoding("UTF-8");
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		int mem_dis = 0;
-		int mem_auth = 0;
-
-		MemberVO vo = new MemberVO();
-		String mem_id = request.getParameter("mem_id");
-		System.out.println("controller : mem_id : " + mem_id);
-		String mem_pwd = request.getParameter("mem_pwd");
-		System.out.println("controller : mem_pwd : " + mem_pwd);
-		String mem_name = request.getParameter("mem_name");
-		System.out.println("controller : mem_name : " + mem_name);
-		String mem_phone = request.getParameter("mem_phone");
-		System.out.println("controller : mem_phone : " + mem_phone);
-		String carid = request.getParameter("carid");
-		System.out.println("controller : carnum : " + carid);
-		String carmodel = request.getParameter("carmodel");
-		System.out.println("controller : CARMODEL : " + carmodel);
-		String category = request.getParameter("category");
-		System.out.println("controller : category : " + category);
-		String mem_dis_str = request.getParameter("mem_dis");
-		System.out.println("controller : mem_dis_str : " + mem_dis_str);
-		String mem_auth_str = request.getParameter("mem_auth");
-		System.out.println("controller : mem_auth_str : " + mem_auth_str);
-
-		if (category.equals("big-sized")) {
-			category = "대형";
-		} else if (category.equals("medium-sized")) {
-			category = "중형";
-		} else if (category.equals("small-sized")) {
-			category = "소형";
-		}
-
-		if (mem_dis_str.equals("ordi")) {
-			mem_dis = 0;
-		} else if (mem_dis_str.equals("dis")) {
-			mem_dis = 1;
-		}
-
-		if (mem_auth_str.equals("user")) {
-			mem_auth = 1;
-		} else if (mem_auth_str.equals("owner")) {
-			mem_auth = 2;
-		}
-		
-		Random rnd = new Random();
-		String randomStr = String.valueOf((char) ((int) (rnd.nextInt(26)) + 97));
-		String mem_token=null;
-		//일반회원가입(토큰이 없는경우)
-		if (mem_token == null) {
-			mem_token = sha256.testSHA256(randomStr);
-		}
-		
-		vo.setMem_id(mem_id);
-		vo.setMem_pwd(mem_pwd);
-		vo.setMem_name(mem_name);
-		vo.setMem_phone(mem_phone);
-		vo.setCar_id(carid);
-		vo.setCar_model(carmodel);
-		vo.setCategory(category);
-		vo.setMem_dis(mem_dis);
-		vo.setMem_auth(mem_auth);
-		vo.setMem_token(mem_token);
-
-		memberService.insertMember(vo);
-		//세션에 토큰넣기
-		session.setAttribute("mem_token", mem_token);
-  	  	System.out.println("세션에 넣은 토큰값 : " + mem_token);
-  	  	
-		model.addAttribute("logOK", 1); // 로그인 완료되었을 때
-		model.addAttribute("mem_name", mem_name);
-
+		ModelAndView mav = new ModelAndView();
 		return "main/main";
 	}
 
 	// 로그인
 	@RequestMapping(value = "/project/login.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public String login(HttpServletRequest request, Model model, HttpSession session) {
+	public String login(HttpServletRequest request, Model model) {
 		System.out.println("로그인 실행");
+		HttpSession session = request.getSession();
 
 		try {
 			request.setCharacterEncoding("UTF-8");
@@ -217,11 +133,17 @@ public class MemberController {
 		vo.setMem_id(mem_id);
 		vo.setMem_pwd(mem_pwd);
 		
-		vo = memberService.login(vo);
+		 vo = memberService.login(vo);
 		if (vo != null) {
-			session.setAttribute("mem_token", vo.getMem_token());
+			session.setAttribute("mem_id", mem_id);
+			session.setAttribute("mem_pwd", mem_pwd);
+			String token = mem_id+System.currentTimeMillis()+new Random().nextInt(100); //토큰값 생성 (id + 시간 + 100까지의 랜덤 숫자의 문자열)
+			token = testSHA256(token);
+			System.out.println("토큰값 : " + token);
+			session.setAttribute("tokken", token);
 			model.addAttribute("logOK", 1); //로그인 완료시
-			model.addAttribute("mem_name", vo.getMem_name());
+			model.addAttribute("mem_name", vo.getMem_id());
+			System.out.println("사용자 이름 : " + vo.getMem_id());
 			System.out.println("로그인 성공");
 		}else {
 			session.setAttribute("mem_id", null);
@@ -239,14 +161,33 @@ public class MemberController {
 		return "main/main";
 
 	}
+	//토큰값 생성
+	public String testSHA256(String pwd) {
+		try{
+
+			MessageDigest digest = MessageDigest.getInstance("SHA-256");
+			byte[] hash = digest.digest(pwd.getBytes("UTF-8"));
+			StringBuffer hexString = new StringBuffer();
+
+			for (int i = 0; i < hash.length; i++) {
+				String hex = Integer.toHexString(0xff & hash[i]);
+				if(hex.length() == 1) hexString.append('0');
+				hexString.append(hex);
+			}
+			//출력
+			return hexString.toString();
+			
+		} catch(Exception ex){
+			throw new RuntimeException(ex);
+		}
+	}
 
 	// 내정보 보기
 	@RequestMapping(value = "/member/memberdetail.do")
 	public ModelAndView memberDetail(HttpServletRequest request, Model model, HttpSession session) {
 
-		String mem_token = (String) session.getAttribute("mem_token");
-		System.out.println("mem_token in memberdetail123 : " + mem_token);
-		
+		String mem_token = request.getParameter("mem_token");
+		System.out.println("mem_token : " + mem_token);
 		
 		// 토큰으로 memberVO가져오기
 		MemberVO memberVO = memberService.getMemberbytoken(mem_token);
@@ -341,9 +282,5 @@ public class MemberController {
 		return "member/signUp";
 	}
 	
-	@RequestMapping(value = "/member/logOut.do")
-	public String logOut(HttpServletRequest request, Model model, HttpSession session) {
-		session.removeAttribute("mem_token");
-		return "redirect:/project/main.do";
-	}
+
 }
