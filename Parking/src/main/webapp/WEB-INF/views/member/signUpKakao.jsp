@@ -161,29 +161,22 @@ html, body {
   
   <section class="input-content">
     <h2>회원가입<span>*은 필수 입력사항입니다.</span></h2>
-    <form  action="${pageContext.request.contextPath}/member/insert.do" method="post">
+    <form  action="${pageContext.request.contextPath}/member/signUpkakao.do" method="post">
     <div class="input-content-wrap">
       <dl class="inputbox">
         <dt class="inputbox-title">* 아이디</dt>
         <dd class="inputbox-content">
-          <input id="mem_id" type="text"  placeholder="아이디" name="mem_id" required />       
+          <input id="mem_id" type="text" value="${mem_id}" placeholder="아이디" name="mem_id" required readonly />
+          <input id="mem_token" type="hidden" value="${mem_token}" name="mem_token" required readonly/>          
           <label for="input0">${id}</label>
           
           <span class="underline"></span>
         </dd>
       </dl>
       <dl class="inputbox">
-        <dt class="inputbox-title">* 비밀번호</dt>
-        <dd class="inputbox-content">
-          <input id="mem_pwd" type="password" name="mem_pwd" required/>
-          <label for="input0">비밀번호</label>
-          <span class="underline"></span>
-        </dd>
-      </dl>
-      <dl class="inputbox">
         <dt class="inputbox-title">* 이름</dt>
         <dd class="inputbox-content">
-          <input id="mem_name" type="text" placeholder="이름" name="mem_name" required/>
+          <input id="mem_name" type="text" placeholder="이름" value="${mem_name}" name="mem_name" required readonly/>
           <label for="input0"></label>
           <span class="underline"></span>
         </dd>
