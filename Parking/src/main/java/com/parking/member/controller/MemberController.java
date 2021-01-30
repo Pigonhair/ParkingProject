@@ -40,7 +40,7 @@ public class MemberController {
 
 	// 회원가입 컨트롤러
 	@RequestMapping(value = "/project/insert.do", method = RequestMethod.POST)
-	public String kakaoInsert(HttpServletRequest request, Model model) {
+	public String kakaoInsert(HttpServletRequest request, Model model, HttpSession session) {
 		try {
 			request.setCharacterEncoding("UTF-8");
 		} catch (UnsupportedEncodingException e) {
@@ -105,11 +105,13 @@ public class MemberController {
 		vo.setMem_token(mem_token);
 
 		memberService.insertMember(vo);
-
+		//세션에 토큰넣기
+		session.setAttribute("mem_token", mem_token);
+  	  	System.out.println("세션에 넣은 토큰값 : " + mem_token);
+  	  	
 		model.addAttribute("logOK", 1); // 로그인 완료되었을 때
 		model.addAttribute("mem_name", mem_name);
 
-		ModelAndView mav = new ModelAndView();
 		return "main/main";
 	}
 
@@ -187,7 +189,7 @@ public class MemberController {
 	public ModelAndView memberDetail(HttpServletRequest request, Model model, HttpSession session) {
 
 		String mem_token = request.getParameter("mem_token");
-		System.out.println("mem_token : " + mem_token);
+		System.out.println("mem_token in memberdetail : " + mem_token);
 		
 		// 토큰으로 memberVO가져오기
 		MemberVO memberVO = memberService.getMemberbytoken(mem_token);
