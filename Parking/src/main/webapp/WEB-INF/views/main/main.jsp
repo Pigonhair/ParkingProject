@@ -19,14 +19,14 @@ $(document).ready(function() {
 	var mem_token = '<%=(String) session.getAttribute("mem_token")%>';
 	//로그아웃
    $("#logout").click(function(){
-	   	//세션 삭제하기
-	    <% session.invalidate(); %>
+	   	//세션 삭제하기***추가해야됨
+	    
 		location.href=ctx+"/project/main.do";
    });	
 	
 	//내정보 보기
    $("#myinfo").click(function(){
-		location.href=ctx+"/member/memberdetail.do?mem_token="+mem_token;
+		location.href=ctx+"/member/memberdetail.do?;
    });
 	
 	//로그인 popup창 열기

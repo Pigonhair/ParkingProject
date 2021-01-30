@@ -93,6 +93,9 @@ public class MemberController {
 			mem_auth = 2;
 		}
 
+		if (mem_token == null) {
+			
+		}
 		vo.setMem_id(mem_id);
 		vo.setMem_pwd(mem_pwd);
 		vo.setMem_name(mem_name);
@@ -117,9 +120,8 @@ public class MemberController {
 
 	// 로그인
 	@RequestMapping(value = "/project/login.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public String login(HttpServletRequest request, Model model) {
+	public String login(HttpServletRequest request, Model model, HttpSession session) {
 		System.out.println("로그인 실행");
-		HttpSession session = request.getSession();
 
 		try {
 			request.setCharacterEncoding("UTF-8");
@@ -188,8 +190,9 @@ public class MemberController {
 	@RequestMapping(value = "/member/memberdetail.do")
 	public ModelAndView memberDetail(HttpServletRequest request, Model model, HttpSession session) {
 
-		String mem_token = request.getParameter("mem_token");
-		System.out.println("mem_token in memberdetail : " + mem_token);
+		String mem_token = (String) session.getAttribute("mem_token");
+		System.out.println("mem_token in memberdetail123 : " + mem_token);
+		
 		
 		// 토큰으로 memberVO가져오기
 		MemberVO memberVO = memberService.getMemberbytoken(mem_token);
