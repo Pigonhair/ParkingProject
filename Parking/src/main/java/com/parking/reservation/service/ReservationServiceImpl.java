@@ -4,16 +4,15 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-
 import com.parking.reservation.dao.ReservationMapper;
 import com.parking.reservation.vo.ReservationVO;
 
 @Service("reservationService")
-public class ReservationServiceImpl implements ReservationService{
+public class ReservationServiceImpl implements ReservationService {
 
    @Resource
-   private ReservationMapper reservationMapper; 
-   
+   private ReservationMapper reservationMapper;
+
    @Override
    public void inseReser(ReservationVO vo) {
       System.out.println("**********impl 들어옴******");
@@ -22,12 +21,14 @@ public class ReservationServiceImpl implements ReservationService{
       System.out.println("InsertReservation : vo.getReser_id() : " + vo.getReser_id());
 
       reservationMapper.inserReser(vo);
-      
+
    }
 
    @Override
-	public ReservationVO selectCheckParkingList(ReservationVO vo) {
+   public int selectCheckParkingList(ReservationVO vo) {
+      int n = reservationMapper.selectCheckParkingList(vo);
+      int n2 = reservationMapper.selectCheckParkingList2(vo);
+      return n + n2;
+   }
 
-		return reservationMapper.selectCheckParkingList(vo);
-	}
 }

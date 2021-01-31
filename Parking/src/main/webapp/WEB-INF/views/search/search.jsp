@@ -77,7 +77,7 @@ color:#a70737;">10분</span>당 <span style="color:#a70737;">1000원</span>입�
                            <input type="hidden" id="parking_id_selected" value="">
                            <input type="text" id="start_time" name="start_time" class="timepicker" placeholder="입차시간을 선택하세요">
                            <input type="text" id="end_time" name="end_time" class="timepicker" placeholder="출차시간을 선택하세요">
-                           <input type="text" name="reserve" id="reserve" placeholder="예약 가능여부">
+                           <input type="text" name="reserve" id="reserve" placeholder="예약 가능여부" readonly>
                         </fieldset>
                      
 <!--                      </form> -->
@@ -132,6 +132,7 @@ color:#a70737;">10분</span>당 <span style="color:#a70737;">1000원</span>입�
                </div>
             </div>
            </form>
+            <input type="button" name="ajaxBtn" id="ajaxBtn" value="예약가능여부">
          </div>
       </div>
 
@@ -164,6 +165,27 @@ $(document).ready(function() {
 	           alert("개인정보처리방침 이용에 대한 안내 동의해주세요")
 	           return false;
 	        } 
+	   });
+	
+	$('#ajaxBtn').click(function() {
+	       $.ajax({
+	            url:'../confirmParkingList.do',
+	            type:'post',
+	            data:{parkID:$('#park_id').val(), startTime:$('#start_time').val(), endTime:$('#end_time').val()},
+	            dataType:'json',
+	            cache:false,
+	            timeout:30000,
+	            success:function(data){
+	               if(data.result == 'Available'){
+	                  $('#reserve').val('예약가능 여부 결과 | 예약가능');
+	               }else if(data.result == 'NotAvailable'){
+	                  $('#reserve').css('color','red').val('예약가능 여부 결과 | 예약불가능, 다른 시간을 입력해주세요');
+	               }
+	            },
+	            error:function(){
+	               alert('네트워크 오류 발생');
+	            }
+	         });
 	   });
 
 });
@@ -313,7 +335,8 @@ for(let item of parking_position_Map){
         			  obj.park_public;
 	            	  $('#pakring_Selected').val(txt);
 	            	  $("#pakring_Selected").attr("readonly",true);
-	            	  $('#parking_id_selected').val(park_id);
+	            	  $('#parking_id_selected').val(obj.park_id);
+	            	  alert(obj.park_id);
 
 		            },
 		            error:function(){
@@ -438,43 +461,6 @@ $('.sel__box__options').click(function() {
         }
      });
 });
-
-
-
-/* function parkList() {
-		 
-    $.ajax({
-         url:'../confirmParkingList.do',
-         type:'post',
-         data:{park_id:$('#park_id').val(), start_time:$('#start_time').val(), end_time:$('#end_time').val()}
-         dataType:'json',
-         cache:false,
-         timeout:30000,
-         success:function(data){
-            $('#loading').hide();//로딩 이미지 감추기
-            $('#mem_id.errors').hide();//서버에서 유효성 체크 결과 오류 메시지 숨기기
-            if(data.result == 'idNotFound'){
-               $('.reserve').val('예약가능 여부 결과 | 예약가능');
-               checkId = 1;
-            }else if(data.result == 'idDuplicated'){
-               $('.reserve').css('color','red').val('예약가능 여부 결과 | 예약불가능, 다른 시간을 입력해주세요');
-               $('.start_time').val('').focus();
-               $('.end_time').val('').focus();
-               checkId=0;
-            }else{
-               checkId=0;
-               alert('ID중복체크 오류');
-            }
-         },
-         error:function(){
-            checkId = 0;
-            $('#loading').hide();//로딩 이미지 감추기
-            alert('네트워크 오류 발생');
-         }
-      });
-   }); */
-   
-
 </script>
 
 
