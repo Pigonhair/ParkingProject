@@ -433,7 +433,6 @@ $('.sel__box__options').click(function() {
   var $currentSel = $(this).closest('.sel');
   var park_id = $currentSel.children('select').prop('selectedIndex', index + 1).val();
   alert('선택된 항목의 값 : ' + park_id); 
-  $currentSel.children('.sel__placeholder').text(txt);
   $currentSel.children('select').prop('selectedIndex', index + 1);
   
 	$.ajax({
