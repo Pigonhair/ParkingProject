@@ -103,7 +103,6 @@ $(document).ready(function() {
       new daum.Postcode({
           oncomplete: function(data) {
               var addr = data.address; // 최종 주소 변수
-
               // 주소 정보를 해당 필드에 넣는다.
               document.getElementById("btnAddress").value = addr;
 
@@ -119,6 +118,14 @@ $(document).ready(function() {
 		   location.href=ctx+"/member/memberdetail.do";
 	   });
    });
+	
+	$('#form_Address').submit(function(){
+		if($('#btnAddress').val() == ''){
+           alert('주소를 입력해주세요');
+           $('#btnAddress').focus();
+           return false;
+		} 
+	});
 });
 </script>
 
@@ -253,22 +260,11 @@ $(document).ready(function() {
 </c:if>
 
  
-  <form action="${pageContext.request.contextPath}/project/search.do" method=post> 
+  <form action="${pageContext.request.contextPath}/project/search.do" id="form_Address"method=post> 
    <div id="main_content">
-<!--       <form id="resveForm" name="resveForm" class="needs-validation" -->
-<!--          novalidate="novalidate"> -->
          <fieldset>
             <legend>.</legend>
             <div class="fbox">
-               <dl>
-                  <dt>차량 선택</dt>
-                  <dd class="select_wrap">
-                     <select title="Division" id="parkngAr" name="parkngAr">
-                        <option value="GNRL" selected="selected">일반</option>
-                        <option value="DSPSN">장애인</option>
-                     </select>
-                  </dd>
-               </dl>
                <dl>
                   <dt>목적지</dt>
                   <dd class="cal_wrap main">
@@ -276,7 +272,7 @@ $(document).ready(function() {
                   </dd>
                </dl>
                <p class="btn_wrap">
-                  <input type="submit" id="btnReserve" class="btn_reserv" value="찾 기"></input>
+                  <input type="submit" id="btnReserve"  class="btn_reserv" value="찾 기"></input>
                   <input type="button" id="btnReview" class="btn_review" value="리뷰검색" onClick="location.href='${pageContext.request.contextPath}/review.do'"></input>
                </p>
             </div>

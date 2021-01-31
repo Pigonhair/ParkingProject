@@ -25,4 +25,9 @@ public class ReservationServiceImpl implements ReservationService{
       
    }
 
+   @Override
+	public ReservationVO selectCheckParkingList(ReservationVO vo) {
+
+		return reservationMapper.selectCheckParkingList(vo);
+	}
 }

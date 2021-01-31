@@ -23,6 +23,10 @@ public interface ReservationMapper {
          + " values(#{reser_id},#{park_id},#{mem_num},#{start_time},#{end_time},#{totalPrice})")
    public void inserReser(ReservationVO vo);
 
+   //주차장 가능한 시간 확인하기
+   @Select("SELECT * FROM reservation where park_id = #{park_id}")
+   public ReservationVO selectCheckParkingList(ReservationVO vo);
+
    
    
 }
