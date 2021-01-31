@@ -50,20 +50,15 @@ public class ReservationController {
 
 		ReservationVO vo = new ReservationVO();
 
-		String str = request.getParameter("select-profession");
-		System.out.println("인풋에서 가져온 주차장번호 : " + str);
-
-//		String[] strArray = str.split(",");
-//		System.out.println("splitsplit : " + strArray[0]); // park_id 값
-//		System.out.println("splitsplit : " + strArray[1]); // mem_num 값
+		String pakring_Selected = request.getParameter("parking_id_selected");
+		System.out.println("주차장번호 : " + pakring_Selected);
 
 		// park_id 셋팅
-		int park_id = Integer.parseInt(str);
+		int park_id = Integer.parseInt(pakring_Selected);
 		vo.setPark_id(park_id);
 		System.out.println("vo에서가져온Park_id값 : " + vo.getPark_id());
 
 		//session에서토큰으로 사용자확인
-		session = request.getSession();
 		String mem_token = (String)session.getAttribute("mem_token");
 		System.out.println("mem_token :" + mem_token);
 		

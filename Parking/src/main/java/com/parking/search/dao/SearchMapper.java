@@ -15,4 +15,6 @@ public interface SearchMapper {
 	//Mapper
 	public List<SearchVO> selectParkinglist();
 
+	@Select("SELECT * FROM PARKING WHERE park_id=#{park_id}")
+	public SearchVO selectParkingbyId(String park_id);
 }

@@ -19,4 +19,9 @@ public class SearchServiceImpl implements SearchService{
 	public List<SearchVO> selectParkinglist() {
 		return searchMapper.selectParkinglist();
 	}
+	
+	@Override
+	public SearchVO selectParkingbyId(String park_id) {
+		return searchMapper.selectParkingbyId(park_id);
+	}
 }

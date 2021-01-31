@@ -7,4 +7,6 @@ import com.parking.search.vo.SearchVO;
 
 public interface SearchService {
 	public List<SearchVO> selectParkinglist();
+
+	public SearchVO selectParkingbyId(String park_id);
 }

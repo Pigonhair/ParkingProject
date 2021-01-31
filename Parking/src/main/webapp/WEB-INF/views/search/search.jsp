@@ -73,9 +73,10 @@ color:#a70737;">10분</span>당 <span style="color:#a70737;">1000원</span>입�
                      </select>
                      </div>
                            <input type="hidden" name="parkReserve" id="parkReserve" value="">
+                           <input type="text" id="pakring_Selected" name="pakring_Selected" placeholder="주차장을 선택하세요">
+                           <input type="hidden" id="parking_id_selected" value="">
                            <input type="text" id="start_time" name="start_time" class="timepicker" placeholder="입차시간을 선택하세요">
                            <input type="text" id="end_time" name="end_time" class="timepicker" placeholder="출차시간을 선택하세요">
-                           <input type="text" name="car_number" placeholder="차번호를 입력하세요">
                            <input type="text" name="reserve" id="reserve" placeholder="예약 가능여부">
                         </fieldset>
                      
@@ -173,6 +174,7 @@ $(document).ready(function() {
 
 
 <script>
+
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = {
         center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
@@ -186,12 +188,16 @@ console.log('목적지 : ' + dest_position);
 
 //주차장 map만들기
 var parking_position_Map = new Map()
+var parking_parkid_Map = new Map()
 
 //DB에서 받아온 주차장 이름 및 위치 넣기
 <c:forEach var="parking" items="${list}">
 var parkinglot_name = '${parking.park_name}';
 var parkinglot_addr = '${parking.detailAddr}';
-//map에 주차장 key,value 넣기
+var parkinglot_id = '${parking.park_id}';
+//map에 주차장 key(이름),value(번호) 넣기
+parking_parkid_Map.set(parkinglot_name,parkinglot_id)
+//map에 주차장 key(이름),value(주소) 넣기
 parking_position_Map.set(parkinglot_name, parkinglot_addr);
 </c:forEach>
 
@@ -283,9 +289,43 @@ for(let item of parking_position_Map){
            });
            // 인포윈도우로 장소에 대한 설명을 표시합니다
            infowindow.open(map, marker);
+           
+           // 마커에 click 이벤트를 등록합니다
+           kakao.maps.event.addListener(marker, 'click', function() {
+				alert('클릭하신 주차장은 "' + item[0] + '" 입니다' );
+				var park_id =  parking_parkid_Map.get(item[0]);
+				map.setCenter(coords);
+				
+				$.ajax({
+		            url:'../searchParkingbyId.do',
+		            type:'post',
+		            data:{park_id : park_id},
+		            dataType:'json',
+		            cache:false,
+		            timeout:30000,
+		            success:function(obj){
+		            	txt = obj.park_id + "  " +
+          			  obj.park_name + "  " +
+        			  obj.park_capacity + "  " +
+        			  obj.mem_num + "  " +
+        			  obj.park_type + "  " +
+        			  obj.detailAddr + "  " +
+        			  obj.park_public;
+	            	  $('#pakring_Selected').val(txt);
+	            	  $("#pakring_Selected").attr("readonly",true);
+	            	  $('#parking_id_selected').val(park_id);
+
+		            },
+		            error:function(){
+		               alert('네트워크 오류 발생');
+		            }
+		         });
+           });
        } 
    });
 }
+
+
 
 //지도위에 목적지 marker만들고 거기로 이동하기
 for(let item of dest_position_Map){
@@ -293,8 +333,8 @@ for(let item of dest_position_Map){
    geocoder.addressSearch(item[1], function(result, status) {
        // 정상적으로 검색이 완료됐으면 
         if (status === kakao.maps.services.Status.OK) {
-
-           var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+     	
+            var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
 
            // 결과값으로 받은 위치를 마커로 표시합니다
            var marker = new kakao.maps.Marker({
@@ -306,15 +346,24 @@ for(let item of dest_position_Map){
            var infowindow = new kakao.maps.InfoWindow({
                content: '<div style="width:150px;text-align:center;padding:6px 0;">'+item[0]+'</div>'
            });
+           
 
            // 인포윈도우로 장소에 대한 설명을 표시합니다
            infowindow.open(map, marker);
 
            // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
            map.setCenter(coords);
+           
+           // 마커에 click 이벤트를 등록합니다
+           kakao.maps.event.addListener(marker, 'click', function() {
+				alert('고객님의 목적지는 "'+dest_position+'" 입니다' );
+				map.setCenter(coords);
+           });
        } 
    });
-}
+} 
+
+
 
 /* ===== Logic for creating fake Select Boxes ===== */
 $('.sel').each(function() {
@@ -359,9 +408,38 @@ $('.sel__box__options').click(function() {
   $(this).addClass('selected');
   
   var $currentSel = $(this).closest('.sel');
+  var park_id = $currentSel.children('select').prop('selectedIndex', index + 1).val();
+  alert('선택된 항목의 값 : ' + park_id); 
   $currentSel.children('.sel__placeholder').text(txt);
   $currentSel.children('select').prop('selectedIndex', index + 1);
+  
+	$.ajax({
+        url:'../searchParkingbyId.do',
+        type:'post',
+        data:{park_id : park_id},
+        dataType:'json',
+        cache:false,
+        timeout:30000,
+        success:function(obj){
+        	txt = obj.park_id + "  " +
+			  obj.park_name + "  " +
+		  obj.park_capacity + "  " +
+		  obj.mem_num + "  " +
+		  obj.park_type + "  " +
+		  obj.detailAddr + "  " +
+		  obj.park_public;
+    	  $('#pakring_Selected').val(txt);
+    	  $("#pakring_Selected").attr("readonly",true);
+    	  $('#parking_id_selected').val(park_id);
+
+        },
+        error:function(){
+           alert('네트워크 오류 발생');
+        }
+     });
 });
+
+
 
 /* function parkList() {
 		 
