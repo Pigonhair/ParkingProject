@@ -68,9 +68,9 @@ public class ReservationController {
 		vo.setMem_num(mem_num);
 		System.out.println("mem : " + vo.getMem_num());
 		
-		// mem_num 셋팅
-//		int mem_num = Integer.parseInt(strArray[1]);
-//		vo.setMem_num(mem_num);
+        String car_num = request.getParameter("car_num");
+        vo.setCar_num(car_num);
+        System.out.println("vo에서가져온car_num값: "+ vo.getCar_num());
 		
 
 		//문자열로 받아온 데이터 시간차 계산해서 총가격 측정
@@ -99,7 +99,7 @@ public class ReservationController {
 
 		reservationService.inseReser(vo);
 
-		return "예약완료페이지넣어야됨";
+		return "pay/pay";
 	}
 
 }

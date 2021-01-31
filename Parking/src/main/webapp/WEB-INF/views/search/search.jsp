@@ -73,10 +73,11 @@ color:#a70737;">10분</span>당 <span style="color:#a70737;">1000원</span>입�
                      </select>
                      </div>
                            <input type="hidden" name="parkReserve" id="parkReserve" value="">
-                           <input type="text" id="pakring_Selected" name="pakring_Selected" placeholder="주차장을 선택하세요">
-                           <input type="hidden" id="parking_id_selected" value="">
+<!--                            <input type="text" id="pakring_Selected" name="pakring_Selected" placeholder="주차장을 선택하세요"> -->
+                           <input type="hidden" id="parking_id_selected" name="parking_id_selected" value="">
                            <input type="text" id="start_time" name="start_time" class="timepicker" placeholder="입차시간을 선택하세요">
                            <input type="text" id="end_time" name="end_time" class="timepicker" placeholder="출차시간을 선택하세요">
+                           <input type="text" id="car_num" name="car_num"  placeholder="차 번호를 입력하세요">
                            <input type="text" name="reserve" id="reserve" placeholder="예약 가능여부" readonly>
                         </fieldset>
                      
@@ -142,7 +143,6 @@ color:#a70737;">10분</span>당 <span style="color:#a70737;">1000원</span>입�
    
 $(document).ready(function() {	
 	
-
 	$('.timepicker').timepicker({
 	    timeFormat: 'HH:mm ',
 	    interval: 10,
@@ -171,13 +171,13 @@ $(document).ready(function() {
 	       $.ajax({
 	            url:'../confirmParkingList.do',
 	            type:'post',
-	            data:{parkID:$('#park_id').val(), startTime:$('#start_time').val(), endTime:$('#end_time').val()},
+	            data:{parkID:$('#parking_id_selected').val(), startTime:$('#start_time').val(), endTime:$('#end_time').val()},
 	            dataType:'json',
 	            cache:false,
 	            timeout:30000,
 	            success:function(data){
 	               if(data.result == 'Available'){
-	                  $('#reserve').val('예약가능 여부 결과 | 예약가능');
+	                  $('#reserve').css('color','blue').val('예약가능 여부 결과 | 예약가능');
 	               }else if(data.result == 'NotAvailable'){
 	                  $('#reserve').css('color','red').val('예약가능 여부 결과 | 예약불가능, 다른 시간을 입력해주세요');
 	               }
@@ -190,10 +190,6 @@ $(document).ready(function() {
 
 });
 </script>
-
-
-
-
 
 <script>
 
@@ -333,10 +329,12 @@ for(let item of parking_position_Map){
         			  obj.park_type + "  " +
         			  obj.detailAddr + "  " +
         			  obj.park_public;
-	            	  $('#pakring_Selected').val(txt);
+		              var $currentSel = $('.sel__box__options').closest('.sel');
+		              $currentSel.children('.sel__placeholder').text(txt);	
+// 	            	  $('#pakring_Selected').val(txt);
 	            	  $("#pakring_Selected").attr("readonly",true);
 	            	  $('#parking_id_selected').val(obj.park_id);
-	            	  alert(obj.park_id);
+// 	            	  alert(obj.park_id);
 
 		            },
 		            error:function(){
@@ -432,33 +430,13 @@ $('.sel__box__options').click(function() {
   
   var $currentSel = $(this).closest('.sel');
   var park_id = $currentSel.children('select').prop('selectedIndex', index + 1).val();
-  alert('선택된 항목의 값 : ' + park_id); 
+  $currentSel.children('.sel__placeholder').text(txt);
   $currentSel.children('select').prop('selectedIndex', index + 1);
+  var s = document.getElementById("select-profession");
+  var selectParkID = s.options[s.selectedIndex].value;
+  $('#parking_id_selected').val(selectParkID);
   
-	$.ajax({
-        url:'../searchParkingbyId.do',
-        type:'post',
-        data:{park_id : park_id},
-        dataType:'json',
-        cache:false,
-        timeout:30000,
-        success:function(obj){
-        	txt = obj.park_id + "  " +
-			  obj.park_name + "  " +
-		  obj.park_capacity + "  " +
-		  obj.mem_num + "  " +
-		  obj.park_type + "  " +
-		  obj.detailAddr + "  " +
-		  obj.park_public;
-    	  $('#pakring_Selected').val(txt);
-    	  $("#pakring_Selected").attr("readonly",true);
-    	  $('#parking_id_selected').val(park_id);
 
-        },
-        error:function(){
-           alert('네트워크 오류 발생');
-        }
-     });
 });
 </script>
 
