@@ -182,6 +182,7 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 //내 위치,이름 설정
 var dest_name = '목적지';
 var dest_position = '<%=btnAddress%>';
+console.log('목적지 : ' + dest_position);
 
 //주차장 map만들기
 var parking_position_Map = new Map()
@@ -362,7 +363,7 @@ $('.sel__box__options').click(function() {
   $currentSel.children('select').prop('selectedIndex', index + 1);
 });
 
-function parkList() {
+/* function parkList() {
 		 
     $.ajax({
          url:'../confirmParkingList.do',
@@ -393,9 +394,8 @@ function parkList() {
             alert('네트워크 오류 발생');
          }
       });
-   });
+   }); */
    
-}
 
 </script>
 
