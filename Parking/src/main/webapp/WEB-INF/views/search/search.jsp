@@ -30,13 +30,14 @@
          <form class="form-wrapper" >
             <ul class="steps">
                <li class="is-active">Step 1</li>
-               <li class="listword">주차장예약</li>
+               <li class="listword"><h1>주차장예약</h1></li>
             </ul>
          </form>
       </div>
       <div id="main_container">
        <form class="form-wrapper" id="form_id" name="form_id" action="${pageContext.request.contextPath}/project/reserveInsert.do" method="post">
          <div id="sub_content">
+         <h2 style="color:#000000; font-family:'jua'; font-size: 30px; margin-bottom: 50px" id="destination">목적지 : <%=btnAddress %></h2>
             <div id="map_content">
                <div id="map" style="width: 1000px; height: 500px; position: relative; overflow: hidden;"></div>
                <!-- 지도타입 컨트롤 div 입니다 -->
@@ -59,6 +60,7 @@
 <!--                      <form class="form-wrapper"> -->
 
                         <fieldset class="section is-active">
+                        
                           <h3 style="color:#000000; font-family:'jua'; font-size: 30px; margin-bottom: 50px">예약정보입력<p>(주차요금은 <span style="
 color:#a70737;">10분</span>당 <span style="color:#a70737;">1000원</span>입니다)</p></h3>
                            <div class="sel sel--black-panther">
@@ -72,11 +74,10 @@ color:#a70737;">10분</span>당 <span style="color:#a70737;">1000원</span>입�
                            <br>
                         </c:forEach>
                      </select>
-                     </div>
+                     </div><br>
                            <input type="hidden" name="parkReserve" id="parkReserve" value="">
-<!--                            <input type="text" id="pakring_Selected" name="pakring_Selected" placeholder="주차장을 선택하세요"> -->
                            <input type="hidden" id="parking_id_selected" name="parking_id_selected" value="">
-                           <input type="text" id="start_time" name="start_time" class="timepicker" placeholder="입차시간을 선택하세요">
+                           <span>입차시간</span><input type="text" id="start_time" name="start_time" class="timepicker" placeholder="입차시간을 선택하세요">
                            <input type="text" id="end_time" name="end_time" class="timepicker" placeholder="출차시간을 선택하세요">
                            <input type="text" id="car_num" name="car_num"  placeholder="차 번호를 입력하세요">
                            <input type="text" name="reserve" id="reserve" placeholder="예약 가능여부" readonly>
@@ -85,6 +86,7 @@ color:#a70737;">10분</span>당 <span style="color:#a70737;">1000원</span>입�
 <!--                      </form> -->
                   </div>
                </div>
+               <input type="button" name="reservOKBtn" id="reservOKBtn" value="예약가능여부">
                <h3 class="stitle01" style="margin-left: 100px; font-family:'jua'; font-size:25px;">주차예약 이용안내</h3>
                <div class="scroll_box" style="margin-left: 100px">
                   [예약 기본정보]<br> (예약 기간) 최소 2시간부터 최장 1개월까지 예약이 가능합니다.<br>
@@ -134,7 +136,6 @@ color:#a70737;">10분</span>당 <span style="color:#a70737;">1000원</span>입�
                </div>
             </div>
            </form>
-            <input type="button" name="ajaxBtn" id="ajaxBtn" value="예약가능여부">
          </div>
       </div>
 
@@ -168,7 +169,7 @@ $(document).ready(function() {
 	        } 
 	   });
 	
-	$('#ajaxBtn').click(function() {
+	$('#reservOKBtn').click(function() {
 	       $.ajax({
 	            url:'../confirmParkingList.do',
 	            type:'post',
