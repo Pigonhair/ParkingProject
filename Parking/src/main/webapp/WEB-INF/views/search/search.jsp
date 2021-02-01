@@ -6,6 +6,7 @@
    String btnAddress = request.getParameter("btnAddress");
 %>
 <c:set var="path" value="${pageContext.request.contextPath}" />
+<%@ include file = "../main/header.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>

@@ -219,6 +219,9 @@ $(document).ready(function() {
 
 <%
 	PrintWriter script = response.getWriter();
+	script.println("<a class = \"logo\" id = \"logo\" href=\"../project/main.do\">");
+	script.println("<img class = \"logoimg\" src =\"../resources/images/logo.png\"/>");
+	script.println("</a>");
 	script.println("<div class=\"container\" id=\"blur\">");
 // 	script.println("<img class=\"background\" src=\"https://s3-us-west-2.amazonaws.com/s.cdpn.io/221808/sky.jpg\" />");
     script.println("<img class=\"background\" src=\"../resources/images/back.jpg\" />");
@@ -273,7 +276,7 @@ $(document).ready(function() {
                </dl>
                <p class="btn_wrap">
                   <input type="submit" id="btnReserve"  class="btn_reserv" value="찾 기"></input>
-                  <input type="button" id="btnReview" class="btn_review" value="리뷰검색" onClick="location.href='${pageContext.request.contextPath}/review.do'"></input>
+                  <input type="button" id="btnReview" class="btn_review" value="리뷰검색" onClick="location.href='${pageContext.request.contextPath}/project/review.do'"></input>
                </p>
             </div>
          </fieldset>

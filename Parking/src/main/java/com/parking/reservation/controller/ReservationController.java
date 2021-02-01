@@ -23,8 +23,6 @@ import com.parking.member.vo.MemberVO;
 import com.parking.reservation.service.ReservationService;
 import com.parking.reservation.vo.ReservationVO;
 
-import oracle.net.aso.m;
-
 @Controller
 public class ReservationController {
 
