@@ -219,8 +219,8 @@ $(document).ready(function() {
 
 <%
 	PrintWriter script = response.getWriter();
-	script.println("<a class = \"logo\" id = \"logo\" href=\"../project/main.do\">");
-	script.println("<img class = \"logoimg\" src =\"../resources/images/logo.png\"/>");
+	script.println("<a class = \"background2\" id = \"logo\" href=\"../project/main.do\">");
+	script.println("<img class = \"background2\" src =\"../resources/images/logo.png\"/>");
 	script.println("</a>");
 	script.println("<div class=\"container\" id=\"blur\">");
 // 	script.println("<img class=\"background\" src=\"https://s3-us-west-2.amazonaws.com/s.cdpn.io/221808/sky.jpg\" />");

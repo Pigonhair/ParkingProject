@@ -33,6 +33,16 @@ body {
   height: 100%;
   mask-image: radial-gradient(white 0%, white 30%, transparent 80%, transparent);
 }
+.background2{
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: auto;
+	z-index: 100;
+	margin: 10;
+	mask-image : radial-gradient(white 0%, white 30%, transparent 80%, transparent);
+}
 
 .circle-container {
   position: absolute;
