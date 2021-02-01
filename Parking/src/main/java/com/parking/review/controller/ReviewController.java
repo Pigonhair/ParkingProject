@@ -86,7 +86,7 @@ public class ReviewController {
 	
 
 	//리뷰 리스트 페이지 호출
-	@RequestMapping("/project/review.do")
+	@RequestMapping("/	project/review.do")
 	public String review() {
 		//리뷰페이지 호출
 		return "review/review";
