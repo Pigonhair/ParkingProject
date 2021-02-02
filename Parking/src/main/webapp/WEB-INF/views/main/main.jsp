@@ -75,7 +75,7 @@ $(document).ready(function() {
 	
 	//내정보 보기
    $("#myinfo").click(function(){
-		location.href=ctx+"/member/memberdetail.do";
+		location.href=ctx+"/member/mypage.do";
    });
 	
 	

@@ -223,9 +223,15 @@ public class MemberController {
 		} else {
 			//일반회원
 			mav.addObject(memberVO);
-			mav.setViewName("/member/mypage");
+			mav.setViewName("/member/memberdetail");
 		}
 		return mav;
+	}
+	//로그아웃
+	@RequestMapping(value = "/member/mypage.do")
+	public String mypage(HttpServletRequest request, Model model, HttpSession session) {
+		session.removeAttribute("mem_token");
+		return "/member/mypage";
 	}
 
 
