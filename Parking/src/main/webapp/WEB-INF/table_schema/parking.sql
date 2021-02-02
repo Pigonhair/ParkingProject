@@ -11,9 +11,9 @@ create table parking(
   constraint owner_fk foreign key (mem_num) references member (mem_num)
 );
 
-CREATE SEQUENCE PARKING_ID nocache nocycle;
-DROP SEQUENCE PARKING_ID;
-
+CREATE SEQUENCE PARK_ID nocache nocycle;
+DROP SEQUENCE PARK_ID;
+SELECT park_id.nextval FROM dual
 INSERT INTO PARKING VALUES (PARKING_ID.NEXTVAL,'이젠주차장',300,18,'노상','서울 서초구 강남대로 241',1);
 INSERT INTO PARKING VALUES (PARKING_ID.NEXTVAL,'강아지주차장',300,18,'부설','서울 서초구 강남대로 243',1);
 INSERT INTO PARKING VALUES (PARKING_ID.NEXTVAL,'토끼주차장',300,18,'부설','서울 서초구 강남대로 251 (해동빌딩)',1);

@@ -50,7 +50,7 @@ String btnAddress = request.getParameter("btnAddress");
 
    <div class="wrapper">
       <form
-         action="${pageContext.request.contextPath}/project/parkingInsert.do"
+         action="${pageContext.request.contextPath}/parking/parkingInsert.do"
          method="post">
 
          <hr class="sep" />
