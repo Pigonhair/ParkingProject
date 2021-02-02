@@ -1,9 +1,7 @@
 package com.parking.member.service;
 
-import java.security.MessageDigest;
 import java.util.List;
-import java.util.Map;
-import java.util.Random;
+
 
 import javax.annotation.Resource;
 

@@ -223,14 +223,14 @@ $(document).ready(function(){
 					alert('목록 호출 오류 발생!');
 				}else{
 					$(list).each(function(index,item){
+						var img = item.img; 
 						var output='<div class="container">';
 						output = '<h1 class="my-4"></h1>';
 						output += '<div class="row">';
 						output += '<div class="col-md-7">';
 						/* output += '<a href="#">'; */
-/* 						output += '<img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/700x300" alt="">'; */
-/* 						output += '<img class="img-fluid rounded mb-3 mb-md-0" src="<spring:url value = '/images/abc.jpg'/> ">'; */
-						output += '<img class="img-fluid rounded mb-3 mb-md-0" src="<spring:url value = '/images/'"'+item.img+'"'/> ">';
+ 						output += '<img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/700x300" alt="">'; 
+ 						/* output += '<img class="img-fluid rounded mb-3 mb-md-0" src="<spring:url value = '/images/`${item.img}`'/> ">'; */ 
 						/* output += '</a>'; */
 						output += '</div>';
 						output += '<div class="col-md-5">';

@@ -2,6 +2,7 @@ package com.parking.review.controller;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -146,6 +147,12 @@ public class ReviewController {
 	public String submitReviewInsert(@Valid ReviewVO reviewvo,
 			@RequestParam(value = "pageNum", defaultValue = "1") int currentPage, BindingResult result, Model model,
 			HttpServletRequest request, HttpSession session) {
+		try {
+			request.setCharacterEncoding("UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		System.out.println("reviewInsert : " + reviewvo.getPark_id());
 		

@@ -213,9 +213,6 @@ $(document).ready(function() {
 
 </head>
 <body>
-<a href="${pageContext.request.contextPath}/project/review.do">리뷰페이지Test</a>
-   <!-- <div class="container" id="blur">
-      <img class="background" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/221808/sky.jpg" /> -->
 
 <%
 	PrintWriter script = response.getWriter();
@@ -276,7 +273,7 @@ $(document).ready(function() {
                </dl>
                <p class="btn_wrap">
                   <input type="submit" id="btnReserve"  class="btn_reserv" value="찾 기"></input>
-                  <input type="button" id="btnReview" class="btn_review" value="리뷰검색" onClick="location.href='${pageContext.request.contextPath}/project/review.do'"></input>
+                  <input type="button" id="btnReview" class="btn_review" value="리뷰검색" onClick="location.href='${pageContext.request.contextPath}/review.do'"></input>
                </p>
             </div>
          </fieldset>
