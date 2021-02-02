@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
-   request.setCharacterEncoding("UTF-8");
-   String btnAddress = request.getParameter("btnAddress");
+request.setCharacterEncoding("UTF-8");
+String btnAddress = request.getParameter("btnAddress");
 %>
 <c:set var="path" value="${pageContext.request.contextPath}" />
-<%@ include file = "../main/header.jsp" %>
+<%@ include file="../main/header.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="${path}/resources/css/Search.css" />
 <link rel="stylesheet" href="${path}/resources/css/Search2.css" />
 <link rel="stylesheet" href="${path}/resources/css/parkingList.css" />
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c59597a942774a145bf6ea568ac28488&libraries=services,clusterer,drawing"></script>
 <meta charset="utf-8" />
@@ -25,135 +25,165 @@
 </head>
 <body>
 
-   <div id="wrap">
-      <div class="wrapper">
-         <form class="form-wrapper" >
-            <ul class="steps">
-               <li class="is-active">Step 1</li>
-               <li class="listword"><h1>주차장예약</h1></li>
-            </ul>
-         </form>
-      </div>
-      <div id="main_container">
-       <form class="form-wrapper" id="form_id" name="form_id" action="${pageContext.request.contextPath}/project/reserveInsert.do" method="post">
-         <div id="sub_content">
-         <h2 style="color:#000000; font-family:'jua'; font-size: 30px; margin-bottom: 50px" id="destination">목적지 : <%=btnAddress %></h2>
-            <div id="map_content">
-               <div id="map" style="width: 1000px; height: 500px; position: relative; overflow: hidden;"></div>
-               <!-- 지도타입 컨트롤 div 입니다 -->
-               <div class="custom_typecontrol radius_border">
-                  <span id="btnRoadmap" class="selected_btn"
-                     onclick="setMapType('roadmap')">지도</span> <span id="btnSkyview"
-                     class="btn" onclick="setMapType('skyview')">스카이뷰</span>
-               </div>
-               <!-- 지도 확대, 축소 컨트롤 div 입니다 -->
-               <div class="custom_zoomcontrol radius_border">
-                  <span onclick="zoomIn()"><img
-                     src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_plus.png"
-                     alt="확대"></span> <span onclick="zoomOut()"><img
-                     src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_minus.png"
-                     alt="축소"></span>
-               </div>
-            </div>
-            <div class="information_container">
-                  <div class="wrapper">
-<!--                      <form class="form-wrapper"> -->
+	<div id="wrap">
+		<div class="wrapper">
+			<form class="form-wrapper">
+				<ul class="steps">
+					<li class="is-active">Step 1</li>
+					<li class="listword"><h1>주차장예약</h1></li>
+				</ul>
+			</form>
+		</div>
+		<div id="main_container">
+			<form class="form-wrapper" id="form_id" name="form_id"
+				action="${pageContext.request.contextPath}/project/reserveInsert.do"
+				method="post">
+				<div id="sub_content">
+					<h2
+						style="color: #000000; font-family: 'jua'; font-size: 30px; margin-bottom: 50px"
+						id="destination">
+						목적지 :
+						<%=btnAddress%></h2>
+					<div id="map_content">
+						<div id="map"
+							style="width: 1000px; height: 500px; position: relative; overflow: hidden;"></div>
+						<!-- 지도타입 컨트롤 div 입니다 -->
+						<div class="custom_typecontrol radius_border">
+							<span id="btnRoadmap" class="selected_btn"
+								onclick="setMapType('roadmap')">지도</span> <span id="btnSkyview"
+								class="btn" onclick="setMapType('skyview')">스카이뷰</span>
+						</div>
+						<!-- 지도 확대, 축소 컨트롤 div 입니다 -->
+						<div class="custom_zoomcontrol radius_border">
+							<span onclick="zoomIn()"><img
+								src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_plus.png"
+								alt="확대"></span> <span onclick="zoomOut()"><img
+								src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_minus.png"
+								alt="축소"></span>
+						</div>
+					</div>
+					<div class="information_container">
+						<div class="wrapper">
+							<!--                      <form class="form-wrapper"> -->
 
-                        <fieldset class="section is-active">
-                        
-                          <h3 style="color:#000000; font-family:'jua'; font-size: 30px; margin-bottom: 50px">예약정보입력<p>(주차요금은 <span style="
-color:#a70737;">10분</span>당 <span style="color:#a70737;">1000원</span>입니다)</p></h3>
-                           <div class="sel sel--black-panther">
-                           <select name="select-profession" id="select-profession">
-                           <option value="">주차장선택</option>
-                        <c:forEach var="parking" items="${list}">               
-                           <option id="park_id" value="${parking.park_id}" value2="${parking.park_name}">${parking.park_name}, 
-                              ${parking.park_type},  ${parking.detailAddr},  ${parking.park_public}</option>                 
-                           <br>
-                        </c:forEach>
-                     </select>
-                     </div><br>
-                           <input type="hidden" name="parkReserve" id="parkReserve" value="">
-                           <input type="hidden" id="parking_id_selected" name="parking_id_selected" value="" >
-                           <input type="hidden" id="parking_name_selected" name="parking_name_selected" value="" >
-                            <div class="frow">
-                           <label class="label"> <span class="star">*</span> 예약 입차일시</label> 
-                           <input type="text" id="start_time" name="start_time" class="timepicker" placeholder="입차시간을 선택하세요">
-                        </div>
-                        <div class="frow">
-                           <label class="label"> <span class="star">*</span> 예약 출차일시</label>
-                           <input type="text" id="end_time" name="end_time" class="timepicker" placeholder="출차시간을 선택하세요">
-                        </div>
-                        <div class="frow">
-                           <label class="label"> <span class="star">*</span> 차 번호</label> 
-                           <input type="text" id="car_num" name="car_num" placeholder="차 번호를 입력하세요">
-                        </div>
-                        <div class="frow">
-                           <label class="label"> <span class="star">*</span>예약가능여부</label> 
-                           <input type="text" name="reserve" id="reserve" placeholder="예약 가능여부" style="display:inline" readonly>
-                           <input type="button" name="reserveOKBtn" id="reserveOKBtn" value="여부 클릭">
-                           <input type="hidden" name="res_hid" id="res_hid" value="">
-                        </div>
-                        </fieldset>
-                     
-<!--                      </form> -->
-                  </div>
-               </div>      
-               <h3 class="stitle01" style="margin-left: 100px; font-family:'jua'; font-size:25px;">주차예약 이용안내</h3>
-               <div class="scroll_box" style="margin-left: 100px">
-                  [예약 기본정보]<br> (예약 기간) 최소 2시간부터 최장 1개월까지 예약이 가능합니다.<br>
-                  (예약 대기) 예약신청 일자 중 예약이 불가한 일정이 있을 경우 예약대기가 가능하며, 예약 가능 시 자동 예약 후
-                  예약확정 안내가 휴대폰 문자 및 이메일로 통보됩니다.<br> (예약 안내) 예약 시 예약일정 및 예약정보를
-                  포함한 안내사항은 휴대폰 문자 및 이메일로 통보됩니다.<br> (예약 변경) 입차 후에도 예약출차시간 변경이
-                  가능하며, 예약 변경은 최대 2회 가능합니다.<br> (예약 취소) 예약 입차시간 이후 2시간까지 예약 취소가
-                  가능하며, 이에 따른 페널티 부과는 없습니다.<br> (페널티) 최근 1년간 예약부도 2회 이상 시 예약
-                  출차일로부터 3개월간 주차 예약 서비스의 이용이 불가합니다.<br> (예약문의) 예약관련 문의는
-                  1661-2626 또는 051-974-3718로 가능합니다.<br> <br> [예약 입출차]<br>
-                  (입차 시간) 예약 입차 시간 2시간 전부터 입차 가능합니다.<br> (지연 입차) 예약 입차 시간 이후
-                  2시간까지 지연입차가 가능하며, 출차 시 실제 입차 시간을 기준으로 주차요금이 부과됩니다.<br> (예약부도)
-                  예약 입차 시간 이후 2시간 내 미입차시, 예약은 자동 취소되며 예약부도(No-Show) 처리됩니다.<br>
-                  <br> [예약주차장 이용]<br> (주차장 위치) 예약주차장은 P2 국제선 주차빌딩 3,4층입니다.<br>
+							<fieldset class="section is-active">
+
+								<h3
+									style="color: #000000; font-family: 'jua'; font-size: 30px; margin-bottom: 50px">
+									예약정보입력
+									<p>
+										(주차요금은 <span style="color: #a70737;">10분</span>당 <span
+											style="color: #a70737;">1000원</span>입니다)
+									</p>
+								</h3>
+								<div class="sel sel--black-panther">
+									<select name="select-profession" id="select-profession">
+										<option value="">주차장선택</option>
+										<c:forEach var="parking" items="${list}">
+											<option id="park_id" value="${parking.park_id}"
+												value2="${parking.park_name}">${parking.park_id},
+												${parking.park_name}, ${parking.park_type},
+												${parking.detailAddr}, ${parking.park_public}</option>
+											<br>
+										</c:forEach>
+									</select>
+								</div>
+								<br> <input type="hidden" name="parkReserve"
+									id="parkReserve" value=""> <input type="hidden"
+									id="parking_id_selected" name="parking_id_selected" value="">
+								<input type="hidden" id="parking_name_selected"
+									name="parking_name_selected" value="">
+								<div class="frow">
+									<label class="label"> <span class="star">*</span> 예약
+										입차일시
+									</label> <input type="text" id="start_time" name="start_time"
+										class="timepicker" placeholder="입차시간을 선택하세요">
+								</div>
+								<div class="frow">
+									<label class="label"> <span class="star">*</span> 예약
+										출차일시
+									</label> <input type="text" id="end_time" name="end_time"
+										class="timepicker" placeholder="출차시간을 선택하세요">
+								</div>
+								<div class="frow">
+									<label class="label"> <span class="star">*</span> 차 번호
+									</label> <input type="text" id="car_num" name="car_num"
+										placeholder="차 번호를 입력하세요">
+								</div>
+								<div class="frow">
+									<label class="label"> <span class="star">*</span>예약가능여부
+									</label> <input type="text" name="reserve" id="reserve"
+										placeholder="예약 가능여부" style="display: inline" readonly>
+									<input type="button" name="reserveOKBtn" id="reserveOKBtn"
+										value="여부 클릭"> <input type="hidden" name="res_hid"
+										id="res_hid" value="">
+								</div>
+							</fieldset>
+
+							<!--                      </form> -->
+						</div>
+					</div>
+					<h3 class="stitle01"
+						style="margin-left: 100px; font-family: 'jua'; font-size: 25px;">주차예약
+						이용안내</h3>
+					<div class="scroll_box" style="margin-left: 100px">
+						[예약 기본정보]<br> (예약 기간) 최소 2시간부터 최장 1개월까지 예약이 가능합니다.<br>
+						(예약 대기) 예약신청 일자 중 예약이 불가한 일정이 있을 경우 예약대기가 가능하며, 예약 가능 시 자동 예약 후
+						예약확정 안내가 휴대폰 문자 및 이메일로 통보됩니다.<br> (예약 안내) 예약 시 예약일정 및 예약정보를
+						포함한 안내사항은 휴대폰 문자 및 이메일로 통보됩니다.<br> (예약 변경) 입차 후에도 예약출차시간 변경이
+						가능하며, 예약 변경은 최대 2회 가능합니다.<br> (예약 취소) 예약 입차시간 이후 2시간까지 예약 취소가
+						가능하며, 이에 따른 페널티 부과는 없습니다.<br> (페널티) 최근 1년간 예약부도 2회 이상 시 예약
+						출차일로부터 3개월간 주차 예약 서비스의 이용이 불가합니다.<br> (예약문의) 예약관련 문의는
+						1661-2626 또는 051-974-3718로 가능합니다.<br> <br> [예약 입출차]<br>
+						(입차 시간) 예약 입차 시간 2시간 전부터 입차 가능합니다.<br> (지연 입차) 예약 입차 시간 이후
+						2시간까지 지연입차가 가능하며, 출차 시 실제 입차 시간을 기준으로 주차요금이 부과됩니다.<br> (예약부도)
+						예약 입차 시간 이후 2시간 내 미입차시, 예약은 자동 취소되며 예약부도(No-Show) 처리됩니다.<br>
+						<br> [예약주차장 이용]<br> (주차장 위치) 예약주차장은 P2 국제선 주차빌딩 3,4층입니다.<br>
 
 
 
 
 
 
-                  (주차요금) 주차요금은 예약 입출차시간이 아닌 실제 입출차 시간을 기준으로 부과됩니다.<br> (할인적용)
-                  저공해차량, 장애인, 국가유공상이자, 다자녀가정, 경차 할인은 출차(유인, 무인) 정산 시 적용(자세한 할인내용은
-                  주차장 운영관리 예규 참조)<br> (이용 불가 차량) 미니버스, 화물차 등 대형차량 및 2.3m 이상의
-                  차량은 입차가 불가능함에 따라 예약이 제한됩니다.<br> (입차방법) 예약 후 P2 국제선 주차빌딩 3층
-                  예약존(Zone)입구에서 차량번호 확인 후 입차<br> (출차방법) 예약존(Zone) 출구를 지나 무인정산기
-                  또는 출구 정산소를 이용하여 요금정산 후 출차
-               </div>
-               <div class="agree_chk"
-                  style="margin-left: 100px; margin-top: 15px;">
-                  <input type="checkbox" id="agree1" name="agree1" value="Y"
-                     aria-required="true"> <label for="agree1" style="font-family:'jua'; font-size:18px;">주차예약
-                     이용안내 모든 내용을 읽고 동의합니다.</label>
-               </div>
-               <div style="margin-bottom: 10px">
-                  <br>
-               </div>
-               <h3 class="stitle01" style="margin-left: 100px; font-family:'jua';" >
-                  개인정보처리방침
-                  <button id="btnPrivacy" class="btn" onclick="#">개인정보처리방침</button>
-               </h3>
-               <div class="agree_chk" style="margin-left: 100px">
-                  <input type="checkbox" id="agree2" name="agree2" value="Y"
-                     aria-required="true"> <label for="agree2" style="font-family:'jua'; font-size:18px;">개인정보처리방침
-                     모든 내용을 읽고 동의합니다.</label>
-                  <div class="btn_area">
-                   <input type="submit" id="btnNext" class="btn wine" value="예약하기"/>
-               </div>
-            </div>
-           </form>
-         </div>
-      </div>
+						(주차요금) 주차요금은 예약 입출차시간이 아닌 실제 입출차 시간을 기준으로 부과됩니다.<br> (할인적용)
+						저공해차량, 장애인, 국가유공상이자, 다자녀가정, 경차 할인은 출차(유인, 무인) 정산 시 적용(자세한 할인내용은
+						주차장 운영관리 예규 참조)<br> (이용 불가 차량) 미니버스, 화물차 등 대형차량 및 2.3m 이상의
+						차량은 입차가 불가능함에 따라 예약이 제한됩니다.<br> (입차방법) 예약 후 P2 국제선 주차빌딩 3층
+						예약존(Zone)입구에서 차량번호 확인 후 입차<br> (출차방법) 예약존(Zone) 출구를 지나 무인정산기
+						또는 출구 정산소를 이용하여 요금정산 후 출차
+					</div>
+					<div class="agree_chk"
+						style="margin-left: 100px; margin-top: 15px;">
+						<input type="checkbox" id="agree1" name="agree1" value="Y"
+							aria-required="true"> <label for="agree1"
+							style="font-family: 'jua'; font-size: 18px;">주차예약 이용안내 모든
+							내용을 읽고 동의합니다.</label>
+					</div>
+					<div style="margin-bottom: 10px">
+						<br>
+					</div>
+					<h3 class="stitle01"
+						style="margin-left: 100px; font-family: 'jua';">
+						개인정보처리방침
+						<button id="btnPrivacy" class="btn" onclick="#">개인정보처리방침</button>
+					</h3>
+					<div class="agree_chk" style="margin-left: 100px">
+						<input type="checkbox" id="agree2" name="agree2" value="Y"
+							aria-required="true"> <label for="agree2"
+							style="font-family: 'jua'; font-size: 18px;">개인정보처리방침 모든
+							내용을 읽고 동의합니다.</label>
+						<div class="btn_area">
+							<input type="submit" id="btnNext" class="btn wine" value="예약하기" />
+						</div>
+					</div>
+			</form>
+		</div>
+	</div>
 
-      <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
-   
-<script>
+	<script
+		src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+
+	<script>
    
 $(document).ready(function() {	
 	
@@ -170,7 +200,7 @@ $(document).ready(function() {
 	});
 	
 	$('#reserveOKBtn').click(function() {   
-// 	      if ($('#parking_id_selected').val()!='' && $('#start_time').val()!='' && $('#end_time').val()!='') {
+	      if ($('#parking_id_selected').val()!='' && $('#start_time').val()!='' && $('#end_time').val()!='') {
 	          $.ajax({
 	               url:'../confirmParkingList.do',
 	               type:'post',
@@ -179,6 +209,7 @@ $(document).ready(function() {
 	               cache:false,
 	               timeout:30000,
 	               success:function(data){
+	            	   $('#res_hid').val("버튼눌렀음");
 	                  if(data.result == 'Available'){
 	                     $('#reserve').css('color','blue').val('예약가능 여부 결과 | 예약가능');
 	                  }else if(data.result == 'NotAvailable'){
@@ -196,7 +227,7 @@ $(document).ready(function() {
 });
 </script>
 
-<script>
+	<script>
 $('#form_id').submit(function(){
     if($(agree1).is(":checked")==false){
        alert("이용 약관 이용에 대한 안내 동의해주세요 ") 
@@ -218,7 +249,7 @@ $('#form_id').submit(function(){
 
 </script>
 
-<script>
+	<script>
 
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = {
@@ -349,7 +380,8 @@ for(let item of parking_position_Map){
 		            cache:false,
 		            timeout:30000,
 		            success:function(obj){
-		      txt =   obj.park_name + ",   " +
+		      txt =   obj.park_id + ",   " +
+		    	      obj.park_name + ",   " +
         			  obj.park_type + ",   " +
         			  obj.detailAddr + ",   " +
         			  obj.park_public;
