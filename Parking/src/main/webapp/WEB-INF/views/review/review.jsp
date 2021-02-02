@@ -149,6 +149,13 @@ html, body {
   background: #2962ff;
   color: #fff;
 }
+.reviewtitle {
+   display: inline-block;
+   margin: 30px 0 0 10px;
+   color: #000000;
+   font-family: "jua";
+   font-size: 50px;
+}
 </style>
 </head>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
@@ -160,7 +167,8 @@ html, body {
   <!-- CSS only -->
   <section class="input-content">
 <div class="page_reviewList">
-<a class="btn btn-primary" href="${pageContext.request.contextPath}/review/reviewInsert.do">리뷰쓰기</a>
+<h1 class="reviewtitle">주차장리뷰</h1><br>
+<a class="btn btn-primary" href="${pageContext.request.contextPath}/review/reviewInsert.do" style="float:right;">리뷰쓰기</a>
 <div class="review">
 <div id="output">
 <!-- ajax 영역 -->
