@@ -11,7 +11,10 @@ constraint review_num_pk primary key (review_num),
 constraint park_id_review_fk foreign key (park_id) references parking (park_id),
 constraint mem_num_review_fk foreign key (mem_num) references member (mem_num)
 );
-
+update reviewBoard set img='1.jpg' where review_num = 3;
+update reviewBoard set img='2.jpg' where review_num = 4;
+update reviewBoard set img='3.jpg' where review_num = 5;
+update reviewBoard set img='4.jpg' where review_num = 6;
 
 create sequence review_seq nocache nocycle;
 drop sequence review_seq;

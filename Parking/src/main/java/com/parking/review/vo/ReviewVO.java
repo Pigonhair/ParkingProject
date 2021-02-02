@@ -8,14 +8,17 @@ public class ReviewVO {
 	private String review_title;
 	//리뷰 내용
 	private String review_content;
+	//리뷰 쓴 날짜
+	private String review_date;
 	//회원 번호
 	private int mem_num;
 	//주차장 식별번호
 	private int park_id;
 	//주차장 이름
 	private String park_name;
-	//리뷰 쓴 날짜
-	private String review_date;
+	//주차장 이름
+	private String img;
+
 	
 	public int getReview_num() {
 		return review_num;
@@ -59,15 +62,17 @@ public class ReviewVO {
 	public void setPark_name(String park_name) {
 		this.park_name = park_name;
 	}
+	public String getImg() {
+		return img;
+	}
+	public void setImg(String img) {
+		this.img = img;
+	}
 	@Override
 	public String toString() {
 		return "ReviewVO [review_num=" + review_num + ", review_title=" + review_title + ", review_content="
-				+ review_content + ", mem_num=" + mem_num + ", park_id=" + park_id + ", park_name=" + park_name
-				+ ", review_date=" + review_date + "]";
+				+ review_content + ", review_date=" + review_date + ", mem_num=" + mem_num + ", park_id=" + park_id
+				+ ", park_name=" + park_name + ", img=" + img + "]";
 	}
-	
-	
-	
-	
 	
 }

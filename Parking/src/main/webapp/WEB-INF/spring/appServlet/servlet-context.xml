@@ -24,6 +24,9 @@
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
+
+	<!-- IMAGE VIEW 서버컴퓨터의 c:/spring/img/파일안에 그림넣어놈-->
+	<resources mapping="/images/**" location="file:///C:/spring/img/" />
 	
 	<context:component-scan base-package="com.parking.main.controller" />
 	<context:component-scan base-package="com.parking.member.controller" />

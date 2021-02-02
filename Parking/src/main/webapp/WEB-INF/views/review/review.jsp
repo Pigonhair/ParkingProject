@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -226,9 +227,11 @@ $(document).ready(function(){
 						output = '<h1 class="my-4"></h1>';
 						output += '<div class="row">';
 						output += '<div class="col-md-7">';
-						output += '<a href="#">';
-						output += '<img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/700x300" alt="">';
-						output += '</a>';
+						/* output += '<a href="#">'; */
+/* 						output += '<img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/700x300" alt="">'; */
+/* 						output += '<img class="img-fluid rounded mb-3 mb-md-0" src="<spring:url value = '/images/abc.jpg'/> ">'; */
+						output += '<img class="img-fluid rounded mb-3 mb-md-0" src="<spring:url value = '/images/'"'+item.img+'"'/> ">';
+						/* output += '</a>'; */
 						output += '</div>';
 						output += '<div class="col-md-5">';
 						output += '<h1>'+item.park_name+'</h1>';

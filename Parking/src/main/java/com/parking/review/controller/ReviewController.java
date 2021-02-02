@@ -1,11 +1,15 @@
 package com.parking.review.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -119,6 +123,7 @@ public class ReviewController {
 		// 모든 그룹 list에 담기
 		list = reviewService.allReviewList(map);
 		System.out.println("list에 담긴 글 목록 : " + list);
+		System.out.println("list에 담긴 이미지이름: " + list.get(0).getImg());
 
 		Map<String, Object> hashMap = new HashMap<String, Object>();
 		hashMap.put("list", list);
@@ -211,5 +216,6 @@ public class ReviewController {
 		mav.addObject("list", list);
 		return mav;
 	}
+	
 
 }
