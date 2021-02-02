@@ -26,6 +26,8 @@ public interface MemberService {
 
 	public MemberVO CheckMemberIdPwd(MemberVO vo);
 
-	public MemberVO deleteMember(MemberVO mem_id);
 
+	public void deletemember(int mem_num);
+
+	public int getMemnumBytoken(String mem_token);
 }

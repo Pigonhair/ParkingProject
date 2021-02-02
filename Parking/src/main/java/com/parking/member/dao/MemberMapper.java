@@ -75,11 +75,18 @@ public interface MemberMapper {
 
 	@Select("SELECT * FROM MEMBER WHERE MEM_ID = #{mem_id} AND MEM_PWD = #{mem_pwd} ")
 	public MemberVO CheckMemberIdPwd(MemberVO vo);
-	
-	/************************ 회원 탈퇴 *	************************/
-	@Delete("DELETE MEMBER WHERE MEM_ID = #{mem_id} AND MEM_PWD = #{mem_pwd}")
-	public MemberVO memberDelete(MemberVO vo);
-	/************************ 회원 탈퇴 ************************/
+
+	/************************ member삭제 ************************/
+	@Delete("DELETE FROM MEMBER_CAR WHERE MEM_NUM= #{mem_num}")
+	public void deletemember_car(int mem_num);
+	@Delete("DELETE FROM MEMBER_DETAIL WHERE MEM_NUM= #{mem_num}")
+	public void deletemember_detail(int mem_num);
+	@Delete("DELETE FROM MEMBER WHERE MEM_NUM= #{mem_num}")
+	public void deletemember(int mem_num);
+	/************************ member삭제 ************************/
+
+	@Select("SELECT * FROM MEMBER WHERE MEM_TOKEN = #{mem_token}")
+	public int getMemnumBytoken(String mem_token);
 
 
 }

@@ -72,12 +72,16 @@ public class MemberServiceImpl implements MemberService{
 	
 	//회원 탈퇴
 	@Override
-	public MemberVO deleteMember(MemberVO vo) {
-		MemberVO memberVO = memberMapper.memberDelete(vo);
-		return memberVO;
+	public void deletemember(int mem_num) {
+		memberMapper.deletemember_car(mem_num);
+		memberMapper.deletemember_detail(mem_num);
+		memberMapper.deletemember(mem_num);
 	}
 	
-	
-	//마이페이지
+	@Override
+	public int getMemnumBytoken(String mem_token) {
+		int mem_num = memberMapper.getMemnumBytoken(mem_token);
+		return mem_num;
+	}
 	
 }

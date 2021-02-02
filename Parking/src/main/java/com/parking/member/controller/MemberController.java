@@ -287,25 +287,14 @@ public class MemberController {
 	//회원 탈퇴
 	@RequestMapping(value = "/member/memberdelete.do")
 	public String memberDelete(HttpServletRequest request, Model model, HttpSession session) {
-		try {
-			request.setCharacterEncoding("UTF-8");
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 		String mem_token = (String) session.getAttribute("mem_token");
-		// 토큰으로 memberVO가져오기
-		MemberVO memberVO = memberService.getMemberbytoken(mem_token);
-		
-		MemberVO vo = new MemberVO();
-		String mem_pwd = request.getParameter("mem_pwd");
-		System.out.println("controller : mem_pwd : " + mem_pwd);
-		vo.setMem_pwd(mem_pwd);
-		
-		memberService.deleteMember(vo);
+		int mem_num = memberService.getMemnumBytoken(mem_token);
+		memberService.deletemember(mem_num);
+		session.removeAttribute("mem_token");
 		System.out.println("탈퇴 완료");
 		
-		return "main/main";
+		return "redirect:/project/main.do";
 	}
 	
 	@RequestMapping(value = "/member/signUp.do")
@@ -335,5 +324,16 @@ public class MemberController {
 		mav.setViewName("/member/mypage");
 
 		return mav;
+	}
+	
+	//회원삭제
+	@RequestMapping(value = "/member/DeletememberByAdmin.do")
+	public String deletememberByAdmin(HttpServletRequest request, Model model, HttpSession session) {
+		String mem_num = request.getParameter("btn_member_remove");
+		System.out.println("mem_id : " + mem_num);
+
+		memberService.deletemember(Integer.parseInt(mem_num));
+		session.removeAttribute("mem_token");
+		return "redirect:/member/memberdetail.do";
 	}
 }
