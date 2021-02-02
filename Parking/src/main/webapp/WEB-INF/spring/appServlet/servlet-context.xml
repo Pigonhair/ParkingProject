@@ -48,4 +48,6 @@
 		base-package="com.parking.pay.controller" />
 	<context:component-scan
 		base-package="com.parking.review.controller" />
+		<context:component-scan
+		base-package="com.parking.parking.controller" />
 </beans:beans>

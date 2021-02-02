@@ -44,7 +44,7 @@ public class ParkingController {
 	    System.out.println("mem_token in memberdetail123 : " + mem_token);
 	    MemberVO memberVO = memberService.getMemberbytoken(mem_token);
 	    ModelAndView mav = new ModelAndView();
-		mav.setViewName("/member/mypage");
+		mav.setViewName("/parking/parking");
 		mav.addObject(memberVO);
 		return mav;
 	}
