@@ -1,6 +1,7 @@
 package com.parking.member.service;
 
 import java.security.MessageDigest;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -82,6 +83,13 @@ public class MemberServiceImpl implements MemberService{
 	public int getMemnumBytoken(String mem_token) {
 		int mem_num = memberMapper.getMemnumBytoken(mem_token);
 		return mem_num;
+	}
+	
+	//전체회원리스트가져오기
+	@Override
+	public List<MemberVO> getMemberList() {
+		List<MemberVO> memberlist = memberMapper.getMemberList();
+		return memberlist;
 	}
 	
 }

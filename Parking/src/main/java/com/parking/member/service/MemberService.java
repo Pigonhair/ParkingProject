@@ -1,5 +1,6 @@
 package com.parking.member.service;
 
+import java.util.List;
 import java.util.Map;
 
 import com.parking.member.vo.MemberVO;
@@ -30,4 +31,7 @@ public interface MemberService {
 	public void deletemember(int mem_num);
 
 	public int getMemnumBytoken(String mem_token);
+
+	//전체회원리스트가져오기
+	public List<MemberVO> getMemberList();
 }

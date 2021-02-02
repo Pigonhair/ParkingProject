@@ -1,5 +1,7 @@
 package com.parking.member.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
@@ -85,8 +87,25 @@ public interface MemberMapper {
 	public void deletemember(int mem_num);
 	/************************ member삭제 ************************/
 
-	@Select("SELECT * FROM MEMBER WHERE MEM_TOKEN = #{mem_token}")
+	@Select("SELECT MEM_NUM FROM MEMBER WHERE MEM_TOKEN = #{mem_token}")
 	public int getMemnumBytoken(String mem_token);
 
 
+	/************************ memberList ************************/
+	@Select("select a.mem_num\r\n" + 
+			"	,a.mem_id\r\n" + 
+			"	,a.mem_auth\r\n" + 
+			"	,a.mem_token\r\n" + 
+			"	,b.mem_name\r\n" + 
+			"	,b.mem_phone\r\n" + 
+			"	,b.mem_dis\r\n" + 
+			"	,c.car_id\r\n" + 
+			"	,c.car_model\r\n" + 
+			"	,c.category\r\n" + 
+			"	from member a\r\n" + 
+			"	inner join member_detail b\r\n" + 
+			"		on a.mem_num = b.mem_num\r\n" + 
+			"	inner join member_car c\r\n" + 
+			"		on b.mem_num = c.mem_num\r\n")
+	public List<MemberVO> getMemberList();
 }
