@@ -78,7 +78,9 @@ public interface MemberMapper {
 	@Select("SELECT * FROM MEMBER WHERE MEM_ID = #{mem_id} AND MEM_PWD = #{mem_pwd} ")
 	public MemberVO CheckMemberIdPwd(MemberVO vo);
 
-	/************************ member삭제 ************************/
+	/************************ 회원데이터(member, pakring)삭제 ************************/
+	@Delete("DELETE FROM PARKING WHERE MEM_NUM= #{mem_num}")
+	public void deleteparking(int mem_num);
 	@Delete("DELETE FROM MEMBER_CAR WHERE MEM_NUM= #{mem_num}")
 	public void deletemember_car(int mem_num);
 	@Delete("DELETE FROM MEMBER_DETAIL WHERE MEM_NUM= #{mem_num}")

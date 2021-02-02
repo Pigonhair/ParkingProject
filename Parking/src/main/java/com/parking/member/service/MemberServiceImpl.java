@@ -71,9 +71,10 @@ public class MemberServiceImpl implements MemberService{
 		return memberVO;
 	}
 	
-	//회원 탈퇴
+	//회원데이터삭제 및 탈퇴 
 	@Override
 	public void deletemember(int mem_num) {
+		memberMapper.deleteparking(mem_num);
 		memberMapper.deletemember_car(mem_num);
 		memberMapper.deletemember_detail(mem_num);
 		memberMapper.deletemember(mem_num);

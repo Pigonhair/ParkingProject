@@ -26,7 +26,6 @@ create table parking_detail(               -- 주차장 상세
   park_id number not null,                   -- 주차장번호
   park_status number,                      -- 주차장사용가능여부   
   park_avgPoint number,                      -- 주차장평균평점
-  cur_parking number,                         -- 현재 주차중인 차량 수
   park_rate number,                        -- 기본 주차요금
   park_time_rate number,                  -- 기본 주차시간   
   add_park_rate number,                     -- 추가단위 요금
@@ -36,3 +35,6 @@ create table parking_detail(               -- 주차장 상세
 SELECT* FROM PARKING_DETAIL;
 DROP TABLE PARKING_DETAIL;
 
+INSERT INTO parking_detail VALUES (7,0,5,5,0300,300,300);
+
+DELETE parking_detail
