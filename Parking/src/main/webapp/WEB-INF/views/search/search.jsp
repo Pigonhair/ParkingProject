@@ -74,18 +74,31 @@ color:#a70737;">10분</span>당 <span style="color:#a70737;">1000원</span>입�
                      </select>
                      </div><br>
                            <input type="hidden" name="parkReserve" id="parkReserve" value="">
-                           <input type="hidden" id="parking_id_selected" name="parking_id_selected" value="">
-                           <input type="hidden" id="parking_name_selected" name="parking_name_selected" value="">
-                           <span>입차시간</span><input type="text" id="start_time" name="start_time" class="timepicker" placeholder="입차시간을 선택하세요">
+                           <input type="hidden" id="parking_id_selected" name="parking_id_selected" value="" >
+                           <input type="hidden" id="parking_name_selected" name="parking_name_selected" value="" >
+                            <div class="frow">
+                           <label class="label"> <span class="star">*</span> 예약 입차일시</label> 
+                           <input type="text" id="start_time" name="start_time" class="timepicker" placeholder="입차시간을 선택하세요">
+                        </div>
+                        <div class="frow">
+                           <label class="label"> <span class="star">*</span> 예약 출차일시</label>
                            <input type="text" id="end_time" name="end_time" class="timepicker" placeholder="출차시간을 선택하세요">
-                           <input type="text" id="car_num" name="car_num"  placeholder="차 번호를 입력하세요">
-                           <input type="text" name="reserve" id="reserve" placeholder="예약 가능여부" readonly>
+                        </div>
+                        <div class="frow">
+                           <label class="label"> <span class="star">*</span> 차 번호</label> 
+                           <input type="text" id="car_num" name="car_num" placeholder="차 번호를 입력하세요">
+                        </div>
+                        <div class="frow">
+                           <label class="label"> <span class="star">*</span>예약가능여부</label> 
+                           <input type="text" name="reserve" id="reserve" placeholder="예약 가능여부" style="display:inline" readonly>
+                           <input type="button" name="reserveOKBtn" id="reserveOKBtn" value="여부 클릭">
+                           <input type="hidden" name="res_hid" id="res_hid" value="">
+                        </div>
                         </fieldset>
                      
 <!--                      </form> -->
                   </div>
-               </div>
-               <input type="button" name="reservOKBtn" id="reservOKBtn" value="예약가능여부">
+               </div>      
                <h3 class="stitle01" style="margin-left: 100px; font-family:'jua'; font-size:25px;">주차예약 이용안내</h3>
                <div class="scroll_box" style="margin-left: 100px">
                   [예약 기본정보]<br> (예약 기간) 최소 2시간부터 최장 1개월까지 예약이 가능합니다.<br>
@@ -156,40 +169,53 @@ $(document).ready(function() {
 	    scrollbar: true
 	});
 	
-	$('#form_id').submit(function(){
-	      alert("버튼 눌림")
-	        if($(agree1).is(":checked")==false){
-	           alert("이용 약관 이용에 대한 안내 동의해주세요 ") 
-	           return false;
-	        }   
-	        if($(agree2).is(":checked")==false){
-	           alert("개인정보처리방침 이용에 대한 안내 동의해주세요")
-	           return false;
-	        } 
-	   });
-	
-	$('#reservOKBtn').click(function() {
-	       $.ajax({
-	            url:'../confirmParkingList.do',
-	            type:'post',
-	            data:{parkID:$('#parking_id_selected').val(), startTime:$('#start_time').val(), endTime:$('#end_time').val()},
-	            dataType:'json',
-	            cache:false,
-	            timeout:30000,
-	            success:function(data){
-	               if(data.result == 'Available'){
-	                  $('#reserve').css('color','blue').val('예약가능 여부 결과 | 예약가능');
-	               }else if(data.result == 'NotAvailable'){
-	                  $('#reserve').css('color','red').val('예약가능 여부 결과 | 예약불가능, 다른 시간을 입력해주세요');
+	$('#reserveOKBtn').click(function() {   
+// 	      if ($('#parking_id_selected').val()!='' && $('#start_time').val()!='' && $('#end_time').val()!='') {
+	          $.ajax({
+	               url:'../confirmParkingList.do',
+	               type:'post',
+	               data:{parkID:$('#parking_id_selected').val(), startTime:$('#start_time').val(), endTime:$('#end_time').val()},
+	               dataType:'json',
+	               cache:false,
+	               timeout:30000,
+	               success:function(data){
+	                  if(data.result == 'Available'){
+	                     $('#reserve').css('color','blue').val('예약가능 여부 결과 | 예약가능');
+	                  }else if(data.result == 'NotAvailable'){
+	                     $('#reserve').css('color','red').val('예약가능 여부 결과 | 예약불가능, 다른 시간을 입력해주세요');
+	                  }
+	               },
+	               error:function(){
+	                  alert('네트워크 오류 발생');
 	               }
-	            },
-	            error:function(){
-	               alert('네트워크 오류 발생');
-	            }
-	         });
+	            });
+	        } else {
+	         alert('주차장, 입차시간, 출차시간을 선택해주세요.');
+	      }
 	   });
-
 });
+</script>
+
+<script>
+$('#form_id').submit(function(){
+    if($(agree1).is(":checked")==false){
+       alert("이용 약관 이용에 대한 안내 동의해주세요 ") 
+       return false;
+    }   
+    if($(agree2).is(":checked")==false){
+       alert("개인정보처리방침 이용에 대한 안내 동의해주세요")
+       return false;
+    }
+    var res =$('#res_hid').val();
+    if(res ==''){
+       alert("예약가능여부를 확인하세요")
+       return false;
+    }else{
+       alert("성공")
+    }
+      
+});
+
 </script>
 
 <script>
