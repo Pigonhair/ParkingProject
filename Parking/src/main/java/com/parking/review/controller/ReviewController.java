@@ -54,6 +54,81 @@ public class ReviewController {
 
 	}
 
+	// 그룹 목록 불러오기
+	@RequestMapping(value="/review/reviewListAjax.do", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> getReviewList(@RequestParam(value = "pageNum", defaultValue = "1") int currentPage,
+			HttpSession session, Model model) {
+		System.out.println("목록불러오기 ajax 진입");
+		List<ReviewVO> list = null;
+
+		// ReviewVO review = (ReviewVO)session.getAttribute("user");
+		// int sessionMem_num = review.getMem_num();
+		int sessionMem_num = 1;
+		int count = 0;
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("mem_num", sessionMem_num);
+
+		count = reviewService.selectCount(map);
+
+		System.out.println("총 글의 갯수 : " + count);
+
+		// paging 처리
+		PagingUtil page = new PagingUtil(currentPage, count, rowCount, 10, "review.do");
+		map.put("start", page.getStartCount());
+		map.put("end", page.getEndCount());
+
+		// 모든 그룹 list에 담기
+		list = reviewService.allReviewList(map);
+		System.out.println("list에 담긴 글 목록 : " + list);
+
+		Map<String, Object> hashMap = new HashMap<String, Object>();
+		hashMap.put("list", list);
+		hashMap.put("count", count);
+		hashMap.put("rowCount", rowCount);
+
+		return hashMap;
+
+	}
+	
+	@RequestMapping(value="/reviewListAjax.do", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> getReviewList2(@RequestParam(value = "pageNum", defaultValue = "1") int currentPage,
+			HttpSession session, Model model) {
+		System.out.println("목록불러오기 ajax 진입");
+		List<ReviewVO> list = null;
+
+		// ReviewVO review = (ReviewVO)session.getAttribute("user");
+		// int sessionMem_num = review.getMem_num();
+		int sessionMem_num = 1;
+		int count = 0;
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("mem_num", sessionMem_num);
+
+		count = reviewService.selectCount(map);
+
+		System.out.println("총 글의 갯수 : " + count);
+
+		// paging 처리
+		PagingUtil page = new PagingUtil(currentPage, count, rowCount, 10, "review.do");
+		map.put("start", page.getStartCount());
+		map.put("end", page.getEndCount());
+
+		// 모든 그룹 list에 담기
+		list = reviewService.allReviewList(map);
+		System.out.println("list에 담긴 글 목록 : " + list);
+
+		Map<String, Object> hashMap = new HashMap<String, Object>();
+		hashMap.put("list", list);
+		hashMap.put("count", count);
+		hashMap.put("rowCount", rowCount);
+
+		return hashMap;
+
+	}
+
 	// 리뷰 리스트 페이지 호출
 	@RequestMapping("/review.do")
 	public String review() {

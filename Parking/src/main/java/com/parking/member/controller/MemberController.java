@@ -199,17 +199,25 @@ public class MemberController {
 	// 내정보 보기
 	@RequestMapping(value = "/member/memberdetail.do")
 	public ModelAndView memberDetail(HttpServletRequest request, Model model, HttpSession session) {
-
+		ModelAndView mav = new ModelAndView();
+		
 		String mem_token = (String) session.getAttribute("mem_token");
 		System.out.println("mem_token in memberdetail123 : " + mem_token);
 		
 		
 		// 토큰으로 memberVO가져오기
 		MemberVO memberVO = memberService.getMemberbytoken(mem_token);
-
-		ModelAndView mav = new ModelAndView();
-		mav.addObject(memberVO);
-		mav.setViewName("/member/memberdetail");
+		
+		System.out.println("관리자(0) 사용자(1) 사장님(2) : " +memberVO.getMem_auth());
+		if(memberVO.getMem_auth()==0) {
+			//관리자일경우
+			mav.addObject(memberVO);
+			mav.setViewName("/member/memberadmin");
+		} else {
+			//일반회원
+			mav.addObject(memberVO);
+			mav.setViewName("/member/memberdetail");
+		}
 
 		return mav;
 	}

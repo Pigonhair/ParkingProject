@@ -24,11 +24,10 @@ public class MainController {
 	@Resource
 	private MemberService memberService;
 	
-//	private static final Logger logger = LoggerFactory.getLogger(MainController.class);
 	
 	@RequestMapping("/project/main.do")
 	public String getMain(HttpServletRequest request,Locale locale, Model model,HttpSession session) {
-//		logger.info("Welcome home! The client locale is {}.", locale);
+
 		 String mem_token = (String)session.getAttribute("mem_token");
 		 System.out.println("Maincontroller.session.mem_token  " + mem_token);
 		 

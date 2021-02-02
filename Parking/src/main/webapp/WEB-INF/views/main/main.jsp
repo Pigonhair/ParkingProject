@@ -13,7 +13,7 @@
 <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a4fc31dd472c61220b10d05b1cec480c&libraries=services"></script>
 <script src="${path}/resources/js/LoginPopup.js"></script>
 <script>
-function gohome(){
+function loginOK(){
 	location.href=ctx+"/proejct/main.do";
 }
 
@@ -23,6 +23,8 @@ $(document).ready(function() {
 	
 	//로그인버튼
     $("#loginBtn").click(function(){
+	     $('input[name='+mem_id+']').val('');
+		 $('input[name='+meme_pwd+']').val('');
    	 	 var mem_id = $('input[name='+mem_id+']').val();
 		 var meme_pwd = $('input[name='+meme_pwd+']').val();
 		 
@@ -44,7 +46,7 @@ $(document).ready(function() {
 		            success:function(data){
 		               if(data.result == 'ok'){
 		                  //로그인성공
-		            	   gohome();
+		            	   loginOK();
 		               }else if(data.result == 'fail'){
 		                  //로그인실패
 		                  alert("아이디 또는 비밀번호가 틀렸습니다.");
