@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.parking.review.vo.ReviewVO;
+import com.parking.search.vo.SearchVO;
 
 public interface ReviewMapper {
 
@@ -16,8 +17,8 @@ public interface ReviewMapper {
 	public int selectReview_num();
 	
 	//리뷰 쓰기
-	@Insert("INSERT INTO reviewBoard (review_num, review_title, review_date, review_content, mem_num, park_id) "
-			+ "VALUES(#{review_num},#{review_title},SYSDATE,#{review_content},1,#{park_id})")
+	@Insert("INSERT INTO reviewBoard (review_num, review_title, review_date, review_content, mem_num, park_id,park_name) "
+			+ "VALUES(#{review_num},#{review_title},SYSDATE,#{review_content},#{mem_num},#{park_id},#{park_name})")
 	public void insertReview(ReviewVO reviewvo);
 	
 	//리뷰 수정
@@ -34,6 +35,10 @@ public interface ReviewMapper {
 	public List<ReviewVO> allReviewList(Map<String,Object>map);
 	public int selectCount(Map<String,Object>map);
 	
+	
+	//
+	@Select("SELECT park_name FROM parking WHERE park_id=#{park_id}")
+	public SearchVO findParkName(String park_name);
 	
 	
 	//리뷰 순서대로 따오기

@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ include file = "../main/header.jsp" %>
+
 <!-- JS, Popper.js, and jQuery -->
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
@@ -62,6 +62,8 @@ $(document).ready(function(){
 						output += '</a>';
 						output += '</div>';
 						output += '<div class="col-md-5">';
+						output += '<h1>'+item.park_name+'</h1>';
+						/* output += '<h2>'+{parking.park_name}+'<h2>'; */
 						output += '<h3>'+item.review_title+'</h3>'; 
 						
 						
@@ -114,7 +116,7 @@ $(document).ready(function(){
 <!-- CSS only -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 <div class="page_reviewList">
-<a class="btn btn-primary" href="${pageContext.request.contextPath}/project/reviewInsert.do">리뷰쓰기</a>
+<a class="btn btn-primary" href="${pageContext.request.contextPath}/review/reviewInsert.do">리뷰쓰기</a>
 <div class="review">
 <div id="output">
 <!-- ajax 영역 -->

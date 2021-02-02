@@ -18,5 +18,10 @@ public class ParkingServiceImpl implements ParkingService {
       return n;
       
    }
-
+   
+	@Override
+	public String getParknameByParkid(int park_id) {
+		String park_name = parkingMapper.getParknameByParkid(park_id);
+		return park_name;
+	}
 }

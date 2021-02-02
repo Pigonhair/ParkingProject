@@ -26,4 +26,6 @@ public interface MemberService {
 
 	public MemberVO CheckMemberIdPwd(MemberVO vo);
 
+	public int getMemnumBytoken(String mem_token);
+
 }

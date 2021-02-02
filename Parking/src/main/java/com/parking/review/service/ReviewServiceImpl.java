@@ -38,4 +38,11 @@ public class ReviewServiceImpl implements ReviewService{
 		return reviewmapper.selectCount(map);
 	}
 
+
+	@Override
+	public String findParkName(String park_name) {
+		
+		return reviewmapper.findParkName(park_name).toString();
+	}
+
 }

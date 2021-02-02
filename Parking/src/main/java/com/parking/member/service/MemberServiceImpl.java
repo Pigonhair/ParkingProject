@@ -70,4 +70,9 @@ public class MemberServiceImpl implements MemberService{
 		return memberVO;
 	}
 	
+	@Override
+	public int getMemnumBytoken(String mem_token) {
+		int mem_num =memberMapper.getMemnumBytoken(mem_token);
+		return mem_num;
+	}
 }

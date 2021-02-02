@@ -75,4 +75,7 @@ public interface MemberMapper {
 	@Select("SELECT * FROM MEMBER WHERE MEM_ID = #{mem_id} AND MEM_PWD = #{mem_pwd} ")
 	public MemberVO CheckMemberIdPwd(MemberVO vo);
 
+	@Select("SELECT MEM_NUM FROM MEMBER WHERE MEM_TOKEN = #{mem_token}")
+	public int getMemnumBytoken(String mem_token);
+
 }
