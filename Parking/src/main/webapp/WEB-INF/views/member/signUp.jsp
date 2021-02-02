@@ -161,7 +161,7 @@ html, body {
   
   <section class="input-content">
     <h2>회원가입<span>*은 필수 입력사항입니다.</span></h2>
-    <form  action="${pageContext.request.contextPath}/project/insert.do" method="post">
+    <form  action="${pageContext.request.contextPath}/member/insert.do" method="post">
     <div class="input-content-wrap">
       <dl class="inputbox">
         <dt class="inputbox-title">* 아이디</dt>

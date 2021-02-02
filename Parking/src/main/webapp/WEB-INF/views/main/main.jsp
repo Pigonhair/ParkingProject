@@ -13,9 +13,6 @@
 <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a4fc31dd472c61220b10d05b1cec480c&libraries=services"></script>
 <script src="${path}/resources/js/LoginPopup.js"></script>
 <script>
-function loginOK(){
-	location.href=ctx+"/proejct/main.do";
-}
 
 $(document).ready(function() {	
 	
@@ -46,7 +43,6 @@ $(document).ready(function() {
 		            success:function(data){
 		               if(data.result == 'ok'){
 		            	   $('#logo').get(0).click();
-
 		               }else if(data.result == 'fail'){
 		                  //로그인실패
 		                  alert("아이디 또는 비밀번호가 틀렸습니다.");
@@ -278,7 +274,7 @@ $(document).ready(function() {
                </dl>
                <p class="btn_wrap">
                   <input type="submit" id="btnReserve"  class="btn_reserv" value="찾 기"></input>
-                  <input type="button" id="btnReview" class="btn_review" value="리뷰검색" onClick="location.href='${pageContext.request.contextPath}/project/review.do'"></input>
+                  <input type="button" id="btnReview" class="btn_review" value="리뷰검색" onClick="location.href='${pageContext.request.contextPath}/review.do'"></input>
                </p>
             </div>
          </fieldset>

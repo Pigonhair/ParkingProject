@@ -82,4 +82,12 @@ public class MemberServiceImpl implements MemberService{
 		List<MemberVO> memberlist = memberMapper.getMemberList();
 		return memberlist;
 	}
+	
+	//관리자권한으로 회원데이터지우기	
+	@Override
+	public void deletememberByAdmin(int mem_num) {
+		memberMapper.deletemember_car(mem_num);
+		memberMapper.deletemember_detail(mem_num);
+		memberMapper.deletemember(mem_num);
+	}
 }

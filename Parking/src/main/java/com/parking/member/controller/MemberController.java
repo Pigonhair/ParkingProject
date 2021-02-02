@@ -299,13 +299,13 @@ public class MemberController {
 		return "redirect:/member/memberdetail.do";
 	}
 	
+	//회원삭제
 	@RequestMapping(value = "/member/delete.do")
-	
 	public String memberDelete(HttpServletRequest request, Model model, HttpSession session) {
 		return null;
-		
 	}
 	
+	//회원가입
 	@RequestMapping(value = "/member/signUp.do")
 	public String signUp() {
 		//회원가입 호출
@@ -316,5 +316,15 @@ public class MemberController {
 	public String logOut(HttpServletRequest request, Model model, HttpSession session) {
 		session.removeAttribute("mem_token");
 		return "redirect:/project/main.do";
+	}
+	
+	//회원삭제
+	@RequestMapping(value = "/member/DeletememberByAdmin.do")
+	public String deletememberByAdmin(HttpServletRequest request, Model model, HttpSession session) {
+		String mem_num = request.getParameter("btn_member_remove");
+		System.out.println("mem_id : " + mem_num);
+			
+		memberService.deletememberByAdmin(Integer.parseInt(mem_num));
+		return "redirect:/member/memberdetail.do";
 	}
 }

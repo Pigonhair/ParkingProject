@@ -79,7 +79,8 @@ table.memberlist td { width: 155px; padding: 10px; vertical-align: top; border-b
   
   <section class="input-content">
     <h2>회원관리</h2>
-		<table class="memberlist">
+    <form class="form-memberlist" id="memberlist" name="memberlist" action="${pageContext.request.contextPath}/member/DeletememberByAdmin.do" method="post">
+	<table class="memberlist">
       <thead>
       <tr>
             <th scope="cols">회원번호</th>
@@ -90,7 +91,7 @@ table.memberlist td { width: 155px; padding: 10px; vertical-align: top; border-b
             <th scope="cols">차량번호</th>            
             <th scope="cols">차량모델</th>
             <th scope="cols">차량구분</th>
-            <th scope="cols">삭제</th>
+            <th scope="cols">삭제하기</th>
       </tr>
       </thead>
       <tbody>
@@ -104,11 +105,12 @@ table.memberlist td { width: 155px; padding: 10px; vertical-align: top; border-b
             <td>${member.car_id}</td>
             <td>${member.car_model}</td>
             <td>${member.category}</td>
-            <td><button>삭제</button></td>
+            <td><button type="submit" id="btn_member_remove" name="btn_member_remove" value="${member.mem_num}">삭제</button></td>
 	  </tr>
 	  </c:forEach>
       </tbody>
-</table>
+	</table>
+	</form>
   </section>
 </div>
 <script>
@@ -121,10 +123,10 @@ $(document).ready(function() {
 	   location.href=ctx+"/project/main.do";
    });
 
-	$('#member_modify-form').submit(function(){
-		var choice = window.confirm('수정하시겠습니까?');
+	$('#memberlist').submit(function(){
+		var choice = window.confirm('삭제하시겠습니까?');
 		if(choice){
-			alert('수정완료!');
+			alert('삭제완료!');
 		}else{
 			return false;
 		}

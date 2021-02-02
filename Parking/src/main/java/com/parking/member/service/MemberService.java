@@ -32,4 +32,7 @@ public interface MemberService {
 	//전체회원리스트가져오기
 	public List<MemberVO> getMemberList();
 
+	//관리자권한으로 회원데이터지우기
+	public void deletememberByAdmin(int mem_num);
+
 }
