@@ -50,11 +50,15 @@ public class ReservationController {
 
 		String pakring_Selected = request.getParameter("parking_id_selected");
 		System.out.println("주차장번호 : " + pakring_Selected);
-
+		
 		// park_id 셋팅
 		int park_id = Integer.parseInt(pakring_Selected);
 		vo.setPark_id(park_id);
 		System.out.println("vo에서가져온Park_id값 : " + vo.getPark_id());
+		
+		//park_name 가져오기
+		String park_name = request.getParameter("parking_name_selected");
+		System.out.println("주차장이름 : " + park_name);
 
 		//session에서토큰으로 사용자확인
 		String mem_token = (String)session.getAttribute("mem_token");
@@ -96,6 +100,12 @@ public class ReservationController {
 		System.out.println("**********controller 들어옴******");
 
 		reservationService.inseReser(vo);
+		
+		model.addAttribute("payprice",totalPrice);
+		model.addAttribute("start_time", start_time);
+		model.addAttribute("end_time", end_time);
+		model.addAttribute("park_name", park_name);
+		model.addAttribute("car_num", car_num);
 
 		return "pay/pay";
 	}

@@ -67,7 +67,7 @@ color:#a70737;">10분</span>당 <span style="color:#a70737;">1000원</span>입�
                            <select name="select-profession" id="select-profession">
                            <option value="">주차장선택</option>
                         <c:forEach var="parking" items="${list}">               
-                           <option id="park_id" value="${parking.park_id}">${parking.park_id}
+                           <option id="park_id" value="${parking.park_id}" value2="${parking.park_name}">${parking.park_id}
                               ${parking.park_name} ${parking.park_capacity}
                               ${parking.mem_num} ${parking.park_type} ${parking.detailAddr}
                               ${parking.park_public}</option>                 
@@ -77,6 +77,7 @@ color:#a70737;">10분</span>당 <span style="color:#a70737;">1000원</span>입�
                      </div><br>
                            <input type="hidden" name="parkReserve" id="parkReserve" value="">
                            <input type="hidden" id="parking_id_selected" name="parking_id_selected" value="">
+                           <input type="hidden" id="parking_name_selected" name="parking_name_selected" value="">
                            <span>입차시간</span><input type="text" id="start_time" name="start_time" class="timepicker" placeholder="입차시간을 선택하세요">
                            <input type="text" id="end_time" name="end_time" class="timepicker" placeholder="출차시간을 선택하세요">
                            <input type="text" id="car_num" name="car_num"  placeholder="차 번호를 입력하세요">
@@ -336,6 +337,7 @@ for(let item of parking_position_Map){
 // 	            	  $('#pakring_Selected').val(txt);
 	            	  $("#pakring_Selected").attr("readonly",true);
 	            	  $('#parking_id_selected').val(obj.park_id);
+	            	  $('#parking_name_selected').val(obj.park_name);
 // 	            	  alert(obj.park_id);
 
 		            },
@@ -435,10 +437,12 @@ $('.sel__box__options').click(function() {
   $currentSel.children('.sel__placeholder').text(txt);
   $currentSel.children('select').prop('selectedIndex', index + 1);
   var s = document.getElementById("select-profession");
-  var selectParkID = s.options[s.selectedIndex].value;
-  $('#parking_id_selected').val(selectParkID);
-  
-
+//   var selectParkID = s.options[s.selectedIndex].value;
+//   var selectParkName = s.options[s.selectedIndex].value2;
+  var selectParkID = $("#select-profession > option:selected").attr("value"); //지정 value2 값
+  var selectParkName = $("#select-profession > option:selected").attr("value2"); //지정 value2 값
+  $('#parking_id_selected').val(selectParkID); 
+  $('#parking_name_selected').val(selectParkName);
 });
 </script>
 
