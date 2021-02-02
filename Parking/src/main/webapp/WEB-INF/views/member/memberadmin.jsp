@@ -74,9 +74,8 @@ table.memberlist td { width: 155px; padding: 10px; vertical-align: top; border-b
 <body>
 <div id="wrap" class="input">
   <header class="input-header">
-    <h1>회원관리</h1>
+    <a href="${pageContext.request.contextPath}/project/main.do"><h1>Home</h1></a>
   </header>
-  
   <section class="input-content">
     <h2>회원관리</h2>
     <form class="form-memberlist" id="memberlist" name="memberlist" action="${pageContext.request.contextPath}/member/DeletememberByAdmin.do" method="post">
