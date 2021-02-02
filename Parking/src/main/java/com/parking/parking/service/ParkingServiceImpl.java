@@ -5,6 +5,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.parking.parking.dao.ParkingMapper;
+import com.parking.parking.vo.ParkingVO;
 
 @Service("parkingService")
 public class ParkingServiceImpl implements ParkingService {
@@ -24,4 +25,14 @@ public class ParkingServiceImpl implements ParkingService {
 		String park_name = parkingMapper.getParknameByParkid(park_id);
 		return park_name;
 	}
+	@Override
+	   public void getInsertParking(ParkingVO vo) {
+	      System.out.println("**********impl 들어옴********");
+	      int park_id = parkingMapper.selectPark_id();
+	      System.out.println("park_id : " + park_id);
+	      vo.setPark_id(park_id);
+	      parkingMapper.insertParking(vo); // member테이블 저장
+	      
+	   }
+
 }

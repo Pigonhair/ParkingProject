@@ -51,7 +51,13 @@ public class ParkingVO {
    }
    public void setPark_public(int park_public) {
       this.park_public = park_public;
-   }   
-
+   }
+	@Override
+	public String toString() {
+		return "ParkingVO [park_id=" + park_id + ", park_name=" + park_name + ", park_capacity=" + park_capacity
+				+ ", mem_num=" + mem_num + ", park_type=" + park_type + ", detailAddr=" + detailAddr + ", park_public="
+				+ park_public + "]";
+	}
+ 
    
 }
