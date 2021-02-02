@@ -67,8 +67,8 @@ color:#a70737;">10분</span>당 <span style="color:#a70737;">1000원</span>입�
                            <select name="select-profession" id="select-profession">
                            <option value="">주차장선택</option>
                         <c:forEach var="parking" items="${list}">               
-                           <option id="park_id" value="${parking.park_id}" value2="${parking.park_name}">${parking.park_name}
-                              ${parking.park_type} ${parking.detailAddr} ${parking.park_public}</option>                 
+                           <option id="park_id" value="${parking.park_id}" value2="${parking.park_name}">${parking.park_name}, 
+                              ${parking.park_type},  ${parking.detailAddr},  ${parking.park_public}</option>                 
                            <br>
                         </c:forEach>
                      </select>
@@ -323,12 +323,9 @@ for(let item of parking_position_Map){
 		            cache:false,
 		            timeout:30000,
 		            success:function(obj){
-		            	txt = obj.park_id + "  " +
-          			  obj.park_name + "  " +
-        			  obj.park_capacity + "  " +
-        			  obj.mem_num + "  " +
-        			  obj.park_type + "  " +
-        			  obj.detailAddr + "  " +
+		      txt =   obj.park_name + ",   " +
+        			  obj.park_type + ",   " +
+        			  obj.detailAddr + ",   " +
         			  obj.park_public;
 		              var $currentSel = $('.sel__box__options').closest('.sel');
 		              $currentSel.children('.sel__placeholder').text(txt);	

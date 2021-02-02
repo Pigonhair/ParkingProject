@@ -5,7 +5,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <style>
 html, body {
@@ -155,7 +154,7 @@ html, body {
 <body>
 <div id="wrap" class="input">
   <header class="input-header">
-    <h1>내정보</h1>
+    <a href="${pageContext.request.contextPath}/project/main.do"><h1>Home</h1></a>
   </header>
   
   <section class="input-content">
@@ -276,8 +275,6 @@ html, body {
       </dl>
       <div class="btns">
           <input type="submit" class="btn btn-confirm" value="수정하기">
-          <input type="button" id="btn_home" class="btn btn-confirm" value="HOME">
-          
       </div>
     </div>
     </form>
@@ -288,10 +285,6 @@ html, body {
 $(document).ready(function() {
 	//context path가져오기
 	var ctx = '<%=request.getContextPath()%>';
-	//홈으로 돌아가기 버튼
-   $("#btn_home").click(function(){
-	   location.href=ctx+"/project/main.do";
-   });
 
 	$('#member_modify-form').submit(function(){
 		var choice = window.confirm('수정하시겠습니까?');

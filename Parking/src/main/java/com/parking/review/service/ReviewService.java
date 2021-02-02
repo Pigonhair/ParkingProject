@@ -24,9 +24,5 @@ public interface ReviewService {
 	public int selectCount(Map<String,Object> map);
 	
 	
-	public String findParkName(String park_name);
-	
-	
-	
 	
 }

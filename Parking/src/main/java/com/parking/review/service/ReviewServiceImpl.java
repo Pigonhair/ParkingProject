@@ -39,10 +39,4 @@ public class ReviewServiceImpl implements ReviewService{
 	}
 
 
-	@Override
-	public String findParkName(String park_name) {
-		
-		return reviewmapper.findParkName(park_name).toString();
-	}
-
 }
