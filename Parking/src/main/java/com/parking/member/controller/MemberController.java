@@ -204,7 +204,7 @@ public class MemberController {
 		ModelAndView mav = new ModelAndView();
 		
 		String mem_token = (String) session.getAttribute("mem_token");
-		System.out.println("mem_token in memberdetail123 : " + mem_token);
+		System.out.println("mem_token in memberdetail : " + mem_token);
 		
 		
 		// 토큰으로 memberVO가져오기
@@ -229,9 +229,15 @@ public class MemberController {
 	}
 	//로그아웃
 	@RequestMapping(value = "/member/mypage.do")
-	public String mypage(HttpServletRequest request, Model model, HttpSession session) {
-		session.removeAttribute("mem_token");
-		return "/member/mypage";
+	public ModelAndView mypage(HttpServletRequest request, Model model, HttpSession session) {
+		String mem_token = (String) session.getAttribute("mem_token");
+		System.out.println("mem_token in mypage : " + mem_token);
+		// 토큰으로 memberVO가져오기
+		MemberVO memberVO = memberService.getMemberbytoken(mem_token);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/member/mypage");
+		mav.addObject(memberVO);
+		return mav;
 	}
 
 

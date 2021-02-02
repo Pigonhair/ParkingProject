@@ -16,6 +16,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.parking.member.service.MemberService;
 import com.parking.member.vo.MemberVO;
@@ -38,9 +39,14 @@ public class ParkingController {
    }
    
 	@RequestMapping("/parking/myparking.do")
-	public String getMain(HttpServletRequest request,Locale locale, Model model,HttpSession session) {
-
-		return "parking/parking";
+	public ModelAndView getMain(HttpServletRequest request,Locale locale, Model model,HttpSession session) {
+		String mem_token = (String) session.getAttribute("mem_token");
+	    System.out.println("mem_token in memberdetail123 : " + mem_token);
+	    MemberVO memberVO = memberService.getMemberbytoken(mem_token);
+	    ModelAndView mav = new ModelAndView();
+		mav.setViewName("/member/mypage");
+		mav.addObject(memberVO);
+		return mav;
 	}
    
    @RequestMapping(value = "/parking/parkingInsert.do", method = RequestMethod.POST)
