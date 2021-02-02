@@ -20,6 +20,7 @@ $(document).ready(function() {
 		if(choice){
 			$("#memberDelete").submit();
 			alert('회원탈퇴 되셨습니다.');
+			location.href = ctx + "/member/memberdelete.do"
 		}else{
 			location.href = ctx + "/member/mypage.do"
 		}
@@ -164,8 +165,7 @@ body {
 <body>
 	<div class="mypage">
 		<h2 class="mypage-header">My Page</h2>
-		<form id="memberDelete"name = "mypage" method="post" class="mypage-container" 
-		action="${pageContext.request.contextPath}/member/memberdelete.do">
+		<form id="memberDelete"name = "mypage" method="post" class="mypage-container" >
 			<p>
 				<input id="mem_id" type="text" value="${memberVO.mem_id}"
 					name="mem_id" placeholder="아이디" required readonly />
@@ -178,7 +178,7 @@ body {
 				<input type="button" id="update" class="user_update" value="회원정보 수정">
 			</p>
 			<p>
-				<input type="submit" id="delete" class="user_delete" value="회원탈퇴">
+				<input type="button" id="delete" class="user_delete" value="회원탈퇴">
 			</p>
 		</form>
 	</div>
