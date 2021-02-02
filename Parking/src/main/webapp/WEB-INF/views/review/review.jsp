@@ -229,8 +229,8 @@ $(document).ready(function(){
 						output += '<div class="row">';
 						output += '<div class="col-md-7">';
 						/* output += '<a href="#">'; */
- 						output += '<img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/700x300" alt="">'; 
- 						/* output += '<img class="img-fluid rounded mb-3 mb-md-0" src="<spring:url value = '/images/`${item.img}`'/> ">'; */ 
+ 						/* output += '<img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/700x300" alt="">'; */ 
+ 						output += '<img class="img-fluid rounded mb-3 mb-md-0" src="<spring:url value = "/images/'+img+'"/> ">'; 
 						/* output += '</a>'; */
 						output += '</div>';
 						output += '<div class="col-md-5">';
