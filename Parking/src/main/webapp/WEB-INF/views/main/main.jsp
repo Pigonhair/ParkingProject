@@ -45,8 +45,8 @@ $(document).ready(function() {
 		            timeout:30000,
 		            success:function(data){
 		               if(data.result == 'ok'){
-		                  //로그인성공
-		            	   loginOK();
+		            	   $('#logo').get(0).click();
+
 		               }else if(data.result == 'fail'){
 		                  //로그인실패
 		                  alert("아이디 또는 비밀번호가 틀렸습니다.");

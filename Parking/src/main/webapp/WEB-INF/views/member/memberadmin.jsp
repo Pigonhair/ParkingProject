@@ -17,7 +17,7 @@ html, body {
 
 #wrap {
   width: 100%;
-  max-width: 900px;
+  max-width: 1800px;
   margin: 0 auto 60px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
 }
@@ -160,127 +160,7 @@ html, body {
   
   <section class="input-content">
     <h2>회원관리</h2>
-    <form  id="member_modify-form"  action="${pageContext.request.contextPath}/member/update.do" method="post">
-    <div class="input-content-wrap">
-      <dl class="inputbox">
-        <dt class="inputbox-title">아이디</dt>
-        <dd class="inputbox-content">
-          <input id="mem_id" type="text" value="${memberVO.mem_id}" name="mem_id" required readonly/>
-          <input id="mem_token" type="hidden" name="mem_token" required readonly/>          
-          <label for="input0">${id}</label>
-          
-          <span class="underline"></span>
-        </dd>
-      </dl>
-      <dl class="inputbox">
-        <dt class="inputbox-title">이름</dt>
-        <dd class="inputbox-content">
-          <input id="mem_name" type="text" value="${memberVO.mem_name}" name="mem_name"required readonly/>
-          <!-- <label for="input1"></label> -->
-          <span class="underline"></span>
-        </dd>
-      </dl>
-      <dl class="inputbox">
-        <dt class="inputbox-title">*전화번호</dt>
-        <dd class="inputbox-content">
-          <input id="mem_phone" type="text" value="${memberVO.mem_phone}" name="mem_phone" required/>
-          <label for="input0">전화번호</label>
-          <span class="underline"></span>
-        </dd>
-      </dl>
-      <dl class="inputbox">
-        <dt class="inputbox-title">*차량번호</dt>
-        <dd class="inputbox-content">
-          <input id="carid" type="text" value="${memberVO.car_id}" name="carid" required/>
-          <label for="input0">차량번호</label>
-          <span class="underline"></span>
-        </dd>
-      </dl>
-      <dl class="inputbox">
-        <dt class="inputbox-title">*차량모델</dt>
-        <dd class="inputbox-content">
-          <input id="carmodel" type="text" value="${memberVO.car_model}" name="carmodel" required/>
-          <label for="input0">차량모델</label>
-          <span class="underline"></span>
-        </dd>
-      </dl>
-      
-      <dl class="inputbox">
-        <dt class="inputbox-title">*소형,중형,대형</dt>
-        <dd class="inputbox-content">
 
-		<c:if test="${memberVO.category eq '소형'}">
-          <select title="category" id="category" name="category">
-             <option value="big-sized">대형</option>
-             <option value="medium-sized">중형</option>
-             <option value="small-sized" selected="selected">소형</option>
-          </select>
-          </c:if>
-          
-     	<c:if test="${memberVO.category eq '중형'}">
-          <select title="category" id="category" name="category">
-             <option value="big-sized">대형</option>
-             <option value="medium-sized" selected="selected">중형</option>
-             <option value="small-sized" >소형</option>
-          </select>
-         </c:if>
-         
- 		<c:if test="${memberVO.category eq '대형'}">
-          <select title="category" id="category" name="category">
-             <option value="big-sized" selected="selected">대형</option>
-             <option value="medium-sized">중형</option>
-             <option value="small-sized">소형</option>
-          </select>
-         </c:if>       
-        </dd>
-      </dl>
-      <dl class="inputbox">
-        <dt class="inputbox-title">*장애여부 </dt>
-        <dd class="inputbox-content">
-
-        <c:if test="${memberVO.mem_dis == 0}">
-          <select title="mem_dis" id="mem_dis" name="mem_dis">
-             <option value="ordi" selected="selected">일반</option>
-             <option value="dis">장애인</option>
-          </select>
-        </c:if>
-        
-        <c:if test="${memberVO.mem_dis == 1}">
-          <select title="mem_dis" id="mem_dis" name="mem_dis">
-             <option value="ordi">일반</option>
-             <option value="dis" selected="selected">장애인</option>
-          </select>
-        </c:if>        
-        
-        </dd>
-      </dl>
-      <dl class="inputbox">
-        <dt class="inputbox-title">*사용자구분</dt>
-        <dd class="inputbox-content">
-        
-        <c:if test="${memberVO.mem_auth == 1}">
-          <select title="mem_auth" id="mem_auth" name="mem_auth">
-             <option value="user" selected="selected">일반사용자</option>
-             <option value="owner">주차장 소유자</option>
-        </select>
-        </c:if>
-          
-        <c:if test="${memberVO.mem_auth == 2}">
-          <select title="mem_auth" id="mem_auth" name="mem_auth">
-             <option value="user">일반사용자</option>
-             <option value="owner" selected="selected">주차장 소유자</option>
-        </select>   
- 		</c:if>
- 		
-        </dd>
-      </dl>
-      <div class="btns">
-          <input type="submit" class="btn btn-confirm" value="수정하기">
-          <input type="button" id="btn_home" class="btn btn-confirm" value="HOME">
-          
-      </div>
-    </div>
-    </form>
   </section>
 </div>
 <script>

@@ -25,7 +25,7 @@ create sequence mem_num nocache nocycle;
 SELECT* FROM MEMBER;
 DROP TABLE MEMBER;
 
---관리자 아이디만들기
+--관리자 아이디만들기(관리자도 member_car까지 있어야 로그인됨)
 INSERT INTO MEMBER (mem_num, mem_id,mem_pwd, mem_auth, mem_token) VALUES (mem_num.nextval,'admin','1111',0,'1111')
 INSERT INTO member_detail(mem_num,mem_name,mem_phone,mem_dis) VALUES (18, '관리자', '010-1234-5678',0)
 INSERT INTO member_car(mem_num, car_id, car_model,category) VALUES (18, '12서울123', '아우디', '소형')
