@@ -57,9 +57,7 @@ String btnAddress = request.getParameter("btnAddress");
 									<form:option value="0">주차장선택</form:option>
 									<c:forEach var="parking" items="${list}">
 										<form:option value="${parking.park_id}">
-											${parking.park_id} ${parking.park_name}
-											${parking.park_capacity} ${parking.mem_num}
-											${parking.park_type} ${parking.detailAddr}
+											${parking.park_name}, ${parking.park_type}, ${parking.detailAddr}, 
 											${parking.park_public}</form:option>
 										<br>
 									</c:forEach>
