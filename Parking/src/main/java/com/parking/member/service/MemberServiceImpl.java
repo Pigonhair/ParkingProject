@@ -1,7 +1,6 @@
 package com.parking.member.service;
 
 import java.security.MessageDigest;
-import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -39,14 +38,14 @@ public class MemberServiceImpl implements MemberService{
 		return v;
 	}
 	
-	//mem_id로 memverVo가져오기
+	//mem_id로 memberVo가져오기
 	@Override
 	public MemberVO isMemberID(String mem_id) {
 		MemberVO v =memberMapper.isMemberID(mem_id);
 		return v;
 	}
 
-	//mem_token로 memverVo가져오기
+	//mem_token로 memberVo가져오기
 	@Override
 	public MemberVO getMemberbytoken(String mem_token) {
 		return memberMapper.getMemberbytoken(mem_token);
@@ -71,23 +70,14 @@ public class MemberServiceImpl implements MemberService{
 		return memberVO;
 	}
 	
+	//회원 탈퇴
 	@Override
-	public int getMemnumBytoken(String mem_token) {
-		int mem_num =memberMapper.getMemnumBytoken(mem_token);
-		return mem_num;
+	public MemberVO deleteMember(MemberVO vo) {
+		MemberVO memberVO = memberMapper.memberDelete(vo);
+		return memberVO;
 	}
 	
-	@Override
-	public List<MemberVO> getMemberList() {
-		List<MemberVO> memberlist = memberMapper.getMemberList();
-		return memberlist;
-	}
 	
-	//관리자권한으로 회원데이터지우기	
-	@Override
-	public void deletememberByAdmin(int mem_num) {
-		memberMapper.deletemember_car(mem_num);
-		memberMapper.deletemember_detail(mem_num);
-		memberMapper.deletemember(mem_num);
-	}
+	//마이페이지
+	
 }

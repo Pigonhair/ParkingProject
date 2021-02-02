@@ -1,6 +1,5 @@
 package com.parking.member.service;
 
-import java.util.List;
 import java.util.Map;
 
 import com.parking.member.vo.MemberVO;
@@ -27,12 +26,6 @@ public interface MemberService {
 
 	public MemberVO CheckMemberIdPwd(MemberVO vo);
 
-	public int getMemnumBytoken(String mem_token);
-
-	//전체회원리스트가져오기
-	public List<MemberVO> getMemberList();
-
-	//관리자권한으로 회원데이터지우기
-	public void deletememberByAdmin(int mem_num);
+	public MemberVO deleteMember(MemberVO mem_id);
 
 }

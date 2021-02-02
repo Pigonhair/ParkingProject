@@ -13,6 +13,9 @@
 <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a4fc31dd472c61220b10d05b1cec480c&libraries=services"></script>
 <script src="${path}/resources/js/LoginPopup.js"></script>
 <script>
+function gohome(){
+	location.href=ctx+"/proejct/main.do";
+}
 
 $(document).ready(function() {	
 	
@@ -20,8 +23,6 @@ $(document).ready(function() {
 	
 	//로그인버튼
     $("#loginBtn").click(function(){
-	     $('input[name='+mem_id+']').val('');
-		 $('input[name='+meme_pwd+']').val('');
    	 	 var mem_id = $('input[name='+mem_id+']').val();
 		 var meme_pwd = $('input[name='+meme_pwd+']').val();
 		 
@@ -42,7 +43,8 @@ $(document).ready(function() {
 		            timeout:30000,
 		            success:function(data){
 		               if(data.result == 'ok'){
-		            	   $('#logo').get(0).click();
+		                  //로그인성공
+		            	   gohome();
 		               }else if(data.result == 'fail'){
 		                  //로그인실패
 		                  alert("아이디 또는 비밀번호가 틀렸습니다.");
@@ -73,7 +75,8 @@ $(document).ready(function() {
 	
 	//내정보 보기
    $("#myinfo").click(function(){
-		location.href=ctx+"/member/memberdetail.do";
+//		location.href=ctx+"/member/memberdetail.do";
+	   location.href=ctx+"/member/mypage.do";
    });
 	
 	//로그인 popup창 열기
@@ -274,7 +277,7 @@ $(document).ready(function() {
                </dl>
                <p class="btn_wrap">
                   <input type="submit" id="btnReserve"  class="btn_reserv" value="찾 기"></input>
-                  <input type="button" id="btnReview" class="btn_review" value="리뷰검색" onClick="location.href='${pageContext.request.contextPath}/review.do'"></input>
+                  <input type="button" id="btnReview" class="btn_review" value="리뷰검색" onClick="location.href='${pageContext.request.contextPath}/project/review.do'"></input>
                </p>
             </div>
          </fieldset>
@@ -285,13 +288,6 @@ $(document).ready(function() {
          <input type="hidden" id="iLotArea" name="iLotArea">
          </div>
       </form>
-
-
-   <c:if test="${empty user}">
-      <a href="https://kauth.kakao.com/oauth/authorize?client_id=c33ff58fa9f138c4cca66548e9bbb951&redirect_uri=http://localhost:8080/project/kakao/callback&response_type=code"> 
-         개같은 카카오 연습</a>
-   </c:if>
-      <a href="${pageContext.request.contextPath}/pay/pay.do">결제 페이지Test</a>
    
    <!-- 로그인 팝업창 -->
     <div id="popup">

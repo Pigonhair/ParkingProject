@@ -1,7 +1,5 @@
 package com.parking.member.dao;
 
-import java.util.List;
-
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
@@ -77,33 +75,11 @@ public interface MemberMapper {
 
 	@Select("SELECT * FROM MEMBER WHERE MEM_ID = #{mem_id} AND MEM_PWD = #{mem_pwd} ")
 	public MemberVO CheckMemberIdPwd(MemberVO vo);
+	
+	/************************ 회원 탈퇴 *	************************/
+	@Delete("DELETE MEMBER WHERE MEM_ID = #{mem_id} AND MEM_PWD = #{mem_pwd}")
+	public MemberVO memberDelete(MemberVO vo);
+	/************************ 회원 탈퇴 ************************/
 
-	@Select("SELECT MEM_NUM FROM MEMBER WHERE MEM_TOKEN = #{mem_token}")
-	public int getMemnumBytoken(String mem_token);
 
-	@Select("select a.mem_num\r\n" + 
-			"	,a.mem_id\r\n" + 
-			"	,a.mem_auth\r\n" + 
-			"	,a.mem_token\r\n" + 
-			"	,b.mem_name\r\n" + 
-			"	,b.mem_phone\r\n" + 
-			"	,b.mem_dis\r\n" + 
-			"	,c.car_id\r\n" + 
-			"	,c.car_model\r\n" + 
-			"	,c.category\r\n" + 
-			"	from member a\r\n" + 
-			"	inner join member_detail b\r\n" + 
-			"		on a.mem_num = b.mem_num\r\n" + 
-			"	inner join member_car c\r\n" + 
-			"		on b.mem_num = c.mem_num\r\n")
-	public List<MemberVO> getMemberList();
-
-	/************************ 관리자권한으로 member삭제 ************************/
-	@Delete("DELETE FROM MEMBER_CAR WHERE MEM_NUM= #{mem_num}")
-	public void deletemember_car(int mem_num);
-	@Delete("DELETE FROM MEMBER_DETAIL WHERE MEM_NUM= #{mem_num}")
-	public void deletemember_detail(int mem_num);
-	@Delete("DELETE FROM MEMBER WHERE MEM_NUM= #{mem_num}")
-	public void deletemember(int mem_num);
-	/************************ 관리자권한으로 member삭제 ************************/
 }

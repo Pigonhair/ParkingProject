@@ -1,7 +1,6 @@
 package com.parking.member.controller;
 
 import java.io.UnsupportedEncodingException;
-import java.util.List;
 import java.util.Random;
 
 import javax.annotation.Resource;
@@ -14,10 +13,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.parking.member.service.MemberService;
 import com.parking.member.vo.MemberVO;
-import com.parking.search.vo.SearchVO;
 import com.parking.util.sha256;
 
 @Controller
@@ -38,7 +37,7 @@ public class MemberController {
 		return new MemberVO();
 	}
 
-	// 회원가입 컨트롤러
+	// 카카오회원가입 컨트롤러
 	@RequestMapping(value = "/member/signUpkakao.do", method = RequestMethod.POST)
 	public String signUpkakao(HttpServletRequest request, Model model, HttpSession session) {
 		try {
@@ -114,7 +113,7 @@ public class MemberController {
 	}	
 	
 	
-	// 회원가입 컨트롤러
+	// 일반회원가입 컨트롤러
 	@RequestMapping(value = "/member/insert.do", method = RequestMethod.POST)
 	public String signUp(HttpServletRequest request, Model model, HttpSession session) {
 		try {
@@ -201,30 +200,17 @@ public class MemberController {
 	// 내정보 보기
 	@RequestMapping(value = "/member/memberdetail.do")
 	public ModelAndView memberDetail(HttpServletRequest request, Model model, HttpSession session) {
-		ModelAndView mav = new ModelAndView();
-		
+
 		String mem_token = (String) session.getAttribute("mem_token");
 		System.out.println("mem_token in memberdetail123 : " + mem_token);
 		
 		
 		// 토큰으로 memberVO가져오기
 		MemberVO memberVO = memberService.getMemberbytoken(mem_token);
-		
-		System.out.println("관리자(0) 사용자(1) 사장님(2) : " +memberVO.getMem_auth());
-		if(memberVO.getMem_auth()==0) {
-			//관리자일경우
-			
-			//회원정보 가져가기
-			List<MemberVO> memberlist = memberService.getMemberList();
-			
-			mav.addObject("memberlist",memberlist);
-			mav.addObject(memberVO);
-			mav.setViewName("/member/memberadmin");
-		} else {
-			//일반회원
-			mav.addObject(memberVO);
-			mav.setViewName("/member/memberdetail");
-		}
+
+		ModelAndView mav = new ModelAndView();
+		mav.addObject(memberVO);
+		mav.setViewName("/member/memberdetail");
 
 		return mav;
 	}
@@ -298,33 +284,56 @@ public class MemberController {
 
 		return "redirect:/member/memberdetail.do";
 	}
-	
-	//회원삭제
-	@RequestMapping(value = "/member/delete.do")
+	//회원 탈퇴
+	@RequestMapping(value = "/member/memberdelete.do")
 	public String memberDelete(HttpServletRequest request, Model model, HttpSession session) {
-		return null;
+		try {
+			request.setCharacterEncoding("UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String mem_token = (String) session.getAttribute("mem_token");
+		// 토큰으로 memberVO가져오기
+		MemberVO memberVO = memberService.getMemberbytoken(mem_token);
+		
+		MemberVO vo = new MemberVO();
+		String mem_pwd = request.getParameter("mem_pwd");
+		System.out.println("controller : mem_pwd : " + mem_pwd);
+		vo.setMem_pwd(mem_pwd);
+		
+		memberService.deleteMember(vo);
+		System.out.println("탈퇴 완료");
+		
+		return "main/main";
 	}
 	
-	//회원가입
 	@RequestMapping(value = "/member/signUp.do")
 	public String signUp() {
 		//회원가입 호출
 		return "member/signUp";
 	}
-	
+	//로그아웃
 	@RequestMapping(value = "/member/logOut.do")
 	public String logOut(HttpServletRequest request, Model model, HttpSession session) {
 		session.removeAttribute("mem_token");
 		return "redirect:/project/main.do";
 	}
 	
-	//회원삭제
-	@RequestMapping(value = "/member/DeletememberByAdmin.do")
-	public String deletememberByAdmin(HttpServletRequest request, Model model, HttpSession session) {
-		String mem_num = request.getParameter("btn_member_remove");
-		System.out.println("mem_id : " + mem_num);
-			
-		memberService.deletememberByAdmin(Integer.parseInt(mem_num));
-		return "redirect:/member/memberdetail.do";
+	//마이페이지
+	@RequestMapping(value = "/member/mypage.do")
+	public ModelAndView mypage(HttpServletRequest request, Model model, HttpSession session) {
+		//마이페이지 호출
+		String mem_token = (String) session.getAttribute("mem_token");
+		System.out.println("mem_token in memberdetail123 : " + mem_token);
+		
+		// 토큰으로 memberVO가져오기
+		MemberVO memberVO = memberService.getMemberbytoken(mem_token);
+
+		ModelAndView mav = new ModelAndView();
+		mav.addObject(memberVO);
+		mav.setViewName("/member/mypage");
+
+		return mav;
 	}
 }
