@@ -4,12 +4,14 @@ import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,7 +37,13 @@ public class ParkingController {
       return new MemberVO();
    }
    
-   @RequestMapping(value = "/project/parkingInsert.do", method = RequestMethod.POST)
+	@RequestMapping("/parking/myparking.do")
+	public String getMain(HttpServletRequest request,Locale locale, Model model,HttpSession session) {
+
+		return "parking/parking";
+	}
+   
+   @RequestMapping(value = "/parking/parkingInsert.do", method = RequestMethod.POST)
    public String kakaoInsert(HttpServletRequest request, ModelMap model, HttpSession session)
          throws UnsupportedEncodingException, ParseException {
       request.setCharacterEncoding("UTF-8");

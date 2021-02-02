@@ -78,6 +78,7 @@ $(document).ready(function() {
 		location.href=ctx+"/member/memberdetail.do";
    });
 	
+	
 	//로그인 popup창 열기
    $("#loginpopup").click(function(){
       var blur = document.getElementById('blur');

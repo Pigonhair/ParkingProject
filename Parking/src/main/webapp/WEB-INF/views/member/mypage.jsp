@@ -25,7 +25,9 @@ $(document).ready(function() {
 			location.href = ctx + "/member/mypage.do"
 		}
 	}
-
+	function myparking(){
+		location.href = ctx + "/parking/myparking.do"
+	}
 $("#update").click(function(){
 	if($('#mem_pwd').val()==''){
 		alert('비밀번호를 입력하세요');
@@ -67,6 +69,33 @@ $("#delete").click(function(){
 	            success:function(data){
 	            	if(data.result == 'ok'){
 	            		godelete();
+	            	}else if(data.result =='fail'){
+	            		alert("비밀번호가 틀렸습니다.");
+	            		$('mem_pwd').val('');
+	            	}
+	            },
+	            error:function(){
+	            	alert('네트워크 오류 발생');
+	            }
+		});
+	}
+});
+
+$("#myparking").click(function(){
+	if($('#mem_pwd').val()==''){
+		alert('비밀번호를 입력하세요');
+		$('#mem_pwd').focus();
+	}else{
+		$.ajax({
+			 url:'../confirmMemberId.do',
+	            type:'post',
+	            data:{mem_id:$('#mem_id').val(), mem_pwd:$('#mem_pwd').val()},
+	            dataType:'json',
+	            cache:false,
+	            timeout:30000,
+	            success:function(data){
+	            	if(data.result == 'ok'){
+	            		myparking();
 	            	}else if(data.result =='fail'){
 	            		alert("비밀번호가 틀렸습니다.");
 	            		$('mem_pwd').val('');
@@ -178,8 +207,12 @@ body {
 				<input type="button" id="update" class="user_update" value="회원정보 수정">
 			</p>
 			<p>
+				<input type="button" id="myparking" class="user_parking" value="내 주차장">
+			</p>
+			<p>
 				<input type="button" id="delete" class="user_delete" value="회원탈퇴">
 			</p>
+			
 		</form>
 	</div>
 	</body>
