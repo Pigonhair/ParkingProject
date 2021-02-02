@@ -1,6 +1,7 @@
 package com.parking.member.controller;
 
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 import java.util.Random;
 
 import javax.annotation.Resource;
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.parking.member.service.MemberService;
 import com.parking.member.vo.MemberVO;
+import com.parking.search.vo.SearchVO;
 import com.parking.util.sha256;
 
 @Controller
@@ -211,6 +213,11 @@ public class MemberController {
 		System.out.println("관리자(0) 사용자(1) 사장님(2) : " +memberVO.getMem_auth());
 		if(memberVO.getMem_auth()==0) {
 			//관리자일경우
+			
+			//회원정보 가져가기
+			List<MemberVO> memberlist = memberService.getMemberList();
+			
+			mav.addObject("memberlist",memberlist);
 			mav.addObject(memberVO);
 			mav.setViewName("/member/memberadmin");
 		} else {

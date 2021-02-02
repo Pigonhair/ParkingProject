@@ -64,92 +64,11 @@ html, body {
   vertical-align: middle;
   color: #ffca00;
 }
-.input-content .inputbox {
-  overflow: hidden;
-  position: relative;
-  padding: 15px 0 28px 200px;
-}
-.input-content .inputbox-title {
-  position: absolute;
-  top: 15px;
-  left: 0;
-  width: 200px;
-  height: 30px;
-  color: #666;
-  font-weight: bold;
-  line-height: 30px;
-}
-.input-content .inputbox-content {
-  position: relative;
-  width: 100%;
-}
-.input-content .inputbox-content input {
-  width: 500px;
-  height: 30px;
-  box-sizing: border-box;
-  line-height: 30px;
-  font-size: 14px;
-  border: 0;
-  background: none;
-  border-bottom: 1px solid #ccc;
-  outline: none;
-  border-radius: 0;
-  -webkit-appearance: none;
-}
-.input-content .inputbox-content input:focus ~ label, .input-content .inputbox-content input:valid ~ label {
-  color: #2962ff;
-  transform: translateY(-20px);
-  font-size: 0.825em;
-  cursor: default;
-}
-.input-content .inputbox-content input:focus ~ .underline {
-  width: 500px;
-}
-.input-content .inputbox-content label {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 30px;
-  line-height: 30px;
-  color: #ccc;
-  cursor: text;
-  transition: all 200ms ease-out;
-  z-index: 10;
-}
-.input-content .inputbox-content .underline {
-  content: "";
-  display: block;
-  position: absolute;
-  bottom: -1px;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: #2962ff;
-  transition: all 200ms ease-out;
-}
-.input-content .btns {
-  padding: 30px 0 0 200px;
-}
-.input-content .btns .btn {
-  display: inline-block;
-  margin-right: 2px;
-  padding: 10px 25px;
-  background: none;
-  border: 1px solid #c0c0c0;
-  border-radius: 2px;
-  color: #666;
-  font-size: 1.125em;
-  outline: none;
-  transition: all 100ms ease-out;
-}
-.input-content .btns .btn:hover, .input-content .btns .btn:focus {
-  transform: translateY(-3px);
-}
-.input-content .btns .btn-confirm {
-  border: 1px solid #2962ff;
-  background: #2962ff;
-  color: #fff;
-}
+
+table.memberlist { border-collapse: separate; border-spacing: 1px; text-align: center; line-height: 1.5; margin: 20px 10px;}
+table.memberlist th { width: 155px; padding: 10px; font-weight: bold; vertical-align: top; color: #fff; background: #ce4869 ;}
+table.memberlist td { width: 155px; padding: 10px; vertical-align: top; border-bottom: 1px solid #ccc; background: #eee;}
+
 </style>
 </head>
 <body>
@@ -160,7 +79,36 @@ html, body {
   
   <section class="input-content">
     <h2>회원관리</h2>
-
+		<table class="memberlist">
+      <thead>
+      <tr>
+            <th scope="cols">회원번호</th>
+            <th scope="cols">회원아이디</th>
+            <th scope="cols">회원구분</th>
+            <th scope="cols">회원이름</th>
+            <th scope="cols">전화번호</th>
+            <th scope="cols">차량번호</th>            
+            <th scope="cols">차량모델</th>
+            <th scope="cols">차량구분</th>
+            <th scope="cols">삭제</th>
+      </tr>
+      </thead>
+      <tbody>
+      <c:forEach var="member" items="${memberlist}"> 
+      <tr>
+            <td>${member.mem_num}</td>
+            <td>${member.mem_id}</td>
+            <td>${member.mem_auth}</td>
+            <td>${member.mem_name}</td>
+            <td>${member.mem_phone}</td>
+            <td>${member.car_id}</td>
+            <td>${member.car_model}</td>
+            <td>${member.category}</td>
+            <td><button>삭제</button></td>
+	  </tr>
+	  </c:forEach>
+      </tbody>
+</table>
   </section>
 </div>
 <script>
