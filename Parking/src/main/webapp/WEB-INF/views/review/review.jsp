@@ -167,13 +167,15 @@ html, body {
   <!-- CSS only -->
   <section class="input-content">
 <div class="page_reviewList">
-<h1 class="reviewtitle">주차장리뷰</h1><br>
+<h1 class="reviewtitle">주차장리뷰</h1>
 <a class="btn btn-primary" href="${pageContext.request.contextPath}/review/reviewInsert.do" style="float:right;">리뷰쓰기</a>
+<div>
 <div class="review">
 <div id="output">
 <!-- ajax 영역 -->
 </div>
 </div>
+<div>
 </div>
 </section>
 </div>
@@ -236,7 +238,6 @@ $(document).ready(function(){
 						
 						output += '<p>'+item.review_content+'</p>'; 
 						
-						output += '<a class="btn btn-primary" href="#">상세보기</a>';
 						output += '</div>';
 						output += '</div>';
 						output += '<hr>';
