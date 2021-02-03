@@ -4,6 +4,7 @@ import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import javax.annotation.Resource;
@@ -33,24 +34,43 @@ public class ParkingController {
 
    // 자바빈(VO) 초기화
    // 서버 유효성 체크시 필수로 필요
-   @ModelAttribute("reservationVO")
-   public MemberVO initCommand() {
-      return new MemberVO();
+   @ModelAttribute("parkingVO")
+   public ParkingVO initCommand() {
+      return new ParkingVO();
    }
-   
-	@RequestMapping("/parking/myparking.do")
-	public ModelAndView getMain(HttpServletRequest request,Locale locale, Model model,HttpSession session) {
+	
+	@RequestMapping("/parking/parkingInserpage.do")
+	public ModelAndView parkingInserpage(HttpServletRequest request,Locale locale, Model model,HttpSession session) {
 		String mem_token = (String) session.getAttribute("mem_token");
-	    System.out.println("mem_token in memberdetail123 : " + mem_token);
+	    System.out.println("mem_token in parkingInserpage : " + mem_token);
 	    MemberVO memberVO = memberService.getMemberbytoken(mem_token);
 	    ModelAndView mav = new ModelAndView();
-		mav.setViewName("/parking/parking");
+		mav.setViewName("/parking/parkingInsert");
+		mav.addObject(memberVO);
+		return mav;
+	}
+
+	//내주차장page로 이동
+	@RequestMapping("/parking/myparking.do")
+	public ModelAndView parkingPage(HttpServletRequest request,Locale locale, Model model,HttpSession session) {
+		String mem_token = (String) session.getAttribute("mem_token");
+	    System.out.println("mem_token in parkingPage : " + mem_token);
+	    MemberVO memberVO = memberService.getMemberbytoken(mem_token);
+	    
+	    
+	    //주차장정보 가져가기
+		List<ParkingVO> parkinglist = parkingService.getmyParkingList(memberVO.getMem_num());
+		
+	    ModelAndView mav = new ModelAndView();
+		mav.addObject("parkinglist",parkinglist);
+		mav.setViewName("/parking/myparking");
 		mav.addObject(memberVO);
 		return mav;
 	}
    
+	//주차장 추가하기
    @RequestMapping(value = "/parking/parkingInsert.do", method = RequestMethod.POST)
-   public String kakaoInsert(HttpServletRequest request, ModelMap model, HttpSession session)
+   public String parkingInsert(HttpServletRequest request, ModelMap model, HttpSession session)
          throws UnsupportedEncodingException, ParseException {
       request.setCharacterEncoding("UTF-8");
 

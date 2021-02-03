@@ -1,5 +1,7 @@
 package com.parking.parking.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 
@@ -20,5 +22,8 @@ public interface ParkingMapper {
    @Insert("INSERT INTO Parking(park_id, park_name, park_capacity, mem_num, park_type,detailAddr,park_public)"
          + "VALUES (#{park_id},#{park_name},#{park_capacity},#{mem_num}, #{park_type},#{detailAddr},#{park_public})")
    public void insertParking(ParkingVO vo);
+   
+   @Select("SELECT * FROM PARKING WHERE MEM_NUM=#{mem_num}")
+   public List<ParkingVO> getmyParkingList(int mem_num);
 
 }

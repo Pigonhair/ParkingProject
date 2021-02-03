@@ -1,5 +1,7 @@
 package com.parking.parking.service;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -27,12 +29,16 @@ public class ParkingServiceImpl implements ParkingService {
 	}
 	@Override
 	   public void getInsertParking(ParkingVO vo) {
-	      System.out.println("**********impl 들어옴********");
 	      int park_id = parkingMapper.selectPark_id();
-	      System.out.println("park_id : " + park_id);
 	      vo.setPark_id(park_id);
-	      parkingMapper.insertParking(vo); // member테이블 저장
+	      parkingMapper.insertParking(vo);
 	      
 	   }
+	
+	@Override
+		public List<ParkingVO> getmyParkingList(int mem_num) {
+			List<ParkingVO> parkinglist = parkingMapper.getmyParkingList(mem_num);
+			return parkinglist;
+		}
 
 }
