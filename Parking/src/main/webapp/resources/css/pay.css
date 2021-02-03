@@ -44,6 +44,7 @@ table {
 }
 
 #payBtn {
+	cursor:pointer;
 	position: relative;
 	width: 210px;
 	height: 64px;
@@ -59,6 +60,7 @@ table {
 }
 
 #payBtn1 {
+	cursor:pointer;
 	position: relative;
 	width: 210px;
 	height: 64px;

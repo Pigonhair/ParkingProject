@@ -5,7 +5,16 @@
 <html>
 <head>
 <style>
-
+.background2{
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 150px;
+	z-index: 100;
+	margin: 10;
+	mask-image : radial-gradient(white 0%, white 30%, transparent 80%, transparent);
+}
 </style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -15,7 +24,7 @@
 	<header>
 		<div id = "logot" >
 			<a id = "logo" href = "../project/main.do">
-			<img alt="logo" src="../resources/images/logo.png">
+			<img alt="logo" class = "background2" src="../resources/images/parking--.png">
 			</a>
 		</div>
 	</header>

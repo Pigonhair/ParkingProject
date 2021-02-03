@@ -218,7 +218,7 @@ $(document).ready(function() {
 <%
 	PrintWriter script = response.getWriter();
 	script.println("<a class = \"background2\" id = \"logo\" href=\"../project/main.do\">");
-	script.println("<img class = \"background2\" src =\"../resources/images/logo.png\"/>");
+	script.println("<img class = \"background2\" src =\"../resources/images/parking--.png\"/>");
 	script.println("</a>");
 	script.println("<div class=\"container\" id=\"blur\">");
 // 	script.println("<img class=\"background\" src=\"https://s3-us-west-2.amazonaws.com/s.cdpn.io/221808/sky.jpg\" />");
@@ -295,9 +295,9 @@ $(document).ready(function() {
     <div class='content2'>
     <div><button type="button" class='btn_exit'>x</button></div>
       <div class='welcome'>예약이</div>
-      <div class='welcome2'>필요한 순간, <span style="color:#ffd400">피몽</span></div>
-      <div class='subtitle'>현재 1,352,786명의 회원이 피몽에서 활동하고 있습니다.
-<span style="color:#ffd400">1,352,787</span>번째 피몽회원이 되어보세요 :)</div>
+      <div class='welcome2'>필요한 순간, <span style="color:#ffd400">피갓츄</span></div>
+      <div class='subtitle'>현재 1,352,786명의 회원이 피갓츄에서 활동하고 있습니다.
+<span style="color:#ffd400">1,352,787</span>번째 피갓츄회원이 되어보세요 :)</div>
       <div class='input-fields'>
         
         <input type='text' id="mem_id" placeholder='아이디' name="mem_id" class='input-line full-width'></input>
@@ -308,7 +308,7 @@ $(document).ready(function() {
       <input type="submit" id="loginBtn" class='ghost-round full-width' value="로그인하기" ></div>
       <a href="https://kauth.kakao.com/oauth/authorize?client_id=c33ff58fa9f138c4cca66548e9bbb951&redirect_uri=http://localhost:8080/project/kakao/callback&response_type=code">
       <img src="../resources/images/kakaolog.png" style="height:50px; width:300px"></a>
-      <div><button type="button" id="signUpBtn" class='ghost-round full-width'>피몽 회원가입 하기   
+      <div><button type="button" id="signUpBtn" class='ghost-round full-width'>피갓츄 회원가입 하기   
       </button></div>
     </div>
     </div>

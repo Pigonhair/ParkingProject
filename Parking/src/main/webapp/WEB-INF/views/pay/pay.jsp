@@ -136,5 +136,4 @@ Calendar cal = Calendar.getInstance();
 		</div>
 	</div>
 </body>
->>>>>>> branch 'master' of https://github.com/Pigonhair/ParkingProject.git
 </html>
