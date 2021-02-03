@@ -98,8 +98,8 @@ table.memberlist td { width: 155px; padding: 10px; vertical-align: top; border-b
             <th scope="cols">주차장구분</th>
             <th scope="cols" colspan="4">주소</th>            
             <th scope="cols">공용/사설</th>
-            <th scope="cols">삭제하기</th>
             <th scope="cols">수정하기</th>
+            <th scope="cols">삭제하기</th>
       </tr>
       </thead>
       <tbody>
@@ -111,8 +111,8 @@ table.memberlist td { width: 155px; padding: 10px; vertical-align: top; border-b
             <td>${myparking.park_type}</td>
             <td colspan="4">${myparking.detailAddr}</td>
             <td>${myparking.park_public}</td>
-            <td><button type="submit" id="btn_member_parking" name="btn_member_remove" value="${myparking.park_id}">삭제</button></td>
-            <td><button type="submit" id="btn_member_update" name="btn_member_remove" value="${myparking.park_id}">수정</button></td>
+            <td><button type="submit" id="btn_parking_update" name="btn_parking_update" value="${myparking.park_id}">수정</button></td>
+            <td><button type="submit" id="btn_parking_remove" name="btn_parking_remove" value="${myparking.park_id}">삭제</button></td>
 	  </tr>
 	  </c:forEach>
       </tbody>
@@ -131,7 +131,16 @@ $(document).ready(function() {
    $("#btn_home").click(function(){
 	   location.href=ctx+"/project/main.do";
    });
+	
+	//수정하기
+   $('#btn_parking_update').click(function(){
+	   
+	});
+	
+ 	//삭제하기
+   $('#btn_parking_remove').click(function(){
 
+	});
 	
 	$('#insertparking').click(function(){
 		location.href=ctx+"/parking/parkingInserpage.do";

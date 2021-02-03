@@ -116,7 +116,7 @@ public class ParkingController {
       vo.setPark_public(park_public);
 
       parkingService.getInsertParking(vo);
-         
-      return "pay/pay";
+
+      return "redirect:/parking/myparking.do";
    }
 }
