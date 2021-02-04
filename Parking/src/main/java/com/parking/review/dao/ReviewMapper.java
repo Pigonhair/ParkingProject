@@ -35,6 +35,14 @@ public interface ReviewMapper {
 	public List<ReviewVO> allReviewList(Map<String,Object>map);
 	public int selectCount(Map<String,Object>map);
 
+	//리뷰작성자 가져오기
+	@Select("SELECT MEM_NUM FROM REVIEWBOARD WHERE REVIEW_NUM = #{review_num}")
+	public int getReviewMemNum(int review_num);
+	
+	//수정할 리뷰 가져오기
+	@Select("SELECT * FROM REVIEWBOARD WHERE REVIEW_NUM = #{review_num}")
+	public ReviewVO getReviewbyReviewNum(int review_num);
+
 	
 	//리뷰 순서대로 따오기
 	/*

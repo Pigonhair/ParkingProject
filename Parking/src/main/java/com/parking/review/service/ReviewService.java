@@ -14,15 +14,18 @@ public interface ReviewService {
 	 */
 	
 	public void insertReview(ReviewVO reviewvo);
-	
-	
-	
+		
 	//리뷰 리스트 호출
 	public List<ReviewVO> allReviewList(Map<String,Object> map);
 	
 	//게시판 글 갯수 카운트
 	public int selectCount(Map<String,Object> map);
-	
-	
+
+	//리뷰 작성자확인
+	public int getReviewMemNum(int review_num);
+
+	//리뷰 수정하기
+	public ReviewVO getReviewbyReviewNum(int review_num);
+
 	
 }

@@ -185,7 +185,7 @@ html, body {
   <!-- CSS only -->
   <section class="input-content">
 <div class="page_reviewList">
-<h1 class="reviewtitle" style="text-align: center;" >주차장 사용 후기를 작성해 주세요 :)</h1>
+<h1 class="reviewtitle" style="text-align: center;" >리뷰 수정하기</h1>
 <div>
 
 		<div class="container">
@@ -196,26 +196,17 @@ html, body {
 					style="text-align: center; border: 1px solid #dddddd">
 					<thead>
 						<tr>
-							<th colspan="2" style="background-color: #eeeeee; text-align: center;">
-							<form:select name="select-profession" id="select-profession" path="park_id">
-									<form:option value="0">주차장선택</form:option>
-									<c:forEach var="parking" items="${list}">
-										<form:option value="${parking.park_id}">
-											${parking.park_name}, ${parking.park_type}, ${parking.detailAddr}, 
-											${parking.park_public}</form:option>
-										<br>
-									</c:forEach>
-							</form:select></th>
+							<th colspan="2" style="background-color: #eeeeee; text-align: center;">${park_name}</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
 							<td><form:input type="text" class="form-control"
-									placeholder="리뷰 제목" path="review_title" name="review_title" /></td>
+									placeholder="리뷰 제목" path="review_title" value="${title}" name="review_title" /></td>
 						</tr>
 						<tr>
 							<td><form:input type="textarea" class="form-control"
-									placeholder="리뷰 내용" name="review_content" path="review_content"
+									placeholder="리뷰 내용" name="review_content" value="${content}" path="review_content"
 									style="height:400px;" /></td>
 						</tr>
 					</tbody>

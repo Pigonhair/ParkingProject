@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import javax.xml.bind.ParseConversionEvent;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.parking.member.service.MemberService;
+import com.parking.member.vo.MemberVO;
 import com.parking.parking.service.ParkingService;
 import com.parking.review.service.ReviewService;
 import com.parking.review.vo.ReviewVO;
@@ -72,6 +74,12 @@ public class ReviewController {
 		int sessionMem_num = 1;
 		int count = 0;
 
+		// 토큰으로 memberVO가져오기
+		String mem_token = (String) session.getAttribute("mem_token");
+		MemberVO memberVO = memberService.getMemberbytoken(mem_token);
+		int mem_num = memberVO.getMem_num();
+		
+		System.out.println("현재 로그인아이디 : mem_num " + mem_num );
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("mem_num", sessionMem_num);
 
@@ -91,11 +99,29 @@ public class ReviewController {
 		Map<String, Object> hashMap = new HashMap<String, Object>();
 		hashMap.put("list", list);
 		hashMap.put("count", count);
+		hashMap.put("mem_num", mem_num);
 		hashMap.put("rowCount", rowCount);
 
 		return hashMap;
 
 	}
+	// 리뷰 수정 페이지 호출
+	@RequestMapping(value="/review/reviewupdatepage.do", method = RequestMethod.GET)
+	public ModelAndView reviewupdatepage(HttpServletRequest request, Model model, HttpSession session) {
+	       ModelAndView mav = new ModelAndView();
+	       String review_num2 = request.getParameter("review_num");
+	       int review_num = Integer.parseInt(review_num2);
+	       System.out.println("수정할 review_num :" + review_num);
+	       
+	       ReviewVO reviewVO = reviewService.getReviewbyReviewNum(review_num);
+	       System.out.println("수정할 review 제목 :" + reviewVO.getPark_name());
+           mav.setViewName("review/reviewUpdate");
+   		   mav.addObject("park_name", reviewVO.getPark_name());	
+   		   mav.addObject("title", reviewVO.getReview_title());	
+   		   mav.addObject("content", reviewVO.getReview_content());	
+		return mav;
+	}
+
 	
 	@RequestMapping(value="/reviewListAjax.do", method = RequestMethod.POST)
 	@ResponseBody
@@ -109,6 +135,12 @@ public class ReviewController {
 		int sessionMem_num = 1;
 		int count = 0;
 
+		// 토큰으로 memberVO가져오기
+		String mem_token = (String) session.getAttribute("mem_token");
+		MemberVO memberVO = memberService.getMemberbytoken(mem_token);
+		int mem_num = memberVO.getMem_num();
+		
+		System.out.println("현재 로그인아이디 : mem_num " + mem_num );
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("mem_num", sessionMem_num);
 
@@ -124,11 +156,11 @@ public class ReviewController {
 		// 모든 그룹 list에 담기
 		list = reviewService.allReviewList(map);
 		System.out.println("list에 담긴 글 목록 : " + list);
-		System.out.println("list에 담긴 이미지이름: " + list.get(0).getImg());
 
 		Map<String, Object> hashMap = new HashMap<String, Object>();
 		hashMap.put("list", list);
 		hashMap.put("count", count);
+		hashMap.put("mem_num", mem_num);
 		hashMap.put("rowCount", rowCount);
 
 		return hashMap;
@@ -141,7 +173,7 @@ public class ReviewController {
 		// 리뷰페이지 호출
 		return "review/review";
 	}
-
+	
 	// 리뷰작성
 	@RequestMapping(value = "/review/reviewInsert.do", method = RequestMethod.POST)
 	public String submitReviewInsert(@Valid ReviewVO reviewvo,
@@ -213,6 +245,8 @@ public class ReviewController {
 
 	}
 
+	
+	
 	// 리뷰 인서트페이지안에서 주차장 리스트 불러오는거
 	@RequestMapping("/review/reviewInsert.do")
 	public ModelAndView reviewInsert() {

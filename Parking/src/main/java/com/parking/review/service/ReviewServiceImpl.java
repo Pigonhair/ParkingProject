@@ -38,5 +38,15 @@ public class ReviewServiceImpl implements ReviewService{
 		return reviewmapper.selectCount(map);
 	}
 
-
+	@Override
+	public int getReviewMemNum(int review_num) {
+		int mem_num = reviewmapper.getReviewMemNum(review_num);
+		return mem_num;
+	}
+	
+	@Override
+	public ReviewVO getReviewbyReviewNum(int review_num) {
+		ReviewVO reviewVO = reviewmapper.getReviewbyReviewNum(review_num);
+		return reviewVO;
+	}
 }

@@ -186,8 +186,9 @@ html, body {
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <script type="text/javaScript" src="${pageContext.request.contextPath}/resources/js/jquery-3.5.1.min.js"></script>
 <script>
-$(document).ready(function(){
 
+$(document).ready(function(){
+	var ctx = '<%=request.getContextPath()%>';
 	var currentPage;
 	var count;
 	var rowCount;
@@ -212,42 +213,61 @@ $(document).ready(function(){
 			cache:false,
 			timeout:10000,
 			success:function(data){
-				//로딩시 이미지(감춤)
-				console.log(data);
+
 				$('#loading').hide();
+				curmem_num = data.mem_num;
 				count = data.count;
 				rowCount = data.rowCount;
 				var list = data.list;
 				
+
 				if(count<0 || list==null){
 					alert('목록 호출 오류 발생!');
 				}else{
 					$(list).each(function(index,item){
-						var img = item.img; 
-						var output='<div class="container">';
-						output = '<h1 class="my-4"></h1>';
-						output += '<div class="row">';
-						output += '<div class="col-md-7">';
-						/* output += '<a href="#">'; */
- 						/* output += '<img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/700x300" alt="">'; */ 
- 						output += '<img class="img-fluid rounded mb-3 mb-md-0" src="<spring:url value = "/images/'+img+'"/> ">'; 
-						/* output += '</a>'; */
-						output += '</div>';
-						output += '<div class="col-md-5">';
-						output += '<h1>'+item.park_name+'</h1>';
-						/* output += '<h2>'+{parking.park_name}+'<h2>'; */
-						output += '<h3>'+item.review_title+'</h3>'; 
-						
-						
-						output += '<p>'+item.review_content+'</p>'; 
-						
-						output += '</div>';
-						output += '</div>';
-						output += '<hr>';
-						
-						
-						//문서 객체에 추가
-						$('#output').append(output);						
+						if(item.mem_num == curmem_num){
+							var img = item.img; 
+							var output='<div class="container">';
+							output = '<h1 class="my-4"></h1>';
+							output += '<div class="row">';
+							output += '<div class="col-md-7">';
+							/* output += '<a href="#">'; */
+	 						/* output += '<img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/700x300" alt="">'; */ 
+	 						output += '<img class="img-fluid rounded mb-3 mb-md-0" src="<spring:url value = "/images/'+img+'"/> ">'; 
+							/* output += '</a>'; */
+							output += '</div>';
+							output += '<div class="col-md-5">';
+							output += '<button type="button" id="review_update" name="review_update" class="btn btn-primary" style="float:right; color: #fff;" value="'+item.review_num+'" >수정하기</button>'
+							output += '<h1>'+item.park_name+'</h1>';
+							output += '<h3>'+item.review_title+'</h3>'; 
+							output += '<p>'+item.review_content+'</p>'; 
+							output += '</div>';
+							output += '</div>';
+							output += '<hr>';
+							//문서 객체에 추가
+							$('#output').append(output);								
+						} else {
+							var img = item.img; 
+							var output='<div class="container">';
+							output = '<h1 class="my-4"></h1>';
+							output += '<div class="row">';
+							output += '<div class="col-md-7">';
+							/* output += '<a href="#">'; */
+	 						/* output += '<img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/700x300" alt="">'; */ 
+	 						output += '<img class="img-fluid rounded mb-3 mb-md-0" src="<spring:url value = "/images/'+img+'"/> ">'; 
+							/* output += '</a>'; */
+							output += '</div>';
+							output += '<div class="col-md-5">';
+							output += '<h1>'+item.park_name+'</h1>';
+							output += '<h3>'+item.review_title+'</h3>'; 
+							output += '<p>'+item.review_content+'</p>'; 
+							output += '</div>';
+							output += '</div>';
+							output += '<hr>';
+							//문서 객체에 추가
+							$('#output').append(output);	
+						}
+					
 					});
 				}
 			},
@@ -279,9 +299,16 @@ $(document).ready(function(){
 	});
 	
 	//1페이지 호출
-	selectData(1);	
+	selectData(1);
+	
 });
 
+//리뷰 수정하기
+$(document).on("click", "#review_update", function(){
+	var ctx = '<%=request.getContextPath()%>';
+	var review_num = $("#review_update").val();
+	location.href= ctx +"/review/reviewupdatepage.do?review_num="+review_num;
+});
 </script>
 </body>
 </html>
