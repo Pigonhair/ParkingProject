@@ -24,8 +24,11 @@ public interface ReviewService {
 	//리뷰 작성자확인
 	public int getReviewMemNum(int review_num);
 
-	//리뷰 수정하기
+	//수정할 리뷰 가져오기
 	public ReviewVO getReviewbyReviewNum(int review_num);
+
+	//리뷰 수정하기
+	public void updateReview(ReviewVO reviewvo);
 
 	
 }

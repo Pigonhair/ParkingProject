@@ -42,6 +42,10 @@ public interface ReviewMapper {
 	//수정할 리뷰 가져오기
 	@Select("SELECT * FROM REVIEWBOARD WHERE REVIEW_NUM = #{review_num}")
 	public ReviewVO getReviewbyReviewNum(int review_num);
+	
+	//리뷰 수정하기
+	@Update("UPDATE REVIEWBOARD SET REVIEW_TITLE=#{review_title}, REVIEW_CONTENT=#{review_content} WHERE REVIEW_NUM = #{review_num}")
+	public void updateReview(ReviewVO reviewvo);
 
 	
 	//리뷰 순서대로 따오기

@@ -49,4 +49,9 @@ public class ReviewServiceImpl implements ReviewService{
 		ReviewVO reviewVO = reviewmapper.getReviewbyReviewNum(review_num);
 		return reviewVO;
 	}
+	
+	@Override
+	public void updateReview(ReviewVO reviewvo) {
+		reviewmapper.updateReview(reviewvo);
+	}
 }

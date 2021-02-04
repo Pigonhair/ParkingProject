@@ -116,7 +116,9 @@ public class ReviewController {
 	       ReviewVO reviewVO = reviewService.getReviewbyReviewNum(review_num);
 	       System.out.println("수정할 review 제목 :" + reviewVO.getPark_name());
            mav.setViewName("review/reviewUpdate");
-   		   mav.addObject("park_name", reviewVO.getPark_name());	
+           mav.addObject("review_num", reviewVO.getReview_num());
+   		   mav.addObject("park_name", reviewVO.getPark_name());
+   		   mav.addObject("park_id", reviewVO.getPark_id());
    		   mav.addObject("title", reviewVO.getReview_title());	
    		   mav.addObject("content", reviewVO.getReview_content());	
 		return mav;
@@ -174,9 +176,27 @@ public class ReviewController {
 		return "review/review";
 	}
 	
+	// 리뷰수정
+	@RequestMapping(value = "/review/reviewUpdate.do", method = RequestMethod.POST)
+	public String reviewUpdate(@Valid ReviewVO reviewvo,
+			@RequestParam(value = "pageNum", defaultValue = "1") int currentPage, BindingResult result, Model model,
+			HttpServletRequest request, HttpSession session) {
+		try {
+			request.setCharacterEncoding("UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
+		reviewService.updateReview(reviewvo);
+		System.out.println("수정완료되었습니다!");
+
+		return "review/review";
+
+	}
 	// 리뷰작성
 	@RequestMapping(value = "/review/reviewInsert.do", method = RequestMethod.POST)
-	public String submitReviewInsert(@Valid ReviewVO reviewvo,
+	public String reviewInsert(@Valid ReviewVO reviewvo,
 			@RequestParam(value = "pageNum", defaultValue = "1") int currentPage, BindingResult result, Model model,
 			HttpServletRequest request, HttpSession session) {
 		try {
@@ -210,36 +230,6 @@ public class ReviewController {
 		reviewService.insertReview(reviewvo);
 		System.out.println("reviewVO 후 : " + reviewvo);
 
-		/*
-		 * List<ReviewVO> list = null;
-		 * 
-		 * //ReviewVO review = (ReviewVO)session.getAttribute("user"); //int
-		 * sessionMem_num = review.getMem_num(); int sessionMem_num = 1; int count = 0;
-		 * 
-		 * Map<String,Object> map = new HashMap<String,Object>(); map.put("mem_num",
-		 * sessionMem_num);
-		 * 
-		 * count = reviewService.selectCount(map);
-		 * 
-		 * System.out.println("총 글의 갯수 : " + count);
-		 * 
-		 * //paging 처리 PagingUtil page = new PagingUtil(currentPage, count, rowCount,
-		 * 10, "review.do"); map.put("start", page.getStartCount()); map.put("end",
-		 * page.getEndCount());
-		 * 
-		 * //모든 그룹 list에 담기 list = reviewService.allReviewList(map);
-		 * System.out.println("list에 담긴 글 목록 : " + list);
-		 * 
-		 * 
-		 * Map<String,Object> hashMap = new HashMap<String, Object>();
-		 * hashMap.put("list", list); hashMap.put("count", count);
-		 * hashMap.put("rowCount", rowCount);
-		 * 
-		 * 
-		 * ModelAndView mav = new ModelAndView(); mav.setViewName("/review/review");
-		 * mav.addObject("list", list); mav.addObject("count", count);
-		 * mav.addObject("rowCount", rowCount);
-		 */
 
 		return "review/review";
 
@@ -249,7 +239,7 @@ public class ReviewController {
 	
 	// 리뷰 인서트페이지안에서 주차장 리스트 불러오는거
 	@RequestMapping("/review/reviewInsert.do")
-	public ModelAndView reviewInsert() {
+	public ModelAndView reviewInsertPage() {
 		// 총 글의 갯수 또는 검색된 글의 갯수
 		List<SearchVO> list = searchService.selectParkinglist();
 

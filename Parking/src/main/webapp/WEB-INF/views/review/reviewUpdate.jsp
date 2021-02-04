@@ -173,6 +173,10 @@ html, body {
 .reviewInsertForm{
 	width: 100%;
 }
+.table-striped tbody tr td{
+	width: 100%;
+	margin: 0 auto;
+}
 </style>
 <meta charset="utf-8" />
 </head>
@@ -191,12 +195,12 @@ html, body {
 		<div class="container">
 		<div class="row">
 			<form:form class="reviewInsertForm"
-				action="/project/review/reviewInsert.do" commandName="reviewVO">
+				action="/project/review/reviewUpdate.do" commandName="reviewVO">
 				<table class="table table-striped"
 					style="text-align: center; border: 1px solid #dddddd">
 					<thead>
 						<tr>
-							<th colspan="2" style="background-color: #eeeeee; text-align: center;">${park_name}</th>
+							<th colspan="2" style="background-color: #eeeeee; value="${park_id}" text-align: center;">${park_name}</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -208,10 +212,13 @@ html, body {
 							<td><form:input type="textarea" class="form-control"
 									placeholder="리뷰 내용" name="review_content" value="${content}" path="review_content"
 									style="height:400px;" /></td>
+							<td><form:input type="hidden" class="form-control"
+									placeholder="리뷰 내용" name="review_content" value="${review_num}" path="review_num"
+									style="height:400px;" /></td>									
 						</tr>
 					</tbody>
 				</table>				
-				<input type="submit" class="btn btn-primary pull-right" style="margin-left: 20px;" value="등록">
+				<input type="submit" class="btn btn-primary pull-right" style="margin-left: 20px;" value="수정하기">
 				<input type="button" id="btnReview" class="btn btn-primary pull-right" value="뒤로가기" onClick="location.href='${pageContext.request.contextPath}/review.do'">
 			</form:form>
 
