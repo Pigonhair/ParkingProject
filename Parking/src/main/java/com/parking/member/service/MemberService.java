@@ -34,4 +34,7 @@ public interface MemberService {
 
 	//전체회원리스트가져오기
 	public List<MemberVO> getMemberList();
+
+	//사용할 수 있는아이디인지 확인
+	public MemberVO isMemberId(String mem_id);
 }

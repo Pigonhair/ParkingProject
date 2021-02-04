@@ -110,4 +110,7 @@ public interface MemberMapper {
 			"	inner join member_car c\r\n" + 
 			"		on b.mem_num = c.mem_num\r\n")
 	public List<MemberVO> getMemberList();
+
+	@Select("SELECT * FROM MEMBER WHERE MEM_ID = #{mem_id}")
+	public MemberVO isMemberId(String mem_id);
 }

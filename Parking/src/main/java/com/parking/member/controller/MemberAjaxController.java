@@ -50,4 +50,25 @@ public class MemberAjaxController {
 
 		return map;
 	}
+	
+	@RequestMapping(value="/member/isMemberId.do", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String,String> process(HttpServletRequest request, HttpSession session,
+			@RequestParam("mem_id") String mem_id){
+		System.out.println("아이디 및 비밀번호 확인 in MemberAjaxController");
+		
+		MemberVO member = memberService.isMemberId(mem_id);
+		
+		Map<String,String> map = new HashMap<String,String>();
+
+		if(member!=null) {
+			//사용할 수 없는 아이디입니다
+			map.put("result", "fail");
+		}else {
+			//사용할 수 있는 아이디입니다.
+			map.put("result", "ok");
+		}
+
+		return map;
+	}
 }

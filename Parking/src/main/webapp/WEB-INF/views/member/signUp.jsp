@@ -84,6 +84,47 @@ html, body {
   position: relative;
   width: 100%;
 }
+.input-content .inputbox-content #mem_id{
+  position: relative;
+  width: 500px;
+}
+.input-content .inputbox-content #confirmMemberId{
+  position: relative;
+  width: 500px;
+}
+
+.input-content .inputbox-content #confirmMemberId {
+  width: 500px;
+  height: 30px;
+  box-sizing: border-box;
+  line-height: 30px;
+  font-size: 14px;
+  border: 0;
+  background: none;
+  outline: none;
+  border-radius: 0;
+  -webkit-appearance: none;
+  text-align:left;
+}
+.input-content .inputbox-content #confirmMemberpwd{
+  position: relative;
+  width: 500px;
+}
+
+.input-content .inputbox-content #confirmMemberpwd {
+  width: 500px;
+  height: 30px;
+  box-sizing: border-box;
+  line-height: 30px;
+  font-size: 14px;
+  border: 0;
+  background: none;
+  outline: none;
+  border-radius: 0;
+  -webkit-appearance: none;
+  text-align:left;
+}
+
 .input-content .inputbox-content input {
   width: 500px;
   height: 30px;
@@ -169,10 +210,15 @@ html, body {
           <input id="mem_id" type="text" value="${mem_id}" placeholder="아이디" name="mem_id" required />
           <input id="mem_token" type="hidden" value="${mem_token}" name="mem_token" required readonly/>          
           <label for="input0">${id}</label>
-          
           <span class="underline"></span>
         </dd>
+        <dd class="inputbox-content">
+          <input id="confirmMemberId" type="text" value="ID 중복체크" readonly>
+        </dd>  
       </dl>
+      <div>
+      	
+      </div>
       <dl class="inputbox">
         <dt class="inputbox-title">* 비밀번호</dt>
         <dd class="inputbox-content">
@@ -181,6 +227,17 @@ html, body {
           <span class="underline"></span>
         </dd>
       </dl>
+      <dl class="inputbox">
+        <dt class="inputbox-title">* 비밀번호확인</dt>
+        <dd class="inputbox-content">
+          <input id="mem_pwd_chk" type="password" name="mem_pwd_chk" required/>
+          <label for="input0">비밀번호</label>
+          <span class="underline"></span>
+        </dd>
+        <dd class="inputbox-content">
+          <input id="confirmMemberpwd" type="text" value="비밀번호확인 확인" readonly>
+        </dd>
+      </dl>      
       <dl class="inputbox">
         <dt class="inputbox-title">* 이름</dt>
         <dd class="inputbox-content">
@@ -252,7 +309,6 @@ html, body {
   </section>
 </div>
 <script>
-
 $(document).ready(function() {
 	//context path가져오기
 	var ctx = '<%=request.getContextPath()%>';
@@ -260,7 +316,65 @@ $(document).ready(function() {
    $("#btn_home").click(function(){
 	   location.href=ctx+"/project/main.do";
    });
-
+	
+   $("#mem_id").change(function(){
+	   var regMsg = /^[A-Za-z0-9+]{4,10}$/
+       if(!regMsg.test($('#mem_id').val())){
+          $('#confirmMemberId').css('color','red').val('아이디는 영문,숫자 4자이상 10자이하로 입력하세요');
+          $('#mem_id').focus();
+          return;
+	   } else{
+	      $('#confirmMemberId').css('color','black').val('ID 중복체크');//메시지 초기화
+	   }
+	   
+	   $.ajax({
+	       url:'isMemberId.do',
+	       type:'post',
+	       data:{mem_id:$('#mem_id').val()},
+	       dataType:'json',
+	       cache:false,
+	       timeout:30000,
+	       success:function(data){
+	          if(data.result == 'fail'){
+	        	  $('#confirmMemberId').css('color','red').val('ID 중복체크 결과 | 사용중인 ID, 다른 ID를 입력해주세요');
+	              $('#mem_id').val('').focus();
+	          }else if(data.result == 'ok'){
+	        	  $('#confirmMemberId').css('color','green').val('ID 중복체크 결과 | 사용가능ID');
+	          }
+	       },
+	       error:function(){
+	          checkId = 0;
+	          $('#loading').hide();//로딩 이미지 감추기
+	          alert('네트워크 오류 발생');
+	       }
+	    });
+       
+   });
+   
+   $("#mem_pwd").change(function(){
+	   var mem_pwd = $("#mem_pwd").val();
+	   var mem_pwd_chk = $("#mem_pwd_chk").val();
+       if(mem_pwd == mem_pwd_chk ){
+          $('#confirmMemberpwd').css('color','green').val('비밀번호가 같습니다.');
+	   } else{
+          $('#confirmMemberpwd').css('color','red').val('비밀번호를 확인해주세요');
+          $('#mem_pwd').focus();
+          return;
+	   }
+       
+   });
+   
+   $("#mem_pwd_chk").change(function(){
+	   var mem_pwd = $("#mem_pwd").val();
+	   var mem_pwd_chk = $("#mem_pwd_chk").val();
+       if(mem_pwd == mem_pwd_chk ){
+          $('#confirmMemberpwd').css('color','green').val('비밀번호가 같습니다.');
+	   } else{
+          $('#confirmMemberpwd').css('color','red').val('비밀번호를 확인해주세요');
+          $('#mem_pwd').focus();
+          return;
+	   }
+   });
 });
 </script>
 </body>

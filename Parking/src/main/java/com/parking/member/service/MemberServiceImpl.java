@@ -91,4 +91,10 @@ public class MemberServiceImpl implements MemberService{
 		return memberlist;
 	}
 	
+	@Override
+	public MemberVO isMemberId(String mem_id) {
+		MemberVO memberVO = memberMapper.isMemberId(mem_id);
+		return memberVO;
+	}
+	
 }
