@@ -274,7 +274,7 @@ $(document).ready(function() {
                </dl>
                <p class="btn_wrap">
                   <input type="submit" id="btnReserve"  class="btn_reserv" value="찾 기"></input>
-                  <input type="button" id="btnReview" class="btn_review" value="리뷰검색" onClick="location.href='${pageContext.request.contextPath}/review.do'"></input>
+                  <input type="button" id="btnReview" class="btn_review" value="주차장 리뷰" onClick="location.href='${pageContext.request.contextPath}/review.do'"></input>
                </p>
             </div>
          </fieldset>

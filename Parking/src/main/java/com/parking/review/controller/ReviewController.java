@@ -170,8 +170,9 @@ public class ReviewController {
 		String park_name = parkingService.getParknameByParkid(reviewvo.getPark_id());
 		reviewvo.setPark_name(park_name);
 		System.out.println("park_name in reviewInsert :    " + park_name);
-		
-		System.out.println("reviewVO 전: " + reviewvo);
+
+		System.out.println("제목 : " +reviewvo.getReview_content());
+		System.out.println("내용 : " +reviewvo.getReview_title());
 		
 		// 유효성 체크 결과 오류가 없으면 쿼리작업
 		reviewService.insertReview(reviewvo);
